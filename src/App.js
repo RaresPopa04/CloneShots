@@ -10,6 +10,7 @@ function App() {
 	const ref = useRef();
 	
 	const handleDownload = () => {
+		console.log(ref.current);	
 		if(ref.current){
 			console.log(ref.current);
 			html2canvas(ref.current).then(canvas => {
@@ -132,6 +133,80 @@ function App() {
 	return (
 		<div className="container">
 			<div className="left-bar">
+				<div className="navbar">
+					<div className="left">
+						<div className="logo">
+							<img src="	https://shots.so/image/shots-logo.png" alt="" />
+						</div>
+						<div className="name">
+							<h4>Shots</h4>
+						</div>
+						<div className="beta-tag">BETA</div>
+
+					</div>
+					<div className="right">
+						<button type="button" class="message">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M19.44 2.52H4.56c-1.32 0-2.4 1.08-2.4 2.4V15c0 1.32 1.08 2.4 2.4 2.4h1.92v4.08l6-4.08h6.96c1.32 0 2.4-1.08 2.4-2.4V4.92c0-1.32-1.08-2.4-2.4-2.4M7.392 7.32h4.896c.408 0 .72.312.72.72s-.312.72-.72.72H7.392a.72.72 0 0 1-.72-.72c0-.384.312-.72.72-.72m8.736 4.8H7.392a.72.72 0 0 1-.72-.72c0-.384.312-.72.72-.72h8.736c.408 0 .72.312.72.72s-.312.72-.72.72"></path>
+							</svg>
+						</button>
+						<button type="button" class="more">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M7.91 13.46c1.41 0 2.54 1.14 2.54 2.56v3.4c0 1.41-1.13 2.56-2.54 2.56H4.53c-1.4 0-2.54-1.15-2.54-2.56v-3.41c0-1.42 1.14-2.57 2.54-2.57h3.38Zm11.54 0c1.4 0 2.54 1.14 2.54 2.56v3.4c0 1.41-1.14 2.56-2.54 2.56h-3.38c-1.41 0-2.54-1.15-2.54-2.56v-3.41c0-1.42 1.13-2.57 2.54-2.57h3.38ZM7.9 1.99c1.41 0 2.54 1.15 2.54 2.561v3.4c0 1.42-1.13 2.56-2.54 2.56H4.52c-1.4 0-2.54-1.14-2.54-2.56v-3.41c0-1.411 1.14-2.561 2.54-2.561H7.9Zm11.54 0c1.4 0 2.54 1.15 2.54 2.561v3.4c0 1.42-1.14 2.56-2.54 2.56h-3.38c-1.41 0-2.54-1.14-2.54-2.56v-3.41a2.55 2.55 0 0 1 2.54-2.561h3.38Z"></path>
+							</svg>
+						</button>
+					</div>
+					
+				</div>
+				<div className="panel">
+					<div className="panel-tabs">
+						<div className="tabs">
+						<button type="button" class="mockupBtn">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M19.46 5C20.86 5 22 6.141 22 7.561v11.87c0 1.41-1.14 2.56-2.54 2.56h-3.38c-1.41 0-2.54-1.15-2.54-2.56V7.55c0-1.42 1.13-2.561 2.54-2.561h3.38ZM7.91 2c1.41 0 2.54 1.15 2.54 2.561v11.87c0 1.42-1.13 2.56-2.54 2.56H4.53c-1.4 0-2.54-1.14-2.54-2.56V4.55c0-1.411 1.14-2.561 2.54-2.561h3.38Z">
+								</path>
+							</svg>
+							<span>Mockup</span>
+						</button>
+						<button type="button" class="frameBtn">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M16.33 2c3.38 0 5.66 2.37 5.66 5.91v8.16c0 3.53-2.28 5.91-5.67 5.91H7.65c-3.39 0-5.67-2.38-5.67-5.92V7.89c0-3.54 2.27-5.92 5.66-5.92h8.66Zm1.1 10.55c-1.08-.67-1.9.27-2.13.57-.22.29-.41.6-.6.92-.48.78-1.03 1.69-1.97 2.22-1.38.76-2.42.05-3.17-.45-.29-.19-.56-.37-.83-.49-.68-.29-1.28.04-2.18 1.17-.48.59-.94 1.18-1.41 1.77-.29.35-.22.89.16 1.13.6.37 1.35.57 2.18.57h8.42c.47 0 .95-.07 1.4-.22 1.02-.34 1.83-1.11 2.26-2.12.35-.86.532-1.89.19-2.75-.12-.29-.28-.55-.52-.79-.62-.61-1.19-1.18-1.88-1.61ZM8.49 6c-1.38 0-2.5 1.12-2.5 2.49s1.12 2.5 2.49 2.5 2.49-1.13 2.49-2.51-1.13-2.5-2.5-2.5Z">
+								</path>
+							</svg>
+							<span>Frame</span>
+						</button>
+						</div>
+						
+					</div>
+					<div className="selectorElem">
+						<div className="btnWrapper">
+							<button className="selector">
+								<div className="current">
+									<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/thumbs/1.png" alt="Thumbnail">
+									</img>
+								</div>
+								<div className="details">
+									<p>Screenshot</p>
+									<span>Adapts to image</span>
+								</div>
+								<div className="arrow">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+										<path fill="currentColor" d="M2 8.539c0-.797.688-1.448 1.543-1.448.421 0 .821.165 1.12.455l7.348 7.031 7.325-7.031a1.65 1.65 0 0 1 1.121-.455c.855 0 1.543.651 1.543 1.448 0 .403-.144.734-.433 1.003l-8.324 7.93c-.366.352-.766.528-1.243.528-.466 0-.866-.165-1.243-.527L2.444 9.542C2.155 9.262 2 8.932 2 8.539">
+										</path>
+									</svg>
+								</div>
+							</button>
+						</div>
+
+					</div>
+					<div className="scroll">
+
+					</div>
+					{/* <button className="handleDownload" onClick={handleDownload}>
+						Download as PNG
+					</button> */}
+
+				</div>
 				
 			</div>
 			<input type="file" onChange = {handleFileChange} id="fileInput" style={{display:"none"}}/>
@@ -195,9 +270,7 @@ function App() {
 					
 				</div>
 			</div>
-			<button className="handleDownload" onClick={handleDownload}>
-				Download as PNG
-			</button>
+			
 			<div className="right-bar">
 				<div className="scroller">
 					<div className="card-wrapper">
@@ -205,7 +278,7 @@ function App() {
 							Array.from({length:4}).map((_,i)=>{
 								return (<div className="card" onClick={()=>applyStyle(i)}>
 									<div className="frame" >
-										<div className="innerFrame" ref={ref}>
+										<div className="innerFrame" >
 											<div className="background">
 											</div>
 											<div className="dropboxParent">
@@ -241,7 +314,7 @@ function App() {
 							Array.from({length:10}).map((_,i)=>{
 								return (<div className="card" onClick={()=>applyStyleTwo(i)}>
 									<div className="frame" >
-										<div className="innerFrame" ref={ref}>
+										<div className="innerFrame">
 											<div className="background">
 											</div>
 											<div className="dropboxParent">
@@ -286,7 +359,7 @@ function App() {
 							Array.from({length:2}).map((_,i)=>{
 								return (<div className="card" onClick={()=>applyStyle(i+14)}>
 									<div className="frame" >
-										<div className="innerFrame" ref={ref}>
+										<div className="innerFrame">
 											<div className="background">
 											</div>
 											<div className="dropboxParent">
