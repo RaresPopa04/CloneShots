@@ -8,6 +8,14 @@ function App() {
 	const [twoCanvases, setTwoCanvases] = useState(false);
 	
 	const ref = useRef();
+	const handleFrameChange = (e) => {	
+		const panelBtns = document.querySelectorAll('.panelBtn .preview');
+		panelBtns.forEach((panelBtns)=>{
+			panelBtns.classList.remove('active');
+		})
+		console.log(e.target);
+		e.target.querySelector('.preview').classList.add('active');
+	}
 	
 	const handleDownload = () => {
 		console.log(ref.current);	
@@ -200,6 +208,98 @@ function App() {
 
 					</div>
 					<div className="scroll">
+						<div className="container">
+							<div className="element">
+								<div className="title">
+									Style
+								</div>
+								<div className="grid">
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+												<div className="image">
+													<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/default.png" alt="Default mockup style">
+													</img>
+												</div>
+										</div>
+										<p>Default</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+											{ <div className="image">
+												<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/glass-light.png" alt="Default mockup style">
+												</img>
+											</div> }
+										</div>
+										<p>Glass Light</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+											{ <div className="image">
+												<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/glass-dark.png" alt="Default mockup style">
+												</img>
+											</div> }
+										</div>
+										<p>Glass Dark</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+												<div className="image">
+													<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/outline.png" alt="Default mockup style">
+													</img>
+												</div>
+										</div>
+										<p>Outline</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+											{ <div className="image">
+												<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/border.png" alt="Default mockup style">
+												</img>
+											</div> }
+										</div>
+										<p>Border</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+											{ <div className="image">
+												<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/retro.png" alt="Default mockup style">
+												</img>
+											</div> }
+										</div>
+										<p>Retro</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+												<div className="image">
+													<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/card.png" alt="Default mockup style">
+													</img>
+												</div>
+										</div>
+										<p>Card</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+												<div className="image">
+													<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/stack.png" alt="Default mockup style">
+													</img>
+												</div>
+										</div>
+										<p>Stack</p>
+									</div>
+									<div className="panelBtn" onClick={handleFrameChange}>
+										<div className="preview">
+											{ <div className="image">
+												<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/styles/stack-2.png" alt="Default mockup style">
+												</img>
+											</div> }
+										</div>
+										<p>Stack 2</p>
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
 
 					</div>
 					{/* <button className="handleDownload" onClick={handleDownload}>
@@ -222,6 +322,7 @@ function App() {
 								<div className="dropbox">
 									<div className="centeredDropbox" >
 										<div className="uploadBox" onClick={handleClickInputFile}>
+										<div class="screenshot-glass glass-dark" style={{borderRadius:"3.3em"}}></div>
 											{preview ==null &&
 												<div class="content default">
 													<div class="svg-loader undefined">

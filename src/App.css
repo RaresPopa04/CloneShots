@@ -11,7 +11,7 @@
     --aspect-ratio2:1/1;
 }
 
-.container{
+#root>.container{
     position: relative;
     display: flex;
     width: 100vw;
@@ -23,12 +23,15 @@
 }
 
 .left-bar{
+    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 248px;
     max-width: 248px;
     gap: 4px;
     z-index: 10;
+    height: 100%;
+    overflow: hidden;
 }
 
 .canvas{
@@ -141,6 +144,7 @@
     overflow: hidden;
     
     box-shadow: 8px 8px 1em 3px rgb(0 0 0 / 68%);
+    
 }
 
 .content h3{
@@ -243,7 +247,7 @@
     transform: rotateX(40deg) rotate(40deg) scale(.8);  
 }
 
-.card.active{
+.active{ 
     outline: solid 1.5px black; 
     outline-offset: 3px;
 }
@@ -424,6 +428,10 @@
 .panel{
     position: relative;
     border-radius: 14px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .1);
+    background: rgba(240,240,240, 1);
+    width: 100%;
+    height: 100%;
 }
 
 .panel-tabs{
@@ -502,6 +510,7 @@
     background: rgba(255,255,255, 1);
     box-shadow: 0 3px 6px rgba(0, 0, 0, .12);
     outline: none;
+    cursor: pointer;
     border: none;
 }
 .selector .current img{
@@ -533,4 +542,93 @@
     width: 12px;
     height: 12px;   
     color: rgba(0,0,0, .36);
+}
+
+.left-bar .scroll{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 14px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+.left-bar .scroll .container{
+    padding: 116px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.left-bar .scroll .container .element{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    position: relative;
+}
+
+.left-bar .scroll .container .element .title{
+    font: 600 11px / 16px Inter, sans-serif;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: rgba(0,0,0, .36) !important;
+}
+
+.left-bar .scroll .container .element .grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:8px;
+    width: 100%;
+}
+
+.left-bar .scroll .container .element .grid .panelBtn{
+    width: 100%;
+    height: max-content;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    aspect-ratio: 4/3;
+}
+
+.panelBtn .preview{
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+
+.panelBtn .preview img{
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.panelBtn p{
+    margin: 8px 4px;
+    color: rgba(0,0,0, .6);
+    font: normal 11px / 14px Inter, sans-serif;
+    letter-spacing: -.2px;
+    pointer-events: none;
+}
+
+.panelBtn .preview .image{
+    pointer-events: none;
+}
+
+
+.screenshot-glass{
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(6em) saturate(250%) contrast(150%) brightness(95%);
+    position: absolute;
+    inset: 0;
+    margin:-1em;
 }
