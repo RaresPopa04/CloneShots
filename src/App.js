@@ -23,29 +23,33 @@ function App() {
 				uploadBox.querySelector('.screenshot-glass').remove();
 			}
 			if(uploadBox.querySelector('.stack1')){
-				uploadBox.querySelector('.stack1').remove();
+				uploadBox.querySelector('.stack1').classList.add('none');
 			}
 			if(uploadBox.querySelector('.stack2')){
-				uploadBox.querySelector('.stack2').remove();
+				uploadBox.querySelector('.stack2').classList.add('none');
 			}
 			const elem = document.createElement('div')
 			elem.classList.add("screenshot-glass");
 			elem.classList.add(e.target.id);
 			if(e.target.id === 'screenshot-stack' || e.target.id === "screenshot-stack2"){
-				const div1 = document.createElement('div');
-				div1.classList.add("stack1");
-				const div2 = document.createElement('div');
-				div2.classList.add("stack2");
-				uploadBox.prepend(div1);
-				uploadBox.prepend(div2);
+				const div1 = document.querySelectorAll('.stack1');
+				div1.forEach((div11)=>{
+					div11.classList.remove('none');
+				})
+				const div2 = document.querySelectorAll('.stack2');
+				div2.forEach((div22)=>{
+					div22.classList.remove('none');
+				})
 				uploadBox.prepend(elem);
 				return;
 			}
-			if(e.target.id === 'screenshot-retro'){
-				const div1 = document.createElement('div');
-				div1.classList.add("stack1");
-				uploadBox.prepend(div1);
+			if(e.target.id === 'screenshot-retro' || e.target.id === "screenshot-card"){
+				const div1 = document.querySelectorAll('.stack1');
+				div1.forEach((div11)=>{
+					div11.classList.remove('none');
+				})
 				uploadBox.prepend(elem);
+				return;
 			}
 
 
@@ -362,10 +366,21 @@ function App() {
 										
 									
 										<div className="uploadBox" onClick={handleClickInputFile}>
-											{/* <div class="screenshot-glass screenshot-retro" style={{borderRadius:"10px"}}>
-											</div>
 											
-											<div className='stack1'></div> */}
+											<div className='stack2 none'>
+												{
+													preview &&
+													<div className="imgContainer">
+														<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+													</div>
+												}
+											</div>
+											<div className='stack1 none'>
+												{preview &&
+														<div className="imgContainer">
+															<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+														</div>}
+											</div>
 											{preview ==null &&
 												<div class="content default">
 													<div class="svg-loader undefined">
@@ -384,6 +399,20 @@ function App() {
 												</div>}
 										</div>
 										<div className="uploadBox none" onClick={handleClickInputFileTwo}>
+											<div className='stack2 none'>
+													{
+														previewTwo &&
+														<div className="imgContainer">
+															<img src={previewTwo} alt="preview" style={{filter:"blur(2em)"}}/>
+														</div>
+													}
+											</div>
+											<div className='stack1 none'>
+												{previewTwo &&
+														<div className="imgContainer">
+															<img src={previewTwo} alt="preview" style={{filter:"blur(2em)"}}/>
+														</div>}
+											</div>
 											{previewTwo ==null &&
 												<div class="content default">
 													<div class="svg-loader undefined">
@@ -429,6 +458,20 @@ function App() {
 												<div className="dropbox">
 													<div className={`centeredDropbox style-${i}`} >
 														<div className="uploadBox" >
+															<div className='stack2 none'>
+																{
+																	preview &&
+																	<div className="imgContainer">
+																		<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+																	</div>
+																}
+															</div>
+															<div className='stack1 none'>
+																{preview &&
+																		<div className="imgContainer">
+																			<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+																		</div>}
+															</div>
 															{preview ==null &&
 																<div class="content default">
 																	
@@ -465,6 +508,20 @@ function App() {
 												<div className="dropbox">
 													<div className={`centeredDropbox two-canvases styletwo-${i}`} >
 														<div className="uploadBox">
+															<div className='stack2 none'>
+																{
+																	preview &&
+																	<div className="imgContainer">
+																		<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+																	</div>
+																}
+															</div>
+															<div className='stack1 none'>
+																{preview &&
+																		<div className="imgContainer">
+																			<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+																		</div>}
+															</div>
 															{preview ==null &&
 																<div class="content default">
 																	
@@ -476,6 +533,20 @@ function App() {
 																</div>}
 														</div>
 														<div className="uploadBox">
+															<div className='stack2 none'>
+																{
+																	previewTwo &&
+																	<div className="imgContainer">
+																		<img src={previewTwo} alt="preview" style={{filter:"blur(2em)"}}/>
+																	</div>
+																}
+															</div>
+															<div className='stack1 none'>
+																{previewTwo &&
+																		<div className="imgContainer">
+																			<img src={previewTwo} alt="preview" style={{filter:"blur(2em)"}}/>
+																		</div>}
+															</div>
 															{previewTwo ==null &&
 																<div class="content default">
 																	
@@ -510,6 +581,20 @@ function App() {
 												<div className="dropbox">
 													<div className={`centeredDropbox style-${i+14}`} >
 														<div className="uploadBox" >
+															<div className='stack2 none'>
+																{
+																	preview &&
+																	<div className="imgContainer">
+																		<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+																	</div>
+																}
+															</div>
+															<div className='stack1 none'>
+																{preview &&
+																		<div className="imgContainer">
+																			<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
+																		</div>}
+															</div>
 															{preview ==null &&
 																<div class="content default">
 																	

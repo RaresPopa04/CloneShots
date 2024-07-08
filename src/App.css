@@ -669,13 +669,6 @@
     background: #000;
 }
 
-.screenshot-card{
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    background: #fff;
-    transform: translate3d(-.6em, .5em, 0) rotate(-1.5deg) scale(.98);
-}
 
 .screenshot-stack{
     position: absolute;
@@ -706,7 +699,7 @@
 
 }
 
-.screenshot-retro + .stack1{
+.screenshot-retro +.stack2+ .stack1{
     position: absolute;
     background: #000;
     top: .4em;
@@ -743,4 +736,14 @@
     border: 1px solid rgba(220,220,220,1);
     z-index: 10;
 
+}
+
+.screenshot-card +.stack2+ .stack1{
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #fff;
+    transform: translate3d(-.6em, .5em, 0) rotate(-1.5deg) scale(.98);
+    z-index: 10;
+    border-radius: 10px;
 }
