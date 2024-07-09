@@ -6,6 +6,7 @@ function App() {
 	const [preview, setPreview] = useState(null);
 	const [previewTwo, setPreviewTwo] = useState(null);
 	const [twoCanvases, setTwoCanvases] = useState(false);
+	const [bo, setSliderValue] = useState(50);
 	
 	const ref = useRef();
 	const handleFrameChange = (e) => {	
@@ -179,6 +180,40 @@ function App() {
 		
 		
 	}
+
+	const handleSliderChange = (e) => {
+		const slider = e.currentTarget;
+		const fullSlider = slider.querySelector('.fullSlider');
+		const line = slider.querySelector('.line');
+		const labels = slider.querySelector('.labels');
+		const value = labels.querySelector('.value');
+
+		const rect = slider.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const width = rect.width;
+		const percent = x/width;
+		fullSlider.style.setProperty('--size', (100-percent*100)+"%");
+		line.style.setProperty('--leftVal', percent*100+"%");
+		value.innerHTML = Math.round(percent*40);
+
+		if(labels.innerHTML.includes('Radius')){
+			document.documentElement.style.setProperty('--border-radius', percent*20+"px");
+		
+		}
+
+
+	}
+
+	const startSlider = (e) => {
+		handleSliderChange(e);
+		const slider = e.currentTarget;
+		slider.addEventListener('mousemove', handleSliderChange);
+	}
+
+	const stopSlider = (e) => {
+		const slider = e.currentTarget;
+		slider.removeEventListener('mousemove', handleSliderChange);
+	}
 	
 	return (
 		<div className="container">
@@ -338,6 +373,22 @@ function App() {
 										<p>Stack 2</p>
 									</div>
 									
+									
+								</div>
+							</div>
+							<div className="element">
+								<div className="title">
+									Border
+								</div>
+								<div className="col1-grid">
+									<div className="slider" style={{transition:"none"}} onMouseDown={startSlider} onMouseUp={stopSlider} onMouseLeave={stopSlider}>
+										<div className="fullSlider"></div>
+										<div className="line"></div>
+										<div className="labels">
+											<div className="name">Radius</div>
+											<div className="value">50</div>
+										</div>
+									</div>
 									
 								</div>
 							</div>

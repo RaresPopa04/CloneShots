@@ -3,12 +3,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: all .2s ease-in;
 }
 
 :root{
     --aspect-ratio:1/1;
     --aspect-ratio2:1/1;
+    --border-radius:0.2em;
 }
 
 #root>.container{
@@ -35,6 +35,8 @@
 }
 
 .canvas{
+    
+    transition: all .2s ease-in;
     padding: clamp(88px, 7%, 1000px) clamp(32px, 3%, 1000px);
     overflow: hidden;
     width: 100%;
@@ -49,7 +51,7 @@
 
 .frame{
     aspect-ratio: 4/3;
-    border-radius: 10px;
+    border-radius: 6px;
     position: absolute;
     inset: 0;
     max-height: 100%;
@@ -67,7 +69,7 @@
 }
 
 .frame .background{
-    border-radius: 10px;
+    border-radius: 6px;
     position: absolute;
     top:0;
     left:0;
@@ -84,6 +86,8 @@
     max-width: 248px;
     gap: 4px;
     z-index: 10;
+    
+    transition: all .2s ease-in;
 }
 
 .dropboxParent{
@@ -102,7 +106,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     position: relative;
 }
 .uploadBox{
@@ -139,7 +143,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     aspect-ratio: var(--aspect-ratio);
     overflow: hidden;
     
@@ -184,7 +188,7 @@
     height: 100%;
     /* make it appear fully */
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 }
 
 .centeredDropbox .uploadBox:nth-child(2){
@@ -206,7 +210,7 @@
 }
 
 .right-bar .card-wrapper{
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
     padding: 5px 10px;
@@ -216,7 +220,7 @@
 }
 .right-bar .card{
     aspect-ratio: 4 / 3; 
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     width: 100%; 
     max-width: 100%; 
     height: auto; 
@@ -513,7 +517,7 @@
     align-items: center;
     gap: 10px;
     padding: 10px 12px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background: rgba(255,255,255, 1);
     box-shadow: 0 3px 6px rgba(0, 0, 0, .12);
     outline: none;
@@ -637,7 +641,7 @@
     inset: 0;
     margin:-.15em;
     z-index: 10;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     overflow: hidden;
 }
 .glass-dark{
@@ -684,7 +688,7 @@
     border-radius: inherit;
     inset: 0.4em;
     box-shadow: inherit;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     border: 1px solid rgba(220,220,220,1);
     z-index: 10;
 }
@@ -695,7 +699,7 @@
     background: #fff;
     border-radius: inherit;
     inset: 0.7em;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 
 }
 
@@ -706,7 +710,7 @@
     left: .4em;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 }
 
 .screenshot-stack2{
@@ -716,7 +720,7 @@
 }
 
 .screenshot-stack2+ .stack2{
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     position: absolute;
     overflow: hidden;
     background: #fff;
@@ -726,7 +730,7 @@
 }
 
 .screenshot-stack2+.stack2+ .stack1{
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     box-shadow: inherit;
     transform: translate3d(-0.45em, -.75em, 0) rotate(-1.5deg);
     position: absolute;
@@ -745,5 +749,66 @@
     background: #fff;
     transform: translate3d(-.6em, .5em, 0) rotate(-1.5deg) scale(.98);
     z-index: 10;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
+}
+
+.element .col1-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap:8px;
+
+
+}
+
+.slider{
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(220,220,220, 1);
+    color: rgba(255,255,255, 1);
+    cursor: pointer;
+    position: relative;
+    pointer-events: all;
+
+    transition: none !important;
+}
+
+.fullSlider{
+    --size:50%;
+    position: absolute;
+    height: 100%;
+    background-color: rgba(255,255,255, 1);
+    left: 0%;
+    right: var(--size);
+    border-radius:inherit;
+}
+
+.slider .line{
+    --leftVal: 50%;
+    position: absolute;
+    left: calc(var(--leftVal) - 0.1px);
+
+    display: block;
+    height: 20px;
+    width: 2px;
+    margin: 4px 0 4px 2px;
+    border-radius: 2px;
+    background: rgba(0,0,0, .36);
+}
+
+.slider .labels{
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    pointer-events: none;
+    font: 600 11px / 16px Inter, sans-serif;
+    color: rgba(0,0,0,.6);
+}
+
+.canvas *,.right-bar *{
+    transition: transform .2s ease-in;
 }
