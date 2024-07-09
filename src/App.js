@@ -271,7 +271,7 @@ function App() {
 		fullSlider.style.setProperty('--size', (100-percent*100)+"%");
 		line.style.setProperty('--leftVal', percent*100+"%");
 		value.innerHTML = 10+Math.round(percent*60);
-		const content = document.querySelectorAll('.content');
+		const content = document.querySelectorAll('.uploadBox');
 		content.forEach((content)=>{
 			content.style.setProperty('--shadowOpacity', 10+Math.round(percent*60)+"%");
 		})
@@ -282,7 +282,7 @@ function App() {
 		console.log(value);
 		if(value == 1){
 			const slider = document.querySelectorAll('.slider')[1];
-			const content = document.querySelectorAll('.content');
+			const content = document.querySelectorAll('.uploadBox');
 			content.forEach((content)=>{
 				content.style.setProperty('--shadowOpacity', 10+Math.round(0*60)+"%");
 			})
@@ -298,7 +298,7 @@ function App() {
 			const labels = slider.querySelector('.labels');
 			const valueLabel = labels.querySelector('.value');
 			
-			const content = document.querySelectorAll('.content');
+			const content = document.querySelectorAll('.uploadBox');
 			content.forEach((content)=>{
 				content.style.setProperty('--shadowOpacity', valueLabel.innerHTML+"%");
 				content.style.setProperty('--offsetX', '0px');
@@ -314,7 +314,7 @@ function App() {
 			slider.classList.remove('inactive');
 			const labels = slider.querySelector('.labels');
 			const valueLabel = labels.querySelector('.value');
-			const content = document.querySelectorAll('.content');
+			const content = document.querySelectorAll('.uploadBox');
 			content.forEach((content)=>{
 				content.style.setProperty('--shadowOpacity', valueLabel.innerHTML+"%");
 				content.style.setProperty('--offsetX', '8px');
@@ -353,7 +353,7 @@ function App() {
 		fullSlider.style.setProperty('--size', (100-percent*100)+"%");
 		line.style.setProperty('--leftVal', percent*100+"%");
 		value.innerHTML = Math.round(percent*100);
-		const content = document.querySelectorAll('.content');
+		const content = document.querySelectorAll('.uploadBox');
 		content.forEach((content)=>{
 			content.style.setProperty('--scale', 0.5+ percent);
 		})

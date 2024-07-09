@@ -115,6 +115,19 @@
     height: 100%;
     aspect-ratio: var(--aspect-ratio);
     cursor: pointer;
+
+    
+    --shadowOpacity: 40%;
+    --offsetX: 8px;
+    --offsetY: 8px;
+    --scale: 1;
+
+    
+    transform: scale(var(--scale));
+    
+    
+    box-shadow: var(--offsetX) var(--offsetY) 1em 3px rgb(0 0 0 / var(--shadowOpacity));
+    border-radius: var(--border-radius);
 }
 .centeredDropbox{
     
@@ -136,10 +149,6 @@
     gap:10%;
 }
 .content{
-    --shadowOpacity: 40%;
-    --offsetX: 8px;
-    --offsetY: 8px;
-    --scale: 1;
     background-color: rgba(220,220,220,1);
     display: flex;
     align-items: center;
@@ -150,12 +159,9 @@
     border-radius: var(--border-radius);
     aspect-ratio: var(--aspect-ratio);
     overflow: hidden;
-    
-    box-shadow: var(--offsetX) var(--offsetY) 1em 3px rgb(0 0 0 / var(--shadowOpacity));
 
     position: relative;
     z-index: 100;
-    transform: scale(var(--scale));
     
 }
 
