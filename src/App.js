@@ -9,6 +9,12 @@ function App() {
 	const [bo, setSliderValue] = useState(50);
 	
 	const ref = useRef();
+
+	useEffect(()=>{
+		const activeBtnRight = document.querySelector('.active-btn.right');
+		activeBtnRight.style.setProperty('--position', '82%');
+
+	},[])
 	const handleFrameChange = (e) => {	
 			
 		const panelBtns = document.querySelectorAll('.panelBtn .preview');
@@ -200,8 +206,169 @@ function App() {
 			document.documentElement.style.setProperty('--border-radius', percent*20+"px");
 		
 		}
+		
+		const activeBtn = slider.nextElementSibling.querySelector('.active-btn');
+		if(activeBtn == null){
+			return;
+		}
+		if(value.innerHTML === '0'){
+			activeBtn.classList.remove('none');
+			activeBtn.style.setProperty('--position', '17%');
+		}else if(value.innerHTML === '20'){
+			activeBtn.classList.remove('none');
+			activeBtn.style.setProperty('--position', '50%');
+			
+		}else if(value.innerHTML === '40'){
+			activeBtn.classList.remove('none');
+			activeBtn.style.setProperty('--position', '82%');
+		}else{
+			activeBtn.classList.add('none');
+		}
 
 
+
+	}
+
+	const modifyBorderButton = (value) => {
+		const slider = document.querySelector('.slider');
+		const fullSlider = slider.querySelector('.fullSlider');
+		const line = slider.querySelector('.line');
+		const labels = slider.querySelector('.labels');
+		const activeBtn = slider.nextElementSibling.querySelector('.active-btn');
+		const valueLabel = labels.querySelector('.value');
+		valueLabel.innerHTML = Math.round(value*40);
+		fullSlider.style.setProperty('--size', (100-value*100)+"%");
+		line.style.setProperty('--leftVal', value*100+"%");
+		if(labels.innerHTML.includes('Radius')){
+			document.documentElement.style.setProperty('--border-radius', value*40+"px");
+		}
+		if(value === 0){
+			activeBtn.classList.remove('none');
+			activeBtn.style.setProperty('--position', '17%');
+		}else if(value === 0.5){
+			activeBtn.classList.remove('none');
+			activeBtn.style.setProperty('--position', '50%');
+			
+		}else if(value === 1){
+			activeBtn.classList.remove('none');
+			activeBtn.style.setProperty('--position', '82%');
+		}else{
+			activeBtn.classList.add('none');
+		}
+	}
+
+	const handleOpacityChange = (e) => {
+		const slider = e.currentTarget;
+		const fullSlider = slider.querySelector('.fullSlider');
+		const line = slider.querySelector('.line');
+		const labels = slider.querySelector('.labels');
+		const value = labels.querySelector('.value');
+
+		const rect = slider.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const width = rect.width;
+		const percent = x/width;
+		fullSlider.style.setProperty('--size', (100-percent*100)+"%");
+		line.style.setProperty('--leftVal', percent*100+"%");
+		value.innerHTML = 10+Math.round(percent*60);
+		const content = document.querySelectorAll('.content');
+		content.forEach((content)=>{
+			content.style.setProperty('--shadowOpacity', 10+Math.round(percent*60)+"%");
+		})
+
+	}
+
+	const modifyOpacity = (e,value) => {
+		console.log(value);
+		if(value == 1){
+			const slider = document.querySelectorAll('.slider')[1];
+			const content = document.querySelectorAll('.content');
+			content.forEach((content)=>{
+				content.style.setProperty('--shadowOpacity', 10+Math.round(0*60)+"%");
+			})
+			slider.classList.add('inactive');
+			const activeBtn = e.currentTarget;
+			const parentActiveBtn = activeBtn.parentElement.querySelector('.active-btn');
+			parentActiveBtn.style.setProperty('--position', '17%');
+		}
+		else if(value == 2){
+			const slider = document.querySelectorAll('.slider')[1];
+			
+			slider.classList.remove('inactive');
+			const labels = slider.querySelector('.labels');
+			const valueLabel = labels.querySelector('.value');
+			
+			const content = document.querySelectorAll('.content');
+			content.forEach((content)=>{
+				content.style.setProperty('--shadowOpacity', valueLabel.innerHTML+"%");
+				content.style.setProperty('--offsetX', '0px');
+				content.style.setProperty('--offsetY', '0px');
+			})
+			const activeBtn = e.currentTarget;
+			const parentActiveBtn = activeBtn.parentElement.querySelector('.active-btn');
+			parentActiveBtn.style.setProperty('--position', '50%');
+		}
+		else if(value == 3){
+			const slider = document.querySelectorAll('.slider')[1];
+			
+			slider.classList.remove('inactive');
+			const labels = slider.querySelector('.labels');
+			const valueLabel = labels.querySelector('.value');
+			const content = document.querySelectorAll('.content');
+			content.forEach((content)=>{
+				content.style.setProperty('--shadowOpacity', valueLabel.innerHTML+"%");
+				content.style.setProperty('--offsetX', '8px');
+				content.style.setProperty('--offsetY', '8px');
+			})
+			const activeBtn = e.currentTarget;
+			const parentActiveBtn = activeBtn.parentElement.querySelector('.active-btn');
+			parentActiveBtn.style.setProperty('--position', '82%');
+		
+		}
+
+	}
+
+	const startSliderOpacity = (e) => {
+		handleOpacityChange(e);
+		const slider = e.currentTarget;
+		slider.addEventListener('mousemove', handleOpacityChange);
+	}
+
+	const stopSliderOpacity = (e) => {
+		const slider = e.currentTarget;
+		slider.removeEventListener('mousemove', handleOpacityChange);
+	}
+
+	const handleSliderScale = (e) => {
+		const slider = e.currentTarget;
+		const fullSlider = slider.querySelector('.fullSlider');
+		const line = slider.querySelector('.line');
+		const labels = slider.querySelector('.labels');
+		const value = labels.querySelector('.value');
+
+		const rect = slider.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const width = rect.width;
+		const percent = x/width;
+		fullSlider.style.setProperty('--size', (100-percent*100)+"%");
+		line.style.setProperty('--leftVal', percent*100+"%");
+		value.innerHTML = Math.round(percent*100);
+		const content = document.querySelectorAll('.content');
+		content.forEach((content)=>{
+			content.style.setProperty('--scale', 0.5+ percent);
+		})
+
+
+	}
+	const startSliderScale = (e) => {
+		handleSliderScale(e);
+		const slider = e.currentTarget;
+		slider.addEventListener('mousemove', handleSliderScale);
+	}
+
+	const stopSliderScale = (e) => {
+		const slider = e.currentTarget;
+		slider.removeEventListener('mousemove', handleSliderScale);
 	}
 
 	const startSlider = (e) => {
@@ -386,9 +553,80 @@ function App() {
 										<div className="line"></div>
 										<div className="labels">
 											<div className="name">Radius</div>
-											<div className="value">50</div>
+											<div className="value">20</div>
 										</div>
 									</div>
+									<div className="buttons">
+										<div className="button" onClick={()=>modifyBorderButton(0)}>
+											<div className="visual">
+											</div>
+											<p>Sharp</p>
+										</div>
+										<div className="button" onClick={()=>modifyBorderButton(0.5)}>
+											<div className="visual">
+											</div>
+											<p>Curved</p>
+										</div>
+											
+										<div className="button" onClick={()=>modifyBorderButton(1)}>
+											<div className="visual">
+											</div>
+											<p>Round</p>
+										</div>
+										<div className="active-btn"></div>
+									</div>
+									
+								</div>
+							</div>
+
+							<div className="element">
+								<div className="title">
+									Shadow
+								</div>
+								<div className="col1-grid">
+									<div className="slider" style={{transition:"none"}} onMouseDown={startSliderOpacity} onMouseUp={stopSliderOpacity} onMouseLeave={stopSliderOpacity}>
+										<div className="fullSlider"></div>
+										<div className="line"></div>
+										<div className="labels">
+											<div className="name">Opacity</div>
+											<div className="value">40</div>
+										</div>
+										
+									</div>
+									<div className="buttons">
+										<div className="button" onClick={(e)=>modifyOpacity(e,1)}>
+											<img src="https://shots.so/image/shadow-modes/shadow-none.png" alt="" />
+											<p>None</p>
+										</div>
+										<div className="button" onClick={(e)=>modifyOpacity(e,2)}>
+											<img src="https://shots.so/image/shadow-modes/shadow-hug.png" alt="" />
+											<p>Hug</p>
+										</div>
+											
+										<div className="button" onClick={(e)=>modifyOpacity(e,3)}>
+											<img src="https://shots.so/image/shadow-modes/shadow-spread.png" alt="" />
+											<p>Spread</p>
+										</div>
+										<div className="active-btn right"></div>
+									</div>
+									
+								</div>
+							</div>
+							<div className="element">
+								<div className="title">
+									Size & Position
+								</div>
+								<div className="col1-grid">
+									<div className="slider" style={{transition:"none"}} onMouseDown={startSliderScale} onMouseUp={stopSliderScale} onMouseLeave={stopSliderScale}>
+										<div className="fullSlider"></div>
+										<div className="line"></div>
+										<div className="labels">
+											<div className="name">Scale</div>
+											<div className="value">50</div>
+										</div>
+										
+									</div>
+									
 									
 								</div>
 							</div>

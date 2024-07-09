@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 :root{
@@ -36,7 +37,6 @@
 
 .canvas{
     
-    transition: all .2s ease-in;
     padding: clamp(88px, 7%, 1000px) clamp(32px, 3%, 1000px);
     overflow: hidden;
     width: 100%;
@@ -136,6 +136,10 @@
     gap:10%;
 }
 .content{
+    --shadowOpacity: 40%;
+    --offsetX: 8px;
+    --offsetY: 8px;
+    --scale: 1;
     background-color: rgba(220,220,220,1);
     display: flex;
     align-items: center;
@@ -147,10 +151,11 @@
     aspect-ratio: var(--aspect-ratio);
     overflow: hidden;
     
-    box-shadow: 8px 8px 1em 3px rgb(0 0 0 / 68%);
+    box-shadow: var(--offsetX) var(--offsetY) 1em 3px rgb(0 0 0 / var(--shadowOpacity));
 
     position: relative;
     z-index: 100;
+    transform: scale(var(--scale));
     
 }
 
@@ -210,7 +215,7 @@
 }
 
 .right-bar .card-wrapper{
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     padding: 5px 10px;
@@ -220,7 +225,7 @@
 }
 .right-bar .card{
     aspect-ratio: 4 / 3; 
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     width: 100%; 
     max-width: 100%; 
     height: auto; 
@@ -773,6 +778,11 @@
     transition: none !important;
 }
 
+.slider.inactive{
+    pointer-events: none;
+    background-color: rgba(0,0,0, .04);
+}
+
 .fullSlider{
     --size:50%;
     position: absolute;
@@ -810,5 +820,99 @@
 }
 
 .canvas *,.right-bar *{
-    transition: transform .2s ease-in;
+    transition: transform .2s ease-in
+    var(--scale) 0 0;
+}
+
+.slider + .buttons{
+    background: rgba(220,220,220, 1);
+    border-radius: 10px;
+    padding: 4px;
+    display: flex;
+    gap: 4px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.slider + .buttons .button{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 8px;
+    background: none !important;
+    overflow: visible;
+    cursor: pointer;
+    z-index: 3;
+}
+.slider + .buttons .active-btn{
+    --position:50%;
+    background: rgba(255,255,255, 1);
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px -3px rgba(0, 0, 0, .3);
+    width: 30%;
+    z-index: 2;
+    margin: 3px 0;
+    left: var(--position);
+    transform: translateX(-50%);
+}
+
+.slider + .buttons .button .visual{
+    width: 24px;
+    height: 24px;
+
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0, .12);
+    background: rgba(0,0,0, .12);
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.slider + .buttons .button img{
+    width: 24px;
+    height: 24px;
+}
+
+.slider + .buttons .button:nth-child(1) .visual::before{
+    content: "";
+    border: 2px solid rgba(0,0,0, 1);
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 100px;
+    height: 100px;
+}
+.slider + .buttons .button:nth-child(2) .visual::before{
+    content: "";
+    border: 2px solid rgba(0,0,0, 1);
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.slider + .buttons .button:nth-child(3) .visual::before{
+    content: "";
+    border: 2px solid rgba(0,0,0, 1);
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 100px;
+    height: 100px;
+    border-radius: 14px;
+}
+
+
+.slider + .buttons .button p{ 
+    color: rgba(0, 0, 0, .6);
+    font: normal 11px / 14px Inter, sans-serif;
 }
