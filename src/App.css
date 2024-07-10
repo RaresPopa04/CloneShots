@@ -392,7 +392,7 @@
 
 
 .none{
-    display: none;
+    display: none !important;
 }
 
 
@@ -979,4 +979,135 @@
     box-shadow: inset 0 0 2px rgba(0,0,0, .05);
     transition: border .2s ease, box-shadow .3s ease;
     transform: translateX(var(--transformX)) translateY(var(--transformY)) translateZ(0px);
+}
+
+.infoElem{
+    width: 100%;
+}
+.infoElem .elem{
+    background: rgba(0,0,0, .04);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 12px;
+    gap: 6px;
+    border-radius: 8px;
+}
+
+.infoElem .elem .row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.infoElem .elem .row span{
+    font: normal 11px / 14px Inter, sans-serif;
+    letter-spacing: -.2px;
+    color: rgba(0,0,0, .36);
+}
+
+.infoElem .elem .row p{
+    font: normal 11px / 14px Inter, sans-serif;
+    letter-spacing: -.2px;
+}
+
+button.hideMockup{
+    padding: 10px 12px;
+    border-radius: 10px;
+    width: 100%;
+    color: #f44;
+    background: rgba(255, 68, 68, .1) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0, .04) !important;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    font: 500 15px / 20px Inter, sans-serif;
+    letter-spacing: -.4px;
+}
+
+button.hideMockup svg{
+    width: 20px;
+    aspect-ratio: 1/1;
+    color: inherit;
+}
+
+.hiddenMockup{
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+    padding: 12px;
+}
+
+.hiddenMockup svg{
+    width: 36px;
+    margin-bottom: 4px;
+}
+
+.hiddenMockup span.title{
+    font: normal 16px / 22px Inter, sans-serif;
+    letter-spacing: -.3px;
+}
+
+.hiddenMockup span.small{
+    font: normal 11px / 14px Inter, sans-serif;
+    letter-spacing: -.2px;
+    color: rgba(0,0,0, .36) !important;
+}
+
+button.showMockup{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0, .04);
+    padding: 10px 12px;
+    margin-top: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    
+    font: 500 15px / 20px Inter, sans-serif;
+    letter-spacing: -.4px;
+
+    cursor: pointer;
+}
+
+button.showMockup:hover{
+    
+    background: rgba(0,0,0, .14);
+    cursor: pointer;
+
+}
+
+
+button.shadowPos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+    flex-direction: row;
+    border-radius: 10px;
+    border: none;
+    
+    background: rgba(0,0,0, .04);
+
+}
+
+button.shadowPos:hover{
+    background: rgba(0,0,0, .14);
+    cursor: pointer;
+
+}
+
+button.shadowPos svg{
+    width: 18px;
 }

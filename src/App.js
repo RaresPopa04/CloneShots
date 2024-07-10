@@ -499,6 +499,31 @@ function App() {
 		button.removeEventListener('mousemove', handlePositionDrag);
 	}
 
+	const hideMockup = ()=>{
+		const centeredDropbox = document.querySelectorAll('.centeredDropbox');
+		centeredDropbox.forEach((elem)=>{
+			elem.classList.add('none');
+		})
+		const panelElements = document.querySelectorAll('.left-bar .element');
+		panelElements.forEach((elem)=>{
+			elem.classList.add("none");
+		})
+		const hiddenMockup = document.querySelector('.hiddenMockup');
+		hiddenMockup.classList.remove("none");
+	}
+
+	const showMockup = () =>{
+		const centeredDropbox = document.querySelectorAll('.centeredDropbox');
+		centeredDropbox.forEach((elem)=>{
+			elem.classList.remove('none');
+		})
+		const panelElements = document.querySelectorAll('.left-bar .element');
+		panelElements.forEach((elem)=>{
+			elem.classList.remove("none");
+		})
+		const hiddenMockup = document.querySelector('.hiddenMockup');
+		hiddenMockup.classList.add("none");
+	}
 	
 	return (
 		<div className="container">
@@ -727,6 +752,9 @@ function App() {
 										</div>
 										<div className="active-btn right"></div>
 									</div>
+									<button className="shadowPos">
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M1.29 12c0 1.188 1.017 2.16 2.262 2.16s2.244-.972 2.244-2.16-1-2.158-2.244-2.158-2.263.97-2.263 2.158zM12 14.16c-1.245 0-2.263-.972-2.263-2.16S10.755 9.842 12 9.842s2.244.97 2.244 2.158-1 2.16-2.244 2.16m8.448 0c-1.263 0-2.263-.972-2.263-2.16s1-2.158 2.263-2.158c1.245 0 2.244.97 2.244 2.158s-1 2.16-2.244 2.16" clip-rule="evenodd"></path></svg>
+									</button>
 									
 								</div>
 							</div>
@@ -791,6 +819,43 @@ function App() {
 									
 									
 								</div>
+							</div>
+							<div className="element">
+								<div className="title">
+									Details
+								</div>
+								<div className="col1-grid">
+									<div className="infoElem">
+										<div className="elem">
+											<div className="row">
+												<span>Screen pixels</span>
+												<p>Adapts to image</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							<div className="element">
+								<div className="title">
+									Visibility
+								</div>
+								<div className="col1-grid">
+									<button className="hideMockup" onClick={hideMockup}>
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M1.707 1.707a1 1 0 0 0 0 1.414l18.951 18.951a.999.999 0 1 0 1.414-1.414L3.121 1.707a1 1 0 0 0-1.414 0m.292 14.733V6.322l8.46 8.46v1.658c0 1.42-1.13 2.56-2.54 2.56h-3.38c-1.4 0-2.54-1.14-2.54-2.56m11.54 2.999v-1.577l4.138 4.137h-1.598c-1.41 0-2.54-1.15-2.54-2.56m0-10.214 8.46 8.46V7.561c0-1.42-1.14-2.561-2.54-2.561h-3.38a2.54 2.54 0 0 0-2.54 2.561zM6.314 2l4.145 4.145V4.561A2.55 2.55 0 0 0 7.919 2z"></path></svg>								
+										<span>Hide Mockup</span>
+									</button>
+								</div>
+								
+							</div>
+							
+							<div className="hiddenMockup none">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M1.707 1.707a1 1 0 0 0 0 1.414l18.951 18.951a.999.999 0 1 0 1.414-1.414L3.121 1.707a1 1 0 0 0-1.414 0m.292 14.733V6.322l8.46 8.46v1.658c0 1.42-1.13 2.56-2.54 2.56h-3.38c-1.4 0-2.54-1.14-2.54-2.56m11.54 2.999v-1.577l4.138 4.137h-1.598c-1.41 0-2.54-1.15-2.54-2.56m0-10.214 8.46 8.46V7.561c0-1.42-1.14-2.561-2.54-2.561h-3.38a2.54 2.54 0 0 0-2.54 2.561zM6.314 2l4.145 4.145V4.561A2.55 2.55 0 0 0 7.919 2z"></path></svg>
+								<span className='title'>Mockup is hidden</span>
+								<span className="small">Show mockup to start editing</span>
+								<button class = "showMockup" onClick={showMockup}>
+									<span>Show mockup</span>
+								</button>
 							</div>
 						</div>
 
