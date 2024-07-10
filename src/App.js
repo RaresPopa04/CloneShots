@@ -381,6 +381,53 @@ function App() {
 		const slider = e.currentTarget;
 		slider.removeEventListener('mousemove', handleSliderChange);
 	}
+
+
+	const handlePositionMove = (e,id) => {
+		const button = e.currentTarget;
+		const colParent = button.parentElement;
+		const gridParent = colParent.parentElement;
+		const wholeParent = gridParent.parentElement;
+		const selectBtn = wholeParent.querySelector('.selectBtn');
+
+		let posXBtn = 0;
+		let posYBtn = 0;
+		let posX = 0;
+		let posY = 0;
+
+		if(id >=1 && id <= 5){
+			posXBtn = 0;
+			posYBtn = 44.8*(id-1);
+		}else if(id >=6 && id <= 10){
+			posXBtn = 44.8;
+			posYBtn = 44.8*(id-6);
+		}else if(id >=11 && id <= 15){
+			posXBtn = 89.6;
+			posYBtn = 44.8*(id-11);
+		}else if(id >=16 && id <= 20){
+			posXBtn = 134.4;
+			posYBtn = 44.8*(id-16);
+		}else if(id >=21 && id <= 25){
+			posXBtn = 179.2;
+			posYBtn = 44.8*(id-21);
+		}
+
+		selectBtn.style.setProperty('--transformX', `${posXBtn}px`);
+		selectBtn.style.setProperty('--transformY', `${posYBtn}px`);
+
+		const boxPositionX = posXBtn/179.2;
+		const boxPositionY = posYBtn/179.2;
+
+		const uploadBoxes = document.querySelectorAll('.uploadBox');
+		uploadBoxes.forEach((uploadBox)=>{
+			uploadBox.style.setProperty('--transformX', -50+100*boxPositionX+"%");
+			uploadBox.style.setProperty('--transformY',	-50+100*boxPositionY+"%");
+		})
+
+		// move the button based on the selected button
+		
+
+	}
 	
 	return (
 		<div className="container">
@@ -626,6 +673,50 @@ function App() {
 										</div>
 										
 									</div>
+									<div className="propertyGridElement">
+										<div className="selectBtn">
+
+										</div>
+										<div className="propertyGrid">
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,1)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,2)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,3)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,4)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,5)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,6)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,7)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,8)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,9)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,10)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,11)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,12)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,13)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,14)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,15)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,16)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,17)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,18)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,19)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,20)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,21)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,22)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,23)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,24)}></div>
+												<div className="propBtn" onClick={(e)=>handlePositionMove(e,25)}></div>
+											</div>
+											
+										</div>
+
+									</div>
 									
 									
 								</div>
@@ -654,7 +745,7 @@ function App() {
 									<div className="centeredDropbox" >
 										
 									
-										<div className="uploadBox" onClick={handleClickInputFile}>
+										<div className="uploadBox" onClick={handleClickInputFile} >
 											
 											<div className='stack2 none'>
 												{
@@ -746,7 +837,7 @@ function App() {
 											<div className="dropboxParent">
 												<div className="dropbox">
 													<div className={`centeredDropbox style-${i}`} >
-														<div className="uploadBox" >
+														<div className="uploadBox">
 															<div className='stack2 none'>
 																{
 																	preview &&
@@ -796,7 +887,7 @@ function App() {
 											<div className="dropboxParent">
 												<div className="dropbox">
 													<div className={`centeredDropbox two-canvases styletwo-${i}`} >
-														<div className="uploadBox">
+														<div className="uploadBox" >
 															<div className='stack2 none'>
 																{
 																	preview &&
@@ -869,7 +960,7 @@ function App() {
 											<div className="dropboxParent">
 												<div className="dropbox">
 													<div className={`centeredDropbox style-${i+14}`} >
-														<div className="uploadBox" >
+														<div className="uploadBox">
 															<div className='stack2 none'>
 																{
 																	preview &&
