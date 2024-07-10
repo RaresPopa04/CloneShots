@@ -424,7 +424,6 @@ function App() {
 			uploadBox.style.setProperty('--transformY',	-50+100*boxPositionY+"%");
 		})
 
-		// move the button based on the selected button
 		
 
 	}
@@ -523,6 +522,126 @@ function App() {
 		})
 		const hiddenMockup = document.querySelector('.hiddenMockup');
 		hiddenMockup.classList.add("none");
+	}
+
+	const handleShadowMove = (e,id) =>{
+		const button = e.currentTarget;
+		const colParent = button.parentElement;
+		const gridParent = colParent.parentElement;
+		const wholeParent = gridParent.parentElement;
+		const selectBtn = wholeParent.querySelector('.selectBtn');
+
+		let posXBtn = 0;
+		let posYBtn = 0;
+
+		if(id >=1 && id <= 5){
+			posXBtn = 0;
+			posYBtn = 44.8*(id-1);
+		}else if(id >=6 && id <= 10){
+			posXBtn = 44.8;
+			posYBtn = 44.8*(id-6);
+		}else if(id >=11 && id <= 15){
+			posXBtn = 89.6;
+			posYBtn = 44.8*(id-11);
+		}else if(id >=16 && id <= 20){
+			posXBtn = 134.4;
+			posYBtn = 44.8*(id-16);
+		}else if(id >=21 && id <= 25){
+			posXBtn = 179.2;
+			posYBtn = 44.8*(id-21);
+		}
+		console.log(posXBtn);
+
+		selectBtn.style.setProperty('--transformX', `${posXBtn}px`);
+		selectBtn.style.setProperty('--transformY', `${posYBtn}px`);
+
+		const boxPositionX = posXBtn/179.2;
+		const boxPositionY = posYBtn/179.2;
+
+		const uploadBox = document.querySelectorAll(".uploadBox")
+		const posX = -20+Math.round(10*posXBtn/44.8);
+		const posY = -20+Math.round(10*posYBtn/44.8);
+		console.log("shadow" + Math.round(10*posXBtn/44.8) + " "+ posY);
+		uploadBox.forEach((box)=>{
+			box.style.setProperty('--offsetX', -posX+"px");
+			box.style.setProperty('--offsetY', -posY+"px");
+		})
+
+	}
+
+	const handleShadowDrag = (e) => {
+		const button = e.currentTarget;
+		const gridParent = button.parentElement;
+
+		const currentX = e.clientX;
+		const currentY = e.clientY;
+		const rect = gridParent.getBoundingClientRect();
+		const width = rect.width;
+		const height = rect.height;
+		const x = currentX - rect.left;
+		const y = currentY - rect.top;
+
+
+		let posXBtn = x;
+		let posYBtn = y;
+
+		if(posXBtn < 22.4){
+			posXBtn = 22.4;
+		}
+		if(posXBtn > width-22.4){
+			posXBtn = width-22.4;
+		}
+		if(posYBtn < 22.4){
+			posYBtn = 22.4;
+		}
+		if(posYBtn > height-22.4){
+			posYBtn = height-22.4;
+		}
+
+		button.style.setProperty('--transformX', `${posXBtn-22.4}px`);
+		button.style.setProperty('--transformY', `${posYBtn-22.4}px`);
+		const boxPositionX = posXBtn/179.2;
+		const boxPositionY = posYBtn/179.2;
+
+		const uploadBoxes = document.querySelectorAll('.uploadBox');
+
+		
+		const posX = -20+Math.round(10*posXBtn/44.8);
+		const posY = -20+Math.round(10*posYBtn/44.8);
+		console.log("shadow" + Math.round(10*posXBtn/44.8) + " "+ posY);
+		uploadBoxes.forEach((box)=>{
+			box.style.setProperty('--offsetX', -posX+"px");
+			box.style.setProperty('--offsetY', -posY+"px");
+		})
+		
+	}
+
+	const startShadowDrag = (e) => {
+		handleShadowDrag(e);
+		const button = e.currentTarget;
+		const sibling = button.nextElementSibling;
+		const buttons = button.parentElement.querySelectorAll('.propBtn');
+		buttons.forEach((button)=>{
+			button.classList.add('none');
+		});
+
+		button.addEventListener('mousemove', handleShadowDrag);
+	}
+
+	const stopShadowDrag = (e) => {
+		const button = e.currentTarget;
+		const buttons = button.parentElement.querySelectorAll('.propBtn');
+		buttons.forEach((button)=>{
+			button.classList.remove('none');
+		});
+		button.removeEventListener('mousemove', handleShadowDrag);
+	}
+
+	const activateGrid = (e)=>{
+		const parent = e.currentTarget.parentElement;
+		const grid = parent.querySelector('.propertyGridElement');
+		grid.classList.toggle('none');
+
 	}
 	
 	return (
@@ -752,9 +871,54 @@ function App() {
 										</div>
 										<div className="active-btn right"></div>
 									</div>
-									<button className="shadowPos">
+									<div className="propertyGridElement none">
+										<div className="selectBtn" onMouseDown={startShadowDrag} onMouseLeave={stopShadowDrag} onMouseUp={stopShadowDrag}>
+
+										</div>
+										<div className="propertyGrid">
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,1)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,2)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,3)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,4)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,5)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,6)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,7)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,8)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,9)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,10)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,11)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,12)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,13)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,14)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,15)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,16)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,17)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,18)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,19)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,20)}></div>
+											</div>
+											<div className="col">
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,21)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,22)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,23)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,24)}></div>
+												<div className="propBtn" onClick={(e)=>handleShadowMove(e,25)}></div>
+											</div>
+											
+										</div>
+
+									</div>
+									<button className="shadowPos" onClick={activateGrid}>
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M1.29 12c0 1.188 1.017 2.16 2.262 2.16s2.244-.972 2.244-2.16-1-2.158-2.244-2.158-2.263.97-2.263 2.158zM12 14.16c-1.245 0-2.263-.972-2.263-2.16S10.755 9.842 12 9.842s2.244.97 2.244 2.158-1 2.16-2.244 2.16m8.448 0c-1.263 0-2.263-.972-2.263-2.16s1-2.158 2.263-2.158c1.245 0 2.244.97 2.244 2.158s-1 2.16-2.244 2.16" clip-rule="evenodd"></path></svg>
 									</button>
+									
 									
 								</div>
 							</div>
