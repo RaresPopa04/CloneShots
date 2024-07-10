@@ -353,7 +353,7 @@ function App() {
 		fullSlider.style.setProperty('--size', (100-percent*100)+"%");
 		line.style.setProperty('--leftVal', percent*100+"%");
 		value.innerHTML = Math.round(percent*100);
-		const content = document.querySelectorAll('.uploadBox');
+		const content = document.querySelectorAll('.centeredDropbox');
 		content.forEach((content)=>{
 			content.style.setProperty('--scale', 0.5+ percent);
 		})
@@ -392,8 +392,6 @@ function App() {
 
 		let posXBtn = 0;
 		let posYBtn = 0;
-		let posX = 0;
-		let posY = 0;
 
 		if(id >=1 && id <= 5){
 			posXBtn = 0;
@@ -418,8 +416,10 @@ function App() {
 		const boxPositionX = posXBtn/179.2;
 		const boxPositionY = posYBtn/179.2;
 
-		const uploadBoxes = document.querySelectorAll('.uploadBox');
+		const uploadBoxes = document.querySelectorAll('.centeredDropbox');
 		uploadBoxes.forEach((uploadBox)=>{
+			
+			uploadBox.style.setProperty('--timeTrans',"0.2s");
 			uploadBox.style.setProperty('--transformX', -50+100*boxPositionX+"%");
 			uploadBox.style.setProperty('--transformY',	-50+100*boxPositionY+"%");
 		})
@@ -428,6 +428,77 @@ function App() {
 		
 
 	}
+
+	const handlePositionDrag = (e) => {
+		const button = e.currentTarget;
+		const gridParent = button.parentElement;
+
+		const currentX = e.clientX;
+		const currentY = e.clientY;
+		const rect = gridParent.getBoundingClientRect();
+		const width = rect.width;
+		const height = rect.height;
+		const x = currentX - rect.left;
+		const y = currentY - rect.top;
+
+		console.log(width+ " "+ height);
+
+		let posXBtn = x;
+		let posYBtn = y;
+
+		console.log(posXBtn);
+		console.log(posYBtn);
+
+		if(posXBtn < 22.4){
+			posXBtn = 22.4;
+		}
+		if(posXBtn > width-22.4){
+			posXBtn = width-22.4;
+		}
+		if(posYBtn < 22.4){
+			posYBtn = 22.4;
+		}
+		if(posYBtn > height-22.4){
+			posYBtn = height-22.4;
+		}
+
+		button.style.setProperty('--transformX', `${posXBtn-22.4}px`);
+		button.style.setProperty('--transformY', `${posYBtn-22.4}px`);
+		const boxPositionX = posXBtn/179.2;
+		const boxPositionY = posYBtn/179.2;
+
+		const uploadBoxes = document.querySelectorAll('.centeredDropbox');
+
+		
+		uploadBoxes.forEach((uploadBox)=>{
+			uploadBox.style.setProperty('--timeTrans',"0s");
+			uploadBox.style.setProperty('--transformX', -50+100*boxPositionX+"%");
+			uploadBox.style.setProperty('--transformY',	-50+100*boxPositionY+"%");
+			
+		})
+	}
+
+	const startPositionDrag = (e) => {
+		handlePositionDrag(e);
+		const button = e.currentTarget;
+		const sibling = button.nextElementSibling;
+		const buttons = button.parentElement.querySelectorAll('.propBtn');
+		buttons.forEach((button)=>{
+			button.classList.add('none');
+		});
+
+		button.addEventListener('mousemove', handlePositionDrag);
+	}
+
+	const stopPositionDrag = (e) => {
+		const button = e.currentTarget;
+		const buttons = button.parentElement.querySelectorAll('.propBtn');
+		buttons.forEach((button)=>{
+			button.classList.remove('none');
+		});
+		button.removeEventListener('mousemove', handlePositionDrag);
+	}
+
 	
 	return (
 		<div className="container">
@@ -674,7 +745,7 @@ function App() {
 										
 									</div>
 									<div className="propertyGridElement">
-										<div className="selectBtn">
+										<div className="selectBtn" onMouseDown={startPositionDrag} onMouseUp={stopPositionDrag} onMouseLeave={stopPositionDrag}>
 
 										</div>
 										<div className="propertyGrid">
@@ -742,7 +813,7 @@ function App() {
 							</div>
 							<div className="dropboxParent">
 								<div className="dropbox">
-									<div className="centeredDropbox" >
+									<div className="centeredDropbox style-0" >
 										
 									
 										<div className="uploadBox" onClick={handleClickInputFile} >

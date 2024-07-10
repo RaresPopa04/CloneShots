@@ -110,7 +110,7 @@
     position: relative;
 }
 .uploadBox{
-    position: absolute;
+    position: relative;
 
     height: 100%;
     aspect-ratio: var(--aspect-ratio);
@@ -120,10 +120,7 @@
     --shadowOpacity: 40%;
     --offsetX: 8px;
     --offsetY: 8px;
-    --scale: 1;
-    --transformX: 0%;
-    --transformY: 0%;
-    transform: scale(var(--scale));
+   
     
     
     box-shadow: var(--offsetX) var(--offsetY) 1em 3px rgb(0 0 0 / var(--shadowOpacity));
@@ -140,6 +137,14 @@
     align-items: center;
     justify-content: center;
     aspect-ratio: var(--aspect-ratio);
+
+    --scale: 1;
+    --transformX: 0%;
+    --transformY: 0%;
+
+    
+    transform: scale(var(--scale)) translate(var(--transformX), var(--transformY));
+
     
 
 }
@@ -249,25 +254,25 @@
     cursor: pointer;
 }
 .centeredDropbox.style-0 .uploadBox{
-    transform: rotate(0deg) scale(1) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: rotate(0deg) translate3d(0,0, 0);
 }
 
 .centeredDropbox.style-1 .uploadBox{
 
-    transform: rotate(-8deg) scale(.9) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: rotate(-8deg) scale(.9) translate3d(0,0 , 0);
 }
 .centeredDropbox.style-2 .uploadBox{
-    transform: perspective(400em) rotateY(-15deg) rotateX(6deg) skew(-8deg, 4deg) translate3d(-4%, -2%, 0) scale(.86) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: perspective(400em) rotateY(-15deg) rotateX(6deg) skew(-8deg, 4deg) translate3d(-4%, -2%, 0) scale(.86);
 }
 .centeredDropbox.style-3 .uploadBox{
-    transform: perspective(400em) rotateY(15deg) rotateX(6deg) skew(8deg, -4deg) translate3d(4%, -2%, 0) scale(.86) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: perspective(400em) rotateY(15deg) rotateX(6deg) skew(8deg, -4deg) translate3d(4%, -2%, 0) scale(.86);
 }
 
 .centeredDropbox.style-14 .uploadBox{
-    transform: perspective(400em) translate3d(0, -6%, 0) rotateX(34deg) scale(.84) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: perspective(400em) translate3d(0, -6%, 0) rotateX(34deg) scale(.84);
 }
 .centeredDropbox.style-15 .uploadBox{
-    transform: rotateX(40deg) rotate(40deg) scale(.8) translateX(var(--transformX)) translateY(var(--transformY));  
+    transform: rotateX(40deg) rotate(40deg) scale(.8)  translate3d(0, 0, 0);  
 }
 
 .active{ 
@@ -277,61 +282,60 @@
 
 
 .centeredDropbox.styletwo-0 .uploadBox:first-child{
-    transform: translate3d(0,0,0) rotate(0deg) translateX(var(--transformX)) translateY(var(--transformY));
-
+    transform: translate3d(0, 0, 0) ;
 }
 .centeredDropbox.styletwo-0 .uploadBox:nth-child(2){
-    transform: translate3d(0,0,0) rotate(0deg) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(0, 0, 0) ;
 
 }
 
 
 .centeredDropbox.styletwo-1 .uploadBox:first-child{
-    transform: translate3d(0, -6%, 0) rotate(-3deg) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(0,-6%, 0) rotate(-3deg) ;
 
 }
 .centeredDropbox.styletwo-1 .uploadBox:nth-child(2){
-    transform: translate3d(0, 6%, 0) rotate(1.5deg) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(0,6%, 0) rotate(1.5deg) ;
 
 }
 
 
 .centeredDropbox.styletwo-2 .uploadBox:first-child{
-    transform: translate3d(20%, -10%, 0) rotate(-4deg) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(20%,-10%, 0) rotate(-4deg) ;
 
 }
 .centeredDropbox.styletwo-2 .uploadBox:nth-child(2){
-    transform: translate3d(-20%, 10%, 0) rotate(4deg) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(-20%,10%, 0) rotate(4deg) ;
 
 }
 
 
 .centeredDropbox.styletwo-3 .uploadBox:first-child{
-    transform: translate3d(20%, 10%, 0) rotate(4deg) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(20%,10%, 0) rotate(4deg) ;
 
 }
 .centeredDropbox.styletwo-3 .uploadBox:nth-child(2){
-    transform: translate3d(-20%, -10%, 0) rotate(-4deg) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(-20%,-10%, 0) rotate(-4deg) ;
 
 }
 
 
 .centeredDropbox.styletwo-4 .uploadBox:first-child{
-    transform: translate3d(0, -16%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(0,-16%, 0) ;
 
 }
 .centeredDropbox.styletwo-4 .uploadBox:nth-child(2){
-    transform: translate3d(0, 16%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(0,16%, 0) ;
 
 }
 
 
 .centeredDropbox.styletwo-5 .uploadBox:first-child{
-    transform: translate3d(0, -10%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(0,-10%, 0) ;
 
 }
 .centeredDropbox.styletwo-5 .uploadBox:nth-child(2){
-    transform: translate3d(0, 10%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(0,10%, 0) ;
 
 }
 
@@ -342,19 +346,19 @@
 
 
 .centeredDropbox.styletwo-6 .uploadBox:first-child{
-    transform: translate3d(-30%, -5%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(-30%, -5%, 0) ;
 
 }
 .centeredDropbox.styletwo-6 .uploadBox:nth-child(2){
-    transform: translate3d(90%, 5%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: translate3d(90%, 5%, 0) ;
 
 }
 .centeredDropbox.styletwo-7 .uploadBox:first-child{
-    transform: rotateY(20deg) rotateX(20deg) rotate(-10deg) translate3d(10%, 20%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: rotateY(20deg) rotateX(20deg) rotate(-10deg) translate3d(20%, 50%, 0) ;
 
 }
 .centeredDropbox.styletwo-7 .uploadBox:nth-child(2){
-    transform: rotateY(20deg) rotateX(20deg) rotate(-10deg) translate3d(-30%, -60%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: rotateY(20deg) rotateX(20deg) rotate(-10deg)translate3d(-20%, -50%, 0) ;
 
 }
 .centeredDropbox.styletwo-7{
@@ -362,11 +366,11 @@
 
 }
 .centeredDropbox.styletwo-8 .uploadBox:first-child{
-    transform: rotateX(5deg) rotateY(30deg) translate3d(20%, -20%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: rotateX(5deg) rotateY(30deg) translate3d(20%, -20%, 0) ;
 
 }
 .centeredDropbox.styletwo-8 .uploadBox:nth-child(2){
-    transform: rotateX(5deg) rotateY(30deg) translate3d(-20%, 20%, 0) translateX(var(--transformX)) translateY(var(--transformY));  
+    transform: rotateX(5deg) rotateY(30deg) translate3d(-20%, 20%, 0) ;  
 
 }
 .centeredDropbox.styletwo-8{
@@ -374,11 +378,11 @@
 
 }
 .centeredDropbox.styletwo-9 .uploadBox:first-child{
-    transform: rotateX(5deg) rotateY(-30deg) translate3d(10%, 20%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: rotateX(5deg) rotateY(-30deg) translate3d(10%,20%, 0) ;
 
 }
 .centeredDropbox.styletwo-9 .uploadBox:nth-child(2){
-    transform: rotateX(5deg) rotateY(50deg) translate3d(-10%, -20%, 0) translateX(var(--transformX)) translateY(var(--transformY));
+    transform: rotateX(5deg) rotateY(50deg) translate3d(-10%, -20%, 0) ;
 
 }
 .centeredDropbox.styletwo-9{
@@ -827,7 +831,13 @@
 }
 
 .canvas *,.right-bar *{
-    transition: all .2s ease-in;
+    transition: transform .2s ease-in;
+}
+.centeredDropbox{
+    --timeTrans: 0s;
+    transition: transform var(--timeTrans) ease;
+
+
 }
 
 .slider + .buttons{
