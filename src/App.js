@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 import './App.css';
+import ScreenshotPosition from './ScreenshotPositions';
 
 function App() {
 	const [preview, setPreview] = useState(null);
@@ -10,9 +11,213 @@ function App() {
 	
 	const ref = useRef();
 
+	const layoutsNames = ["Screenshot", "Browser","Minimal Phone","Minimal Desktop","Iphone15","Iphone 15 Plus", "Iphone 15 Pro", "Iphone 15 Pro Max","Nothing Phone","Pixel 7 Pro","Iphone 14","Iphone 14 Plus","Iphone 14 Pro", "Iphone 14 Pro Max","Iphone 13","Iphone 13 Pro","Iphone SE","iPad Pro 11","iPad Pro 13","iPad Air","iPadMini","Macbook Pro 16","Macbook Air M2","Mackbook Air 13","Macbook Pro 13","Macbook Pro 15","Surface Book","iMac24","Pro Display XDR","Studio Display","iMac Pro","iMax Retina","Apple Watch Ultra","Apple Watch Series 8"]
+	const layoutsNum = [16,9,14,10,15,15,15,15,15,15,15,15,15,15,15,15,15,16,16,16,16,8,8,8,8,8,8,9,9,9,9,9,10,10]
+	const cover = [
+		"https://shots.so/mockups/Screenshot/thumbs/1.png",
+		"https://shots.so/mockups/Browser/thumbs/1.png",
+		"https://shots.so/mockups/Minimal%20Phone/thumbs/1.png",
+		"https://shots.so/mockups/Minimal%20Desktop/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2015/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2015%20Plus/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2015%20Pro/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2015%20Pro%20Max/thumbs/1.png",
+		"https://shots.so/mockups/Nothing%20Phone/thumbs/1.png",
+		"https://shots.so/mockups/Pixel%207%20Pro/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2014/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2014%20Plus/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2014%20Pro/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2014%20Pro%20Max/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2013/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%2013%20Pro/thumbs/1.png",
+		"https://shots.so/mockups/iPhone%20SE/thumbs/1.png",
+		"https://shots.so/mockups/iPad%20Pro%2011/thumbs/1.png",
+		"https://shots.so/mockups/iPad%20Pro%2013/thumbs/1.png",
+		"https://shots.so/mockups/iPad%20Air/thumbs/1.png",
+		"https://shots.so/mockups/iPad%20Mini/thumbs/1.png",
+		"https://shots.so/mockups/Macbook%20Pro%2016/thumbs/1.png",
+		"https://shots.so/mockups/Macbook%20Air%20M2/thumbs/1.png",
+		"https://shots.so/mockups/Macbook%20Air%2013/thumbs/1.png",
+		"https://shots.so/mockups/Macbook%20Pro%2013/thumbs/1.png",
+		"https://shots.so/mockups/Macbook%20Pro%2015/thumbs/1.png",
+		"https://shots.so/mockups/Surface%20Book/thumbs/1.png",
+		"https://shots.so/mockups/iMac%2024/thumbs/1.png",
+		"https://shots.so/mockups/Pro%20Display%20XDR/thumbs/1.png",
+		"https://shots.so/mockups/Studio%20Display/thumbs/1.png",
+		"https://shots.so/mockups/iMac%20Pro/thumbs/1.png",
+		"https://shots.so/mockups/iMac%20Retina/thumbs/1.png",
+		"https://shots.so/mockups/Apple%20Watch%20Ultra/thumbs/1.png",
+		"https://shots.so/mockups/Apple%20Watch%20Series%208/thumbs/1.png",
+	]
+	const previewImages = [
+		[
+			"https://shots.so/mockups/Screenshot/styles/default.png",
+			"https://shots.so/mockups/Screenshot/styles/glass-light.png",
+			"https://shots.so/mockups/Screenshot/styles/glass-dark.png",
+		],
+		[
+			"https://shots.so/mockups/Browser/styles/safari-light.png",
+			"https://shots.so/mockups/Browser/styles/chrome-light.png",
+			"https://shots.so/mockups/Browser/styles/arc-light.png",
+		],
+		[
+			"",
+			"",
+			"",
+		],
+		[
+			"",
+			"",
+			"",
+		],
+		[
+			"https://shots.so/mockups/iPhone%2015/styles/black.png",
+			"https://shots.so/mockups/iPhone%2015/styles/blue.png",
+			"https://shots.so/mockups/iPhone%2015/styles/green.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2015%20Plus/styles/black.png",
+			"https://shots.so/mockups/iPhone%2015%20Plus/styles/blue.png",
+			"https://shots.so/mockups/iPhone%2015%20Plus/styles/green.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2015%20Pro/styles/dark-blue.png",
+			"https://shots.so/mockups/iPhone%2015%20Pro/styles/black-titanium.png",
+			"https://shots.so/mockups/iPhone%2015%20Pro/styles/natural-titanium.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2015%20Pro%20Max/styles/dark-blue.png",
+			"https://shots.so/mockups/iPhone%2015%20Pro%20Max/styles/black-titanium.png",
+			"https://shots.so/mockups/iPhone%2015%20Pro%20Max/styles/natural-titanium.png"
+		],
+		[
+			"https://shots.so/mockups/Nothing%20Phone/styles/white.png",
+			"https://shots.so/mockups/Nothing%20Phone/styles/black.png",
+			""
+		],
+		[
+			"https://shots.so/mockups/Pixel%207%20Pro/styles/hazel.png",
+			"https://shots.so/mockups/Pixel%207%20Pro/styles/obsidian.png",
+			"https://shots.so/mockups/Pixel%207%20Pro/styles/snow.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2014/styles/midnight.png",
+			"https://shots.so/mockups/iPhone%2014/styles/blue.png",
+			"https://shots.so/mockups/iPhone%2014/styles/purple.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2014%20Plus/styles/midnight.png",
+			"https://shots.so/mockups/iPhone%2014%20Plus/styles/blue.png",
+			"https://shots.so/mockups/iPhone%2014%20Plus/styles/purple.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2014%20Pro/styles/space-black.png",
+			"https://shots.so/mockups/iPhone%2014%20Pro/styles/silver.png",
+			"https://shots.so/mockups/iPhone%2014%20Pro/styles/deep-purple.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2014%20Pro%20Max/styles/space-black.png",
+			"https://shots.so/mockups/iPhone%2014%20Pro%20Max/styles/silver.png",
+			"https://shots.so/mockups/iPhone%2014%20Pro%20Max/styles/deep-purple.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2013/styles/midnight.png",
+			"https://shots.so/mockups/iPhone%2013/styles/starlight.png",
+			"https://shots.so/mockups/iPhone%2013/styles/blue.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%2013%20Pro/styles/graphit.png",
+			"https://shots.so/mockups/iPhone%2013%20Pro/styles/silver.png",
+			"https://shots.so/mockups/iPhone%2013%20Pro/styles/sierra-blue.png"
+		],
+		[
+			"https://shots.so/mockups/iPhone%20SE/styles/black.png",
+			"https://shots.so/mockups/iPhone%20SE/styles/white.png",
+			"https://shots.so/mockups/iPhone%20SE/styles/red.png"
+		],
+		[
+			"https://shots.so/mockups/iPad%20Pro%2011/styles/space-grey.png",
+			"https://shots.so/mockups/iPad%20Pro%2011/styles/silver.png",
+			""
+		],
+		[
+			"https://shots.so/mockups/iPad%20Pro%2013/styles/space-grey.png",
+			"https://shots.so/mockups/iPad%20Pro%2013/styles/silver.png"
+		],
+		[
+			"https://shots.so/mockups/iPad%20Air/styles/space-grey.png",
+			"https://shots.so/mockups/iPad%20Air/styles/starlight.png",
+			"https://shots.so/mockups/iPad%20Air/styles/blue.png"
+		],
+		[
+			"https://shots.so/mockups/iPad%20Mini/styles/space-grey.png",
+			"https://shots.so/mockups/iPad%20Mini/styles/starlight.png",
+			"https://shots.so/mockups/iPad%20Mini/styles/pink.png"
+		],
+		[
+			"","",""
+		],
+		[
+			"https://shots.so/mockups/Macbook%20Air%20M2/styles/midnight.png",
+			"https://shots.so/mockups/Macbook%20Air%20M2/styles/silver.png",
+			"https://shots.so/mockups/Macbook%20Air%20M2/styles/space-gray.png"
+		],
+		[
+			"https://shots.so/mockups/Macbook%20Air%2013/styles/space-grey.png",
+			"https://shots.so/mockups/Macbook%20Air%2013/styles/silver.png",
+			"https://shots.so/mockups/Macbook%20Air%2013/styles/gold.png"
+		],
+		[
+			"https://shots.so/mockups/Macbook%20Pro%2013/styles/space-grey.png",
+			"https://shots.so/mockups/Macbook%20Pro%2013/styles/silver.png",
+			""
+		],
+		[
+			"https://shots.so/mockups/Macbook%20Pro%2015/styles/space-grey.png",
+			"https://shots.so/mockups/Macbook%20Pro%2015/styles/silver.png",
+			""
+		],
+		[
+			"","",""
+		],
+		[
+			"https://shots.so/mockups/iMac%2024/styles/silver.png",
+			"https://shots.so/mockups/iMac%2024/styles/blue.png",
+			"https://shots.so/mockups/iMac%2024/styles/purple.png"
+		],
+		[
+			"","",""
+		],
+		[
+			"","",""
+		],
+		[
+			"","",""
+		],
+		[
+			"","",""
+		],
+		[
+			"https://shots.so/mockups/Apple%20Watch%20Ultra/styles/apple-watch-ultra.png",
+			"https://shots.so/mockups/Apple%20Watch%20Ultra/styles/midnight-ocean-band.png",
+			"https://shots.so/mockups/Apple%20Watch%20Ultra/styles/orange-alpine-loop.png"
+		],
+		[
+			"https://shots.so/mockups/Apple%20Watch%20Series%208/styles/aluminum-midnight.png",
+			"https://shots.so/mockups/Apple%20Watch%20Series%208/styles/aluminum-silver.png",
+			"https://shots.so/mockups/Apple%20Watch%20Series%208/styles/aluminum-starlight.png"
+		]
+	]
+	const extraPreview = [6,3,0,0,2,2,1,1,0,0,2,2,1,1,2,1,0,0,0,2,1,0,1,0,0,0,0,4,0,0,0,0,1,0];
+		
 	useEffect(()=>{
 		const activeBtnRight = document.querySelector('.active-btn.right');
 		activeBtnRight.style.setProperty('--position', '82%');
+
+		const  firstLayout  = document.querySelector('.layoutPanel .list .grid button');
+		const firstFilter = document.querySelector('.layoutPanel .filters .buttons button');
+		firstFilter.classList.add('active');
+		firstLayout.classList.add('active');
 
 	},[])
 	const handleFrameChange = (e) => {	
@@ -643,6 +848,38 @@ function App() {
 		grid.classList.toggle('none');
 
 	}
+
+	const openLayoutsPanel = (e) => {
+		const layoutPanel = document.querySelector('.layoutPanel');
+		const arrow = document.querySelector('.left-bar .selector .arrow');
+		
+		arrow.classList.toggle('rotate');
+		layoutPanel.classList.toggle('none');
+	}
+
+	const [layoutsName, setLayoutsName] = useState("Screenshot");
+
+	const handleLayoutChange = (e,index) => {
+		const pressedButton = e.currentTarget;
+		const activeButton = document.querySelector(".layoutPanel .list .grid button.active");
+		const coverImg = document.querySelector('.selector .current img');
+
+		activeButton.classList.remove('active');
+		pressedButton.classList.add('active');
+
+		const title = document.querySelector(".selector .details p")
+		title.innerHTML = layoutsNames[index];
+		coverImg.src = cover[index];
+
+		if(index === 2){
+			document.documentElement.style.setProperty('--aspect-ratio', 6/13);
+			document.documentElement.style.setProperty('--aspect-ratio2', 6/13);
+			document.documentElement.style.setProperty('--aspect-ratio3', 6/13);
+
+			document.querySelector(".infoElem p").innerHTML = "6:13";
+		}
+
+	}
 	
 	return (
 		<div className="container">
@@ -694,7 +931,7 @@ function App() {
 					</div>
 					<div className="selectorElem">
 						<div className="btnWrapper">
-							<button className="selector">
+							<button className="selector" onClick={openLayoutsPanel}>
 								<div className="current">
 									<img crossorigin="anonymous" loading="eager" src="https://shots.so/mockups/Screenshot/thumbs/1.png" alt="Thumbnail">
 									</img>
@@ -711,10 +948,74 @@ function App() {
 								</div>
 							</button>
 						</div>
+						
+						<div className="layoutPanel none">
+								<div className="filters">
+									<div className="buttons">
+										<button><span>All</span></button>
+										<button><span>Phone</span></button>
+										<button><span>Tablet</span></button>
+										<button><span>Laptop</span></button>
+										<button><span>Desktop</span></button>
+										<button><span>Wearable</span></button>
+									</div>
+									
+								</div>
+								<div className="list">
+									<div className="grid">
+										{
+											previewImages.map((layout,index)=>{
+												return(
+													<button className="item" onClick={(e)=>handleLayoutChange(e,index)}>
+														<div className="details">
+															<h6>{layoutsNames[index]}</h6>
+															<p>{layoutsNum[index]} layouts</p>
+														</div>
+														<div className="img">
+															<img src={`${cover[index]}`} alt="" />
+														</div>
+														<div className="preview">
+															{
+																Array.from({length:3}).map((_,index2)=>{
+																	if(previewImages[index][index2] !== "")
+																		return (
+																			<div>
+																				<img src={`${previewImages[index][index2]}`} alt="" />
+																			</div>
+																		)
+																	return (
+																		<div style={{visibility:"hidden"}}>
+																			<img src={`${cover[index]}`} alt="" />
+																		</div>
+																	)
+																	
+																})
+															}
+															{
+																extraPreview[index] !== 0 ?
+																<div>
+																	<span>+ {extraPreview[index]}</span>
+																</div>
+																:
+																<div style={{visibility:"hidden"}}>
+																	<span>+ 6</span>
+																</div>
+															}
+														</div>
+													</button>
+												)
+											})
+										}
+										
+										
+									</div>
+								</div>
+							</div>
 
 					</div>
 					<div className="scroll">
 						<div className="container">
+							
 							<div className="element">
 								<div className="title">
 									Style
@@ -1126,183 +1427,7 @@ function App() {
 			
 			<div className="right-bar">
 				<div className="scroller">
-					<div className="card-wrapper">
-          {
-							Array.from({length:4}).map((_,i)=>{
-								return (<div className="card" onClick={()=>applyStyle(i)}>
-									<div className="frame" >
-										<div className="innerFrame" >
-											<div className="background">
-											</div>
-											<div className="dropboxParent">
-												<div className="dropbox">
-													<div className={`centeredDropbox style-${i}`} >
-														<div className="uploadBox">
-															<div className='stack2 none'>
-																{
-																	preview &&
-																	<div className="imgContainer">
-																		<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
-																	</div>
-																}
-															</div>
-															<div className='stack1 none'>
-																{preview &&
-																		<div className="imgContainer">
-																			<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
-																		</div>}
-															</div>
-															{preview ==null &&
-																<div class="content default">
-																	
-																</div>
-															}
-															{preview &&
-																<div className="imgContainer">
-																	<img src={preview} alt="preview" />
-																</div>}
-														</div>
-														
-														
-													</div>
-													
-													
-												</div>
-												
-											</div>
-										</div>
-										
-									</div>
-								</div>)
-							})
-							
-						}
-						{
-							Array.from({length:10}).map((_,i)=>{
-								return (<div className="card" onClick={()=>applyStyleTwo(i)}>
-									<div className="frame" >
-										<div className="innerFrame">
-											<div className="background">
-											</div>
-											<div className="dropboxParent">
-												<div className="dropbox">
-													<div className={`centeredDropbox two-canvases styletwo-${i}`} >
-														<div className="uploadBox" >
-															<div className='stack2 none'>
-																{
-																	preview &&
-																	<div className="imgContainer">
-																		<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
-																	</div>
-																}
-															</div>
-															<div className='stack1 none'>
-																{preview &&
-																		<div className="imgContainer">
-																			<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
-																		</div>}
-															</div>
-															{preview ==null &&
-																<div class="content default">
-																	
-																</div>
-															}
-															{preview &&
-																<div className="imgContainer">
-																	<img src={preview} alt="preview" />
-																</div>}
-														</div>
-														<div className="uploadBox">
-															<div className='stack2 none'>
-																{
-																	previewTwo &&
-																	<div className="imgContainer">
-																		<img src={previewTwo} alt="preview" style={{filter:"blur(2em)"}}/>
-																	</div>
-																}
-															</div>
-															<div className='stack1 none'>
-																{previewTwo &&
-																		<div className="imgContainer">
-																			<img src={previewTwo} alt="preview" style={{filter:"blur(2em)"}}/>
-																		</div>}
-															</div>
-															{previewTwo ==null &&
-																<div class="content default">
-																	
-																</div>
-															}
-															{previewTwo &&
-																<div className="imgContainer">
-																	<img src={previewTwo} alt="preview" />
-																</div>}
-														</div>
-														
-													</div>
-													
-													
-												</div>
-												
-											</div>
-										</div>
-										
-									</div>
-								</div>)
-							})
-						}
-            {
-							Array.from({length:2}).map((_,i)=>{
-								return (<div className="card" onClick={()=>applyStyle(i+14)}>
-									<div className="frame" >
-										<div className="innerFrame">
-											<div className="background">
-											</div>
-											<div className="dropboxParent">
-												<div className="dropbox">
-													<div className={`centeredDropbox style-${i+14}`} >
-														<div className="uploadBox">
-															<div className='stack2 none'>
-																{
-																	preview &&
-																	<div className="imgContainer">
-																		<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
-																	</div>
-																}
-															</div>
-															<div className='stack1 none'>
-																{preview &&
-																		<div className="imgContainer">
-																			<img src={preview} alt="preview" style={{filter:"blur(2em)"}}/>
-																		</div>}
-															</div>
-															{preview ==null &&
-																<div class="content default">
-																	
-																</div>
-															}
-															{preview &&
-																<div className="imgContainer">
-																	<img src={preview} alt="preview" />
-																</div>}
-														</div>
-														
-														
-													</div>
-													
-													
-												</div>
-												
-											</div>
-										</div>
-										
-									</div>
-								</div>)
-							})
-							
-						}
-						
-						
-					</div>
+					<ScreenshotPosition preview = {preview} preview2 = {previewTwo} applyStyle={applyStyle} applyStyleTwo = {applyStyleTwo}/>
 				</div>
 				
 			</div>

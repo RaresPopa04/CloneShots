@@ -9,7 +9,8 @@
 :root{
     --aspect-ratio:1/1;
     --aspect-ratio2:1/1;
-    --border-radius:0.2em;
+    --aspect-ratio3:1/1;
+    --border-radius:10px;
 }
 
 #root>.container{
@@ -19,7 +20,8 @@
     height: 100vh;
     align-items: stretch;
     gap:8px;
-    padding: 8px;
+    padding-top: 8px;
+    overflow: hidden;
     background-color: rgba(220,220,220,1);
 }
 
@@ -32,7 +34,6 @@
     gap: 4px;
     z-index: 10;
     height: 100%;
-    overflow: hidden;
 }
 
 .canvas{
@@ -41,6 +42,10 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
+}
+
+.rotate{
+    transform: rotate(180deg);
 }
 
 .canvasContainer{
@@ -153,6 +158,7 @@
     aspect-ratio: calc(var(--aspect-ratio) + var(--aspect-ratio2));
     gap:10%;
 }
+
 .content{
     background-color: rgba(220,220,220,1);
     display: flex;
@@ -170,8 +176,13 @@
     
 }
 
+.content p{
+    font-family: Inter, 'sans-serif';
+}
+
 .content h3{
     margin: 8px 0 4px;
+    font-family: Inter, sans-serif;
 }
 
 .content span{
@@ -524,6 +535,8 @@
 .panel .btnWrapper{
     position: relative;
     cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .panel .btnWrapper .selector{
@@ -563,6 +576,13 @@
     font: 500 10px / 12px Inter, sans-serif;
     color: rgba(0,0,0, .36);
     text-transform: capitalize;
+}
+
+.selector .arrow{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .selector .arrow svg{
@@ -1110,4 +1130,155 @@ button.shadowPos:hover{
 
 button.shadowPos svg{
     width: 18px;
+}
+
+.layoutPanel{
+    top: calc(90% + 6px);
+    width: 480px;
+    opacity: 1;
+    transform: translateX(0px) translateY(0px) scale(1) translateZ(0px);
+
+    height: 70vh;
+    max-height: 70vh;
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255,255,255, 1);
+    padding: 6px;
+    border-radius: 12px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0, .03), 0 16px 32px rgba(0, 0, 0, .24);
+
+    scrollbar-width: none;
+}
+
+.layoutPanel .filters{
+    padding: 12px 12px 0;
+}
+
+.layoutPanel .filters .buttons{
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid rgba(0,0,0, .04);
+    padding-bottom: 12px;
+}
+
+.layoutPanel .filters .buttons button{
+    cursor: pointer;
+    width: max-content;
+    min-width: 64px;
+    padding: 8px 12px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: none;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0, .04) !important;
+}
+
+.layoutPanel .filters .buttons button.active{
+    background: rgba(0,0,0, .04);
+}
+
+.layoutPanel .filters .buttons button:hover{
+    background: rgba(0,0,0, .04);
+}
+
+.layoutPanel .filters .buttons button span{
+    font: 500 14px / 20px Inter, sans-serif;
+    letter-spacing: -.4px;
+}
+
+.layoutPanel .list{
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: none;
+}
+
+.layoutPanel .list .grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px;
+}
+.layoutPanel .list .grid button{
+    border: none;
+    cursor: pointer;
+
+    pointer-events: all;
+}
+
+.layoutPanel .list .grid button.active{
+    background: rgba(0,0,0, .24);
+}
+.layoutPanel .list .grid button:hover:not(.active){
+    background: rgba(0,0,0, .14);
+}
+
+
+.layoutPanel .list .grid .item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px !important;
+    border-radius: 10px !important;
+    position: relative;
+    background: rgba(0,0,0, .04);
+    overflow: hidden;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, .24) !important;
+}
+
+.layoutPanel .list .grid .item .details{
+    padding: 6px 6px 0;
+    width: 100%;
+    text-align: left;
+}
+
+.layoutPanel .list .grid .item .details h6  {
+    font: 500 16px / 20px Inter, sans-serif;
+    letter-spacing: -.4px;
+    margin-bottom: 4px;
+}
+.layoutPanel .list .grid .item .details p  {
+    font: normal 11px / 14px Inter, sans-serif;
+    letter-spacing: -.2px;
+}
+.layoutPanel .list .grid .item .img{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.layoutPanel .list .grid .item .img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.layoutPanel .list .grid .item .preview{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 4px;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.layoutPanel .list .grid .item .preview div{
+    display: grid;
+    place-items: center;
+    background: rgba(0,0,0, .04);
+    border-radius: 5px;
+}
+
+.layoutPanel .list .grid .item .preview div img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
