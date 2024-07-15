@@ -1376,3 +1376,85 @@ button.shadowPos svg{
 .centeredDropbox.layout-2.style-3 .uploadBox{
     transform: translateY(-32%) scale(1.4);
 }
+
+.scroll .export{
+    padding: 20px 10px 60px;
+    border-radius: 0 0 14px 14px;
+    position: absolute;
+    inset: 0;
+    top: unset;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    background: linear-gradient(180deg, rgba(v240,240,240, 0) 0, rgba(240,240, 240,1) 70%);
+    z-index: 10;
+}
+
+.scroll .export .exportBtn{
+    flex: 1 1;
+    position: relative;
+    display: flex;
+    background: rgba(220,220,220, .8);
+    height: 44px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0, .08) !important;
+    border-radius: 10px;
+    background-color: black;
+}
+
+button.download{
+    background: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-content: flex-start;
+    
+    gap:8px;
+    color: rgba(255,255,255, 1);
+    padding: 6px 12px;
+    border-radius: 10px 0 0 10px;
+}
+
+button.download svg{
+    width: 20px;
+    height: 20px;
+}
+
+button.download span{
+    font: 500 16px / 22px Inter, sans-serif;
+    letter-spacing: -.3px;
+    text-align: left;
+}
+
+button.download p{
+    font: 500 12px / 16px Inter, sans-serif;
+    letter-spacing: -.2px;
+    color: rgba(255,255,255, .6);
+    text-align: left;
+}
+
+button.copy{
+    background: none;
+    color: rgba(255,255,255, 1);
+    border-left: 1.5px solid rgba(255,255,255, .15);
+    border-radius: 0 10px 10px 0;
+    padding: 10px;
+}
+
+button.copy svg{
+    width: 24px;
+    height: 24px;
+}
+
+.export .settings button{
+    border: none;
+    background-color: rgba(0,0,0,.12);
+    padding: 9px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.export .settings button svg{
+    height: 24px;
+    width: 24px;
+}
