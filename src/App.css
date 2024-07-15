@@ -158,6 +158,10 @@
     aspect-ratio: calc(var(--aspect-ratio) + var(--aspect-ratio2));
     gap:10%;
 }
+.centeredDropbox.three-canvases{
+    aspect-ratio: calc(var(--aspect-ratio) + var(--aspect-ratio2) + var(--aspect-ratio3));
+    gap:4%;
+}
 
 .content{
     background-color: rgba(220,220,220,1);
@@ -1281,4 +1285,94 @@ button.shadowPos svg{
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
+}
+
+
+.centeredDropbox.layout-2.style-1 .uploadBox{
+    transform: rotate(-10deg);
+}
+
+.centeredDropbox.layout-2.styletwo-0 .uploadBox{
+    transform: scale(.9);
+
+}  
+
+.centeredDropbox.layout-2.styletwo-1 .uploadBox:nth-child(2){
+    transform: translateY(8%) scale(.9);
+}
+.centeredDropbox.layout-2.styletwo-1 .uploadBox:nth-child(1){
+    transform: translateY(-8%) scale(.9);
+}
+.centeredDropbox.layout-2.styletwo-2 .uploadBox:nth-child(1){
+    transform: translateX(24%) translateY(-8%) scale(.9);
+}
+.centeredDropbox.layout-2.styletwo-2 .uploadBox:nth-child(2){
+    transform: translateX(-24%) translateY(8%) scale(.9);
+}
+
+.centeredDropbox.layout-2.styletwo-3 .uploadBox:nth-child(1){
+    transform: translate3d(10%, 0, 0) rotate(-10deg) scale(.9);
+    z-index: 1;
+}
+.centeredDropbox.layout-2.styletwo-3 .uploadBox:nth-child(2){
+    transform: translate3d(-10%, 0, 0) rotate(10deg) scale(.9);
+}
+
+.centeredDropbox.layout-2.styletwo-4 .uploadBox:nth-child(1){
+    transform: translate3d(20%, -8%, 0) rotate(-16deg) scale(.9);
+    z-index: 1;
+}
+.centeredDropbox.layout-2.styletwo-4 .uploadBox:nth-child(2){
+    transform: translate3d(-20%, 8%, 0) rotate(-16deg) scale(.9);
+}
+
+.centeredDropbox.layout-2.stylethree-1 .uploadBox:nth-child(1){
+    transform: translate3d(0, 10%, 0);
+}
+
+.centeredDropbox.layout-2.stylethree-1 .uploadBox:nth-child(3){
+    transform: translate3d(0,-10%,0);
+}
+
+.centeredDropbox.layout-2.stylethree-2 .uploadBox:nth-child(1){
+    transform: translate3d(44%, 4%, 0) rotate(-8deg) scale(1);
+}
+
+.centeredDropbox.layout-2.stylethree-2 .uploadBox:nth-child(2){
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.centeredDropbox.layout-2.stylethree-2 .uploadBox:nth-child(3){
+    transform: translate3d(-44%, 4%, 0) rotate(8deg) scale(1);
+}
+
+.centeredDropbox.layout-2.stylethree-3 .uploadBox:nth-child(1){
+    transform: translate3d(44%, 6%, 0) rotate(-12deg) scale(1);
+}
+
+.centeredDropbox.layout-2.stylethree-3 .uploadBox:nth-child(2){
+    transform: rotate(-4deg) scale(1.1);
+}
+
+.centeredDropbox.layout-2.stylethree-3 .uploadBox:nth-child(3){
+    transform: translate3d(-36%, 0, 0) rotate(4deg) scale(1.2);
+}
+
+.centeredDropbox.layout-2.stylethree-4 .uploadBox:nth-child(1){
+    transform: translate3d(50%, 16%, 0) rotate(4deg) scale(1);
+}
+.centeredDropbox.layout-2.stylethree-4 .uploadBox:nth-child(2){
+    transform: rotate(-4deg) scale(1);
+}
+.centeredDropbox.layout-2.stylethree-4 .uploadBox:nth-child(3){
+    transform: translate3d(-54%, -20%, 0) rotate(-12deg) scale(1);
+}
+
+.centeredDropbox.layout-2.style-2 .uploadBox{
+    transform: translateY(32%) scale(1.4);
+}
+
+.centeredDropbox.layout-2.style-3 .uploadBox{
+    transform: translateY(-32%) scale(1.4);
 }
