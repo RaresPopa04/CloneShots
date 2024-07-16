@@ -7,7 +7,7 @@ const ScreenshotPosition = (props)=>{
         <div className="card-wrapper">
           {
 							Array.from({length:4}).map((_,i)=>{
-								return (<div className="card" onClick={()=>applyStyle(i,"layout-0",0)}>
+								return (<div className="card" onClick={()=>applyStyle(i,"layout-0",0,i)}>
 									<div className="frame" >
 										<div className="innerFrame" >
 											<div className="background">
@@ -57,7 +57,7 @@ const ScreenshotPosition = (props)=>{
 						}
 						{
 							Array.from({length:10}).map((_,i)=>{
-								return (<div className="card" onClick={()=>applyStyle(i,"layout-0",1)}>
+								return (<div className="card" onClick={()=>applyStyle(i,"layout-0",1,i+4)}>
 									<div className="frame" >
 										<div className="innerFrame">
 											<div className="background">
@@ -130,7 +130,7 @@ const ScreenshotPosition = (props)=>{
 						}
             {
 							Array.from({length:2}).map((_,i)=>{
-								return (<div className="card" onClick={()=>applyStyle(i+14,"layout-0",0)}>
+								return (<div className="card" onClick={()=>applyStyle(i+14,"layout-0",0,i+14)}>
 									<div className="frame" >
 										<div className="innerFrame">
 											<div className="background">
