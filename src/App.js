@@ -4,6 +4,7 @@ import "./App.css";
 import ScreenshotPosition from "./ScreenshotPositions";
 import MinimalPhonePosition from "./MinimalPhonePosition";
 import IphonePosition from "./IphonePosition";
+import Frame from "./Frame";
 
 function App() {
   const [preview, setPreview] = useState(null);
@@ -938,11 +939,23 @@ function App() {
         changeLayout(1 / 1, "Adapts to image");
 
         document.querySelector(".canvas .zone>img").classList.add("none");
+        document
+          .querySelector(".canvas .zone:nth-child(2)>img")
+          .classList.add("none");
+        document
+          .querySelector(".canvas .zone:nth-child(3)>img")
+          .classList.add("none");
         document.documentElement.style.setProperty("--padding", "0% 0% 0% 0%");
         break;
       case 2:
         changeLayout(6 / 13, "6:13");
         document.querySelector(".canvas .zone>img").classList.add("none");
+        document
+          .querySelector(".canvas .zone:nth-child(2)>img")
+          .classList.add("none");
+        document
+          .querySelector(".canvas .zone:nth-child(3)>img")
+          .classList.add("none");
         document.documentElement.style.setProperty("--padding", "0% 0% 0% 0%");
         break;
       case 4:
@@ -951,9 +964,15 @@ function App() {
           "https://assets.shots.so/canvas/mockups/iPhone 15/black.png"
         );
         document.querySelector(".canvas .zone>img").classList.remove("none");
+        document
+          .querySelector(".canvas .zone:nth-child(2)>img")
+          .classList.remove("none");
+        document
+          .querySelector(".canvas .zone:nth-child(3)>img")
+          .classList.remove("none");
         document.documentElement.style.setProperty(
           "--padding",
-          "9.1% 5.2% 9.1% 2.2%"
+          "9.1% 2.2% 9.1% 2.2%"
         );
     }
     const dropboxParent = document.querySelector(".canvas .centeredDropbox");
@@ -972,6 +991,53 @@ function App() {
     console.log(document.querySelector("left-bar"));
     document.querySelector(".left-bar").classList.toggle("none");
     document.querySelector(".right-bar").classList.toggle("none");
+  };
+
+  const handleDeviceChange = (e, deviceName) => {
+    console.log(deviceName);
+    const button = e.currentTarget;
+    const activeButtons = document.querySelectorAll(
+      ".scroll .element:first-child .panelBtn .preview.active"
+    );
+    activeButtons.forEach((button) => {
+      button.classList.remove("active");
+    });
+    console.log(button);
+
+    button.querySelector(".preview").classList.add("active");
+
+    const deviceImg = document.querySelectorAll(".centeredDropbox .zone>img");
+    deviceImg.forEach((img) => {
+      img.src = deviceName;
+    });
+  };
+
+  const handleLeftBar = (e) => {
+    const button = e.currentTarget;
+    if(button.classList.contains("mockupBtn")){
+      const buttons = document.querySelectorAll(".mockupBtn");
+      buttons.forEach((button) => {
+        button.classList.add("active");
+      });
+      const frameBtns = document.querySelectorAll(".frameBtn");
+      frameBtns.forEach((frameBtn) => {
+        frameBtn.classList.remove("active");
+      });
+      document.querySelector(".panel").classList.remove("none");
+      document.querySelector(".panel.frame").classList.add("none");
+    }
+    else{
+      const buttons = document.querySelectorAll(".mockupBtn");
+      buttons.forEach((button) => {
+        button.classList.remove("active");
+      });
+      const frameBtns = document.querySelectorAll(".frameBtn");
+      frameBtns.forEach((frameBtn) => {
+        frameBtn.classList.add("active");
+      });
+      document.querySelector(".panel").classList.add("none");
+      document.querySelector(".panel.frame").classList.remove("none")
+    }
   };
 
   return (
@@ -1013,7 +1079,11 @@ function App() {
         <div className="panel">
           <div className="panel-tabs">
             <div className="tabs">
-              <button type="button" class="mockupBtn">
+              <button
+                type="button"
+                class="mockupBtn active"
+                onClick={handleLeftBar}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -1022,7 +1092,7 @@ function App() {
                 </svg>
                 <span>Mockup</span>
               </button>
-              <button type="button" class="frameBtn">
+              <button type="button" class="frameBtn" onClick={handleLeftBar}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -1033,6 +1103,7 @@ function App() {
               </button>
             </div>
           </div>
+          
           <div className="selectorElem">
             <div className="btnWrapper">
               <button className="selector" onClick={openLayoutsPanel}>
@@ -1136,646 +1207,780 @@ function App() {
             </div>
           </div>
           <div className="scroll">
-            <div className="container">
-              <div className="element">
-                <div className="title">Style</div>
-                <div className="grid">
-                  <div
-                    className="panelBtn"
-                    id="none"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      <div className="image">
+              <div className="container">
+                {layoutsName !== "layout-4" && (
+                  <div className="element">
+                    <div className="title">Style</div>
+                    <div className="grid">
+                      <div
+                        className="panelBtn"
+                        id="none"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/Screenshot/styles/default.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Default</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="glass-light"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          {
+                            <div className="image">
+                              <img
+                                crossorigin="anonymous"
+                                loading="eager"
+                                src="https://shots.so/mockups/Screenshot/styles/glass-light.png"
+                                alt="Default mockup style"
+                              ></img>
+                            </div>
+                          }
+                        </div>
+                        <p>Glass Light</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="glass-dark"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          {
+                            <div className="image">
+                              <img
+                                crossorigin="anonymous"
+                                loading="eager"
+                                src="https://shots.so/mockups/Screenshot/styles/glass-dark.png"
+                                alt="Default mockup style"
+                              ></img>
+                            </div>
+                          }
+                        </div>
+                        <p>Glass Dark</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="screenshot-outline"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/Screenshot/styles/outline.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Outline</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="screenshot-border"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          {
+                            <div className="image">
+                              <img
+                                crossorigin="anonymous"
+                                loading="eager"
+                                src="https://shots.so/mockups/Screenshot/styles/border.png"
+                                alt="Default mockup style"
+                              ></img>
+                            </div>
+                          }
+                        </div>
+                        <p>Border</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="screenshot-retro"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          {
+                            <div className="image">
+                              <img
+                                crossorigin="anonymous"
+                                loading="eager"
+                                src="https://shots.so/mockups/Screenshot/styles/retro.png"
+                                alt="Default mockup style"
+                              ></img>
+                            </div>
+                          }
+                        </div>
+                        <p>Retro</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="screenshot-card"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/Screenshot/styles/card.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Card</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="screenshot-stack"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/Screenshot/styles/stack.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Stack</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        id="screenshot-stack2"
+                        onClick={handleFrameChange}
+                      >
+                        <div className="preview">
+                          {
+                            <div className="image">
+                              <img
+                                crossorigin="anonymous"
+                                loading="eager"
+                                src="https://shots.so/mockups/Screenshot/styles/stack-2.png"
+                                alt="Default mockup style"
+                              ></img>
+                            </div>
+                          }
+                        </div>
+                        <p>Stack 2</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {layoutsName === "layout-4" && (
+                  <div className="element">
+                    <div className="title">Style</div>
+                    <div className="grid">
+                      <div
+                        className="panelBtn"
+                        onClick={(e) =>
+                          handleDeviceChange(
+                            e,
+                            "https://assets.shots.so/canvas/mockups/iPhone%2015/black.png"
+                          )
+                        }
+                      >
+                        <div className="preview active">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/iPhone%2015/styles/black.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Black</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        onClick={(e) =>
+                          handleDeviceChange(
+                            e,
+                            "https://assets.shots.so/canvas/mockups/iPhone%2015/blue.png"
+                          )
+                        }
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/iPhone%2015/styles/blue.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Black</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        onClick={(e) =>
+                          handleDeviceChange(
+                            e,
+                            "https://assets.shots.so/canvas/mockups/iPhone%2015/green.png"
+                          )
+                        }
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/iPhone%2015/styles/green.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Black</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        onClick={(e) =>
+                          handleDeviceChange(
+                            e,
+                            "https://assets.shots.so/canvas/mockups/iPhone%2015/pink.png"
+                          )
+                        }
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/iPhone%2015/styles/pink.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Black</p>
+                      </div>
+                      <div
+                        className="panelBtn"
+                        onClick={(e) =>
+                          handleDeviceChange(
+                            e,
+                            "https://assets.shots.so/canvas/mockups/iPhone%2015/yellow.png"
+                          )
+                        }
+                      >
+                        <div className="preview">
+                          <div className="image">
+                            <img
+                              crossorigin="anonymous"
+                              loading="eager"
+                              src="https://shots.so/mockups/iPhone%2015/styles/yellow.png"
+                              alt="Default mockup style"
+                            ></img>
+                          </div>
+                        </div>
+                        <p>Black</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className="element">
+                  <div className="title">Border</div>
+                  <div className="col1-grid">
+                    <div
+                      className="slider"
+                      style={{ transition: "none" }}
+                      onMouseDown={startSlider}
+                      onMouseUp={stopSlider}
+                      onMouseLeave={stopSlider}
+                    >
+                      <div className="fullSlider"></div>
+                      <div className="line"></div>
+                      <div className="labels">
+                        <div className="name">Radius</div>
+                        <div className="value">20</div>
+                      </div>
+                    </div>
+                    <div className="buttons">
+                      <div
+                        className="button"
+                        onClick={() => modifyBorderButton(0)}
+                      >
+                        <div className="visual"></div>
+                        <p>Sharp</p>
+                      </div>
+                      <div
+                        className="button"
+                        onClick={() => modifyBorderButton(0.5)}
+                      >
+                        <div className="visual"></div>
+                        <p>Curved</p>
+                      </div>
+
+                      <div
+                        className="button"
+                        onClick={() => modifyBorderButton(1)}
+                      >
+                        <div className="visual"></div>
+                        <p>Round</p>
+                      </div>
+                      <div className="active-btn"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="element">
+                  <div className="title">Shadow</div>
+                  <div className="col1-grid">
+                    <div
+                      className="slider"
+                      style={{ transition: "none" }}
+                      onMouseDown={startSliderOpacity}
+                      onMouseUp={stopSliderOpacity}
+                      onMouseLeave={stopSliderOpacity}
+                    >
+                      <div className="fullSlider"></div>
+                      <div className="line"></div>
+                      <div className="labels">
+                        <div className="name">Opacity</div>
+                        <div className="value">40</div>
+                      </div>
+                    </div>
+                    <div className="buttons">
+                      <div
+                        className="button"
+                        onClick={(e) => modifyOpacity(e, 1)}
+                      >
                         <img
-                          crossorigin="anonymous"
-                          loading="eager"
-                          src="https://shots.so/mockups/Screenshot/styles/default.png"
-                          alt="Default mockup style"
-                        ></img>
+                          src="https://shots.so/image/shadow-modes/shadow-none.png"
+                          alt=""
+                        />
+                        <p>None</p>
                       </div>
-                    </div>
-                    <p>Default</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="glass-light"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      {
-                        <div className="image">
-                          <img
-                            crossorigin="anonymous"
-                            loading="eager"
-                            src="https://shots.so/mockups/Screenshot/styles/glass-light.png"
-                            alt="Default mockup style"
-                          ></img>
-                        </div>
-                      }
-                    </div>
-                    <p>Glass Light</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="glass-dark"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      {
-                        <div className="image">
-                          <img
-                            crossorigin="anonymous"
-                            loading="eager"
-                            src="https://shots.so/mockups/Screenshot/styles/glass-dark.png"
-                            alt="Default mockup style"
-                          ></img>
-                        </div>
-                      }
-                    </div>
-                    <p>Glass Dark</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="screenshot-outline"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      <div className="image">
+                      <div
+                        className="button"
+                        onClick={(e) => modifyOpacity(e, 2)}
+                      >
                         <img
-                          crossorigin="anonymous"
-                          loading="eager"
-                          src="https://shots.so/mockups/Screenshot/styles/outline.png"
-                          alt="Default mockup style"
-                        ></img>
+                          src="https://shots.so/image/shadow-modes/shadow-hug.png"
+                          alt=""
+                        />
+                        <p>Hug</p>
                       </div>
-                    </div>
-                    <p>Outline</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="screenshot-border"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      {
-                        <div className="image">
-                          <img
-                            crossorigin="anonymous"
-                            loading="eager"
-                            src="https://shots.so/mockups/Screenshot/styles/border.png"
-                            alt="Default mockup style"
-                          ></img>
-                        </div>
-                      }
-                    </div>
-                    <p>Border</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="screenshot-retro"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      {
-                        <div className="image">
-                          <img
-                            crossorigin="anonymous"
-                            loading="eager"
-                            src="https://shots.so/mockups/Screenshot/styles/retro.png"
-                            alt="Default mockup style"
-                          ></img>
-                        </div>
-                      }
-                    </div>
-                    <p>Retro</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="screenshot-card"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      <div className="image">
+
+                      <div
+                        className="button"
+                        onClick={(e) => modifyOpacity(e, 3)}
+                      >
                         <img
-                          crossorigin="anonymous"
-                          loading="eager"
-                          src="https://shots.so/mockups/Screenshot/styles/card.png"
-                          alt="Default mockup style"
-                        ></img>
+                          src="https://shots.so/image/shadow-modes/shadow-spread.png"
+                          alt=""
+                        />
+                        <p>Spread</p>
                       </div>
+                      <div className="active-btn right"></div>
                     </div>
-                    <p>Card</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="screenshot-stack"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      <div className="image">
-                        <img
-                          crossorigin="anonymous"
-                          loading="eager"
-                          src="https://shots.so/mockups/Screenshot/styles/stack.png"
-                          alt="Default mockup style"
-                        ></img>
-                      </div>
-                    </div>
-                    <p>Stack</p>
-                  </div>
-                  <div
-                    className="panelBtn"
-                    id="screenshot-stack2"
-                    onClick={handleFrameChange}
-                  >
-                    <div className="preview">
-                      {
-                        <div className="image">
-                          <img
-                            crossorigin="anonymous"
-                            loading="eager"
-                            src="https://shots.so/mockups/Screenshot/styles/stack-2.png"
-                            alt="Default mockup style"
-                          ></img>
+                    <div className="propertyGridElement none">
+                      <div
+                        className="selectBtn"
+                        onMouseDown={startShadowDrag}
+                        onMouseLeave={stopShadowDrag}
+                        onMouseUp={stopShadowDrag}
+                      ></div>
+                      <div className="propertyGrid">
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 1)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 2)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 3)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 4)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 5)}
+                          ></div>
                         </div>
-                      }
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 6)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 7)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 8)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 9)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 10)}
+                          ></div>
+                        </div>
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 11)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 12)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 13)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 14)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 15)}
+                          ></div>
+                        </div>
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 16)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 17)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 18)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 19)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 20)}
+                          ></div>
+                        </div>
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 21)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 22)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 23)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 24)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handleShadowMove(e, 25)}
+                          ></div>
+                        </div>
+                      </div>
                     </div>
-                    <p>Stack 2</p>
+                    <button className="shadowPos" onClick={activateGrid}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          fill-rule="evenodd"
+                          d="M1.29 12c0 1.188 1.017 2.16 2.262 2.16s2.244-.972 2.244-2.16-1-2.158-2.244-2.158-2.263.97-2.263 2.158zM12 14.16c-1.245 0-2.263-.972-2.263-2.16S10.755 9.842 12 9.842s2.244.97 2.244 2.158-1 2.16-2.244 2.16m8.448 0c-1.263 0-2.263-.972-2.263-2.16s1-2.158 2.263-2.158c1.245 0 2.244.97 2.244 2.158s-1 2.16-2.244 2.16"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                    </button>
                   </div>
                 </div>
-              </div>
-              <div className="element">
-                <div className="title">Border</div>
-                <div className="col1-grid">
-                  <div
-                    className="slider"
-                    style={{ transition: "none" }}
-                    onMouseDown={startSlider}
-                    onMouseUp={stopSlider}
-                    onMouseLeave={stopSlider}
-                  >
-                    <div className="fullSlider"></div>
-                    <div className="line"></div>
-                    <div className="labels">
-                      <div className="name">Radius</div>
-                      <div className="value">20</div>
-                    </div>
-                  </div>
-                  <div className="buttons">
+                <div className="element">
+                  <div className="title">Size & Position</div>
+                  <div className="col1-grid">
                     <div
-                      className="button"
-                      onClick={() => modifyBorderButton(0)}
+                      className="slider"
+                      style={{ transition: "none" }}
+                      onMouseDown={startSliderScale}
+                      onMouseUp={stopSliderScale}
+                      onMouseLeave={stopSliderScale}
                     >
-                      <div className="visual"></div>
-                      <p>Sharp</p>
+                      <div className="fullSlider"></div>
+                      <div className="line"></div>
+                      <div className="labels">
+                        <div className="name">Scale</div>
+                        <div className="value">50</div>
+                      </div>
                     </div>
-                    <div
-                      className="button"
-                      onClick={() => modifyBorderButton(0.5)}
-                    >
-                      <div className="visual"></div>
-                      <p>Curved</p>
+                    <div className="propertyGridElement">
+                      <div
+                        className="selectBtn"
+                        onMouseDown={startPositionDrag}
+                        onMouseUp={stopPositionDrag}
+                        onMouseLeave={stopPositionDrag}
+                      ></div>
+                      <div className="propertyGrid">
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 1)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 2)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 3)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 4)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 5)}
+                          ></div>
+                        </div>
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 6)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 7)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 8)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 9)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 10)}
+                          ></div>
+                        </div>
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 11)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 12)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 13)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 14)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 15)}
+                          ></div>
+                        </div>
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 16)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 17)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 18)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 19)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 20)}
+                          ></div>
+                        </div>
+                        <div className="col">
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 21)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 22)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 23)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 24)}
+                          ></div>
+                          <div
+                            className="propBtn"
+                            onClick={(e) => handlePositionMove(e, 25)}
+                          ></div>
+                        </div>
+                      </div>
                     </div>
-
-                    <div
-                      className="button"
-                      onClick={() => modifyBorderButton(1)}
-                    >
-                      <div className="visual"></div>
-                      <p>Round</p>
-                    </div>
-                    <div className="active-btn"></div>
                   </div>
                 </div>
-              </div>
+                <div className="element">
+                  <div className="title">Details</div>
+                  <div className="col1-grid">
+                    <div className="infoElem">
+                      <div className="elem">
+                        {layoutsName == "layout-4" && (
+                          <div className="row">
+                            <span>Device</span>
+                            <p>Apple Iphone 15</p>
+                          </div>
+                        )}
+                        <div className="row">
+                          <span>Screen pixels</span>
+                          <p>Adapts to image</p>
+                        </div>
+                        {layoutsName == "layout-4" && (
+                          <div className="row">
+                            <span>Realease year</span>
+                            <p>2023</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="element">
+                  <div className="title">Visibility</div>
+                  <div className="col1-grid">
+                    <button className="hideMockup" onClick={hideMockup}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          fill-rule="evenodd"
+                          d="M1.707 1.707a1 1 0 0 0 0 1.414l18.951 18.951a.999.999 0 1 0 1.414-1.414L3.121 1.707a1 1 0 0 0-1.414 0m.292 14.733V6.322l8.46 8.46v1.658c0 1.42-1.13 2.56-2.54 2.56h-3.38c-1.4 0-2.54-1.14-2.54-2.56m11.54 2.999v-1.577l4.138 4.137h-1.598c-1.41 0-2.54-1.15-2.54-2.56m0-10.214 8.46 8.46V7.561c0-1.42-1.14-2.561-2.54-2.561h-3.38a2.54 2.54 0 0 0-2.54 2.561zM6.314 2l4.145 4.145V4.561A2.55 2.55 0 0 0 7.919 2z"
+                        ></path>
+                      </svg>
+                      <span>Hide Mockup</span>
+                    </button>
+                  </div>
+                </div>
 
-              <div className="element">
-                <div className="title">Shadow</div>
-                <div className="col1-grid">
-                  <div
-                    className="slider"
-                    style={{ transition: "none" }}
-                    onMouseDown={startSliderOpacity}
-                    onMouseUp={stopSliderOpacity}
-                    onMouseLeave={stopSliderOpacity}
-                  >
-                    <div className="fullSlider"></div>
-                    <div className="line"></div>
-                    <div className="labels">
-                      <div className="name">Opacity</div>
-                      <div className="value">40</div>
-                    </div>
-                  </div>
-                  <div className="buttons">
-                    <div
-                      className="button"
-                      onClick={(e) => modifyOpacity(e, 1)}
-                    >
-                      <img
-                        src="https://shots.so/image/shadow-modes/shadow-none.png"
-                        alt=""
-                      />
-                      <p>None</p>
-                    </div>
-                    <div
-                      className="button"
-                      onClick={(e) => modifyOpacity(e, 2)}
-                    >
-                      <img
-                        src="https://shots.so/image/shadow-modes/shadow-hug.png"
-                        alt=""
-                      />
-                      <p>Hug</p>
-                    </div>
-
-                    <div
-                      className="button"
-                      onClick={(e) => modifyOpacity(e, 3)}
-                    >
-                      <img
-                        src="https://shots.so/image/shadow-modes/shadow-spread.png"
-                        alt=""
-                      />
-                      <p>Spread</p>
-                    </div>
-                    <div className="active-btn right"></div>
-                  </div>
-                  <div className="propertyGridElement none">
-                    <div
-                      className="selectBtn"
-                      onMouseDown={startShadowDrag}
-                      onMouseLeave={stopShadowDrag}
-                      onMouseUp={stopShadowDrag}
-                    ></div>
-                    <div className="propertyGrid">
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 1)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 2)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 3)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 4)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 5)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 6)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 7)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 8)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 9)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 10)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 11)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 12)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 13)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 14)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 15)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 16)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 17)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 18)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 19)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 20)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 21)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 22)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 23)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 24)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handleShadowMove(e, 25)}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <button className="shadowPos" onClick={activateGrid}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        fill-rule="evenodd"
-                        d="M1.29 12c0 1.188 1.017 2.16 2.262 2.16s2.244-.972 2.244-2.16-1-2.158-2.244-2.158-2.263.97-2.263 2.158zM12 14.16c-1.245 0-2.263-.972-2.263-2.16S10.755 9.842 12 9.842s2.244.97 2.244 2.158-1 2.16-2.244 2.16m8.448 0c-1.263 0-2.263-.972-2.263-2.16s1-2.158 2.263-2.158c1.245 0 2.244.97 2.244 2.158s-1 2.16-2.244 2.16"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
+                <div className="hiddenMockup none">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      d="M1.707 1.707a1 1 0 0 0 0 1.414l18.951 18.951a.999.999 0 1 0 1.414-1.414L3.121 1.707a1 1 0 0 0-1.414 0m.292 14.733V6.322l8.46 8.46v1.658c0 1.42-1.13 2.56-2.54 2.56h-3.38c-1.4 0-2.54-1.14-2.54-2.56m11.54 2.999v-1.577l4.138 4.137h-1.598c-1.41 0-2.54-1.15-2.54-2.56m0-10.214 8.46 8.46V7.561c0-1.42-1.14-2.561-2.54-2.561h-3.38a2.54 2.54 0 0 0-2.54 2.561zM6.314 2l4.145 4.145V4.561A2.55 2.55 0 0 0 7.919 2z"
+                    ></path>
+                  </svg>
+                  <span className="title">Mockup is hidden</span>
+                  <span className="small">Show mockup to start editing</span>
+                  <button class="showMockup" onClick={showMockup}>
+                    <span>Show mockup</span>
                   </button>
                 </div>
-              </div>
-              <div className="element">
-                <div className="title">Size & Position</div>
-                <div className="col1-grid">
-                  <div
-                    className="slider"
-                    style={{ transition: "none" }}
-                    onMouseDown={startSliderScale}
-                    onMouseUp={stopSliderScale}
-                    onMouseLeave={stopSliderScale}
-                  >
-                    <div className="fullSlider"></div>
-                    <div className="line"></div>
-                    <div className="labels">
-                      <div className="name">Scale</div>
-                      <div className="value">50</div>
-                    </div>
-                  </div>
-                  <div className="propertyGridElement">
-                    <div
-                      className="selectBtn"
-                      onMouseDown={startPositionDrag}
-                      onMouseUp={stopPositionDrag}
-                      onMouseLeave={stopPositionDrag}
-                    ></div>
-                    <div className="propertyGrid">
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 1)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 2)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 3)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 4)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 5)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 6)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 7)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 8)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 9)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 10)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 11)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 12)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 13)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 14)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 15)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 16)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 17)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 18)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 19)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 20)}
-                        ></div>
-                      </div>
-                      <div className="col">
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 21)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 22)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 23)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 24)}
-                        ></div>
-                        <div
-                          className="propBtn"
-                          onClick={(e) => handlePositionMove(e, 25)}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="element">
-                <div className="title">Details</div>
-                <div className="col1-grid">
-                  <div className="infoElem">
-                    <div className="elem">
-                      <div className="row">
-                        <span>Screen pixels</span>
-                        <p>Adapts to image</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="element">
-                <div className="title">Visibility</div>
-                <div className="col1-grid">
-                  <button className="hideMockup" onClick={hideMockup}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path
-                        fill="currentColor"
-                        fill-rule="evenodd"
-                        d="M1.707 1.707a1 1 0 0 0 0 1.414l18.951 18.951a.999.999 0 1 0 1.414-1.414L3.121 1.707a1 1 0 0 0-1.414 0m.292 14.733V6.322l8.46 8.46v1.658c0 1.42-1.13 2.56-2.54 2.56h-3.38c-1.4 0-2.54-1.14-2.54-2.56m11.54 2.999v-1.577l4.138 4.137h-1.598c-1.41 0-2.54-1.15-2.54-2.56m0-10.214 8.46 8.46V7.561c0-1.42-1.14-2.561-2.54-2.561h-3.38a2.54 2.54 0 0 0-2.54 2.561zM6.314 2l4.145 4.145V4.561A2.55 2.55 0 0 0 7.919 2z"
-                      ></path>
-                    </svg>
-                    <span>Hide Mockup</span>
-                  </button>
-                </div>
-              </div>
 
-              <div className="hiddenMockup none">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    d="M1.707 1.707a1 1 0 0 0 0 1.414l18.951 18.951a.999.999 0 1 0 1.414-1.414L3.121 1.707a1 1 0 0 0-1.414 0m.292 14.733V6.322l8.46 8.46v1.658c0 1.42-1.13 2.56-2.54 2.56h-3.38c-1.4 0-2.54-1.14-2.54-2.56m11.54 2.999v-1.577l4.138 4.137h-1.598c-1.41 0-2.54-1.15-2.54-2.56m0-10.214 8.46 8.46V7.561c0-1.42-1.14-2.561-2.54-2.561h-3.38a2.54 2.54 0 0 0-2.54 2.561zM6.314 2l4.145 4.145V4.561A2.55 2.55 0 0 0 7.919 2z"
-                  ></path>
-                </svg>
-                <span className="title">Mockup is hidden</span>
-                <span className="small">Show mockup to start editing</span>
-                <button class="showMockup" onClick={showMockup}>
-                  <span>Show mockup</span>
-                </button>
-              </div>
-
-              <div className="export">
-                <div className="exportBtn">
-                  <button className="download">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M12.404 16.49V8.317m3.752 4.408s-2.528 3.764-3.752 3.764-3.748-3.764-3.748-3.764"
-                      ></path>
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M3.154 12.404c0 6.937 2.313 9.25 9.25 9.25s9.25-2.313 9.25-9.25-2.313-9.25-9.25-9.25-9.25 2.313-9.25 9.25"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                    <div>
-                      <span>Download</span>
-                      <p>1x as PNG</p>
-                    </div>
-                  </button>
-                  <button className="copy">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g fill="currentColor" fill-rule="evenodd">
-                        <path d="M11.82 6.02h.2c.16 0 .32.06.43.18l4.07 4.24c.1.11.16.26.16.41v7.48c0 1.98-1.62 3.61-3.6 3.64H6.49c-1.99-.04-3.58-1.68-3.54-3.66V9.59c.04-2 1.69-3.61 3.67-3.61l5.04-.01c.03-.01.06-.01.1-.01Zm-.61 1.21H6.66c-1.34 0-2.44 1.07-2.48 2.41v8.71a2.376 2.376 0 0 0 2.34 2.43l.11-.01h6.44a2.44 2.44 0 0 0 2.39-2.44l-.01-6.73h-1.62a2.684 2.684 0 0 1-2.67-2.68l-.01-1.73Zm1.2.67v1.05c0 .8.65 1.46 1.46 1.46l.95-.01-2.42-2.52Z"></path>
-                        <path d="M15.949 2c-.04-.01-.07-.01-.11-.01h-5.16c-1.99 0-3.63 1.6-3.68 3.6V6.8h1.2V5.6a2.48 2.48 0 0 1 2.47-2.42l4.54-.01v1.72c0 1.47 1.19 2.67 2.66 2.67l1.61-.01v6.72c0 1.32-1.08 2.41-2.4 2.43H15.8v1.2l1.27-.01a3.67 3.67 0 0 0 3.596-3.65V6.76c0-.16-.07-.31-.17-.42l-4.08-4.25a.63.63 0 0 0-.44-.19l-.11-.01Zm.5 2.93-.01-1.06 2.41 2.51h-.96c-.81-.01-1.47-.67-1.47-1.47Z"></path>
-                      </g>
-                    </svg>
-                  </button>
-                </div>
-                <div className="settings">
-                  <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path
-                        fill="currentColor"
-                        fill-rule="evenodd"
-                        d="M17.38 13.7c1.71 0 3.11 1.38 3.11 3.09 0 1.7-1.4 3.09-3.12 3.09s-3.12-1.39-3.12-3.1 1.39-3.1 3.11-3.1Zm0 1.5c-.89 0-1.62.71-1.62 1.59s.72 1.59 1.61 1.59c.88 0 1.61-.72 1.61-1.6s-.73-1.6-1.62-1.6Zm-7.31.88a.749.749 0 1 1 0 1.5H3.76c-.42 0-.75-.34-.75-.75 0-.42.33-.75.75-.75h6.3ZM6.1 3.98c1.71 0 3.11 1.39 3.11 3.09s-1.4 3.09-3.12 3.09-3.12-1.388-3.12-3.1c0-1.71 1.39-3.1 3.11-3.1Zm0 1.5c-.89 0-1.62.71-1.62 1.59s.72 1.59 1.61 1.59 1.61-.72 1.61-1.6c0-.89-.73-1.6-1.62-1.6Zm13.07.9a.749.749 0 1 1 0 1.5h-6.3c-.42 0-.75-.34-.75-.75 0-.42.33-.75.75-.75z"
-                      ></path>
-                    </svg>
-                  </button>
+                <div className="export">
+                  <div className="exportBtn">
+                    <button className="download">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M12.404 16.49V8.317m3.752 4.408s-2.528 3.764-3.752 3.764-3.748-3.764-3.748-3.764"
+                        ></path>
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M3.154 12.404c0 6.937 2.313 9.25 9.25 9.25s9.25-2.313 9.25-9.25-2.313-9.25-9.25-9.25-9.25 2.313-9.25 9.25"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                      <div>
+                        <span>Download</span>
+                        <p>1x as PNG</p>
+                      </div>
+                    </button>
+                    <button className="copy">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <g fill="currentColor" fill-rule="evenodd">
+                          <path d="M11.82 6.02h.2c.16 0 .32.06.43.18l4.07 4.24c.1.11.16.26.16.41v7.48c0 1.98-1.62 3.61-3.6 3.64H6.49c-1.99-.04-3.58-1.68-3.54-3.66V9.59c.04-2 1.69-3.61 3.67-3.61l5.04-.01c.03-.01.06-.01.1-.01Zm-.61 1.21H6.66c-1.34 0-2.44 1.07-2.48 2.41v8.71a2.376 2.376 0 0 0 2.34 2.43l.11-.01h6.44a2.44 2.44 0 0 0 2.39-2.44l-.01-6.73h-1.62a2.684 2.684 0 0 1-2.67-2.68l-.01-1.73Zm1.2.67v1.05c0 .8.65 1.46 1.46 1.46l.95-.01-2.42-2.52Z"></path>
+                          <path d="M15.949 2c-.04-.01-.07-.01-.11-.01h-5.16c-1.99 0-3.63 1.6-3.68 3.6V6.8h1.2V5.6a2.48 2.48 0 0 1 2.47-2.42l4.54-.01v1.72c0 1.47 1.19 2.67 2.66 2.67l1.61-.01v6.72c0 1.32-1.08 2.41-2.4 2.43H15.8v1.2l1.27-.01a3.67 3.67 0 0 0 3.596-3.65V6.76c0-.16-.07-.31-.17-.42l-4.08-4.25a.63.63 0 0 0-.44-.19l-.11-.01Zm.5 2.93-.01-1.06 2.41 2.51h-.96c-.81-.01-1.47-.67-1.47-1.47Z"></path>
+                        </g>
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="settings">
+                    <button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          fill-rule="evenodd"
+                          d="M17.38 13.7c1.71 0 3.11 1.38 3.11 3.09 0 1.7-1.4 3.09-3.12 3.09s-3.12-1.39-3.12-3.1 1.39-3.1 3.11-3.1Zm0 1.5c-.89 0-1.62.71-1.62 1.59s.72 1.59 1.61 1.59c.88 0 1.61-.72 1.61-1.6s-.73-1.6-1.62-1.6Zm-7.31.88a.749.749 0 1 1 0 1.5H3.76c-.42 0-.75-.34-.75-.75 0-.42.33-.75.75-.75h6.3ZM6.1 3.98c1.71 0 3.11 1.39 3.11 3.09s-1.4 3.09-3.12 3.09-3.12-1.388-3.12-3.1c0-1.71 1.39-3.1 3.11-3.1Zm0 1.5c-.89 0-1.62.71-1.62 1.59s.72 1.59 1.61 1.59 1.61-.72 1.61-1.6c0-.89-.73-1.6-1.62-1.6Zm13.07.9a.749.749 0 1 1 0 1.5h-6.3c-.42 0-.75-.34-.75-.75 0-.42.33-.75.75-.75z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
-          {/* <button className="handleDownload" onClick={handleDownload}>
-						Download as PNG
-					</button> */}
+
         </div>
+        <Frame handleLeftBar ={handleLeftBar}/>
       </div>
       <input
         type="file"
