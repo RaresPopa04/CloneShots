@@ -39,3 +39,132 @@
     outline: none;
     border: none;
 }
+
+.panel.frameWindow .layoutPanel{
+    width: 360px;
+}
+
+.custom{
+    padding: 12px;
+    border-bottom: 1px solid rgba(0,0,0, .08);
+}
+
+.custom form{
+    display: flex;
+    gap: 8px;
+}
+
+.panelDim{
+    position: relative;
+    flex: 1;
+}
+
+.panelDim h6{
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    width: -moz-max-content;
+    width: max-content;
+    font: 600 11px / 16px Inter, sans-serif;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: rgba(0,0,0, .36);
+}
+
+.panelDim input{
+    font: normal 15px / 20px Inter, sans-serif;
+    letter-spacing: -.4px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    background: rgba(0,0,0, .04);
+    color: rgba(0,0,0, 1);
+    border: 1px solid rgba(0,0,0, .04);
+    transition: all .2s ease;
+    text-align: right;
+    width: 100%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.frames-wrapper{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    padding: 12px;
+    border-bottom: 1px solid rgba(var(--primary), .08);
+}
+
+.frames-wrapper .frameItem{
+    flex: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    flex-grow: 0;
+    gap: 0 !important;
+    color: rgba(0,0,0, .6);
+    padding: 12px 8px !important;
+    border-radius: 10px;
+    position: relative;
+
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.frameItem .frameIcon{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+}
+
+.frameItem .frameDetails{
+    font: normal 11px / 14px Inter, sans-serif;
+    letter-spacing: -.2px;
+}
+
+.framePreview span{
+    font: 500 15px / 20px Inter, sans-serif;
+    letter-spacing: 1.4px;
+
+}
+
+.frameIcon .framePreview{
+    width: 100%;
+    background: rgba(0,0,0, .04);
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0, .36);
+    position: relative;
+    transition: all .2s ease;
+    display: grid;
+    place-items: center;
+}
+
+
+.custom form button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    max-width: 36px;
+    border-radius: 9px;
+    background: rgb(127, 127, 127);
+    color: rgba(255,255,255, 1);
+    font: 500 15px / 20px Inter, sans-serif;
+    letter-spacing: -.4px;
+
+    border: none;
+    outline: none;
+}

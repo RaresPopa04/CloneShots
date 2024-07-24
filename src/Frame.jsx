@@ -40,7 +40,7 @@ const Frame = (props) => {
 
   const { handleLeftBar } = props;
   return (
-    <div className="panel frame none">
+    <div className="panel frameWindow none">
       <div className="panel-tabs">
         <div className="tabs">
           <button type="button" class="mockupBtn" onClick={handleLeftBar}>
@@ -86,6 +86,53 @@ const Frame = (props) => {
               </svg>
             </div>
           </button>
+        </div>
+        <div className="layoutPanel">
+          <div className="custom">
+            <form autoComplete="off">
+              <div className="panelDim">
+                <h6>W</h6>
+                <input name="width" type="number" class="input-text" placeholder="1920" min="128" max="7680"></input>
+              </div>
+              <div className="panelDim">
+                <h6>H</h6>
+                <input name="height" type="number" class="input-text" placeholder="1440" min="128" max="7680"></input>
+              </div>
+              <button disabled="" type="submit"><span>Set</span></button>
+            </form>
+          </div>
+          <div className="frames-wrapper">
+            <button className="frameItem">
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"16/9"}}>
+                    <span>16:9</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1920 x 1080
+                </div>
+            </button>
+            <button className="frameItem">
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"3/2"}}>
+                    <span>3:2</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1920 x 1080
+                </div>
+            </button>
+            <button className="frameItem">
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"16/9"}}>
+                    <span>16:9</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1920 x 1080
+                </div>
+            </button>
+          </div>
         </div>
       </div>
       <div className="scroll">
@@ -288,7 +335,10 @@ const Frame = (props) => {
                 </div>
                 <div className="panelBtn textInside ">
                   <div className="preview">
-                    <div className="icon" style={{ width: "24px", height: "24px" , color:"black"}}>
+                    <div
+                      className="icon"
+                      style={{ width: "24px", height: "24px", color: "black" }}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -308,18 +358,113 @@ const Frame = (props) => {
           <div className="element">
             <div className="title">Solid color</div>
             <div className="colorsGrid">
-              <button className="color" style={{backgroundColor:"white"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(222, 226, 230)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(173, 181, 189)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(73, 80, 87)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(33, 37, 41)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(21, 22, 23)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(255, 89, 94)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(222, 226, 230)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(173, 181, 189)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(73, 80, 87)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(33, 37, 41)"}}></button>
-              <button className="color" style={{backgroundColor:"rgb(21, 22, 23)"}}></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "white" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(222, 226, 230)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(173, 181, 189)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(73, 80, 87)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(33, 37, 41)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(21, 22, 23)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(255, 89, 94)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(255, 146, 76)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(255, 202, 58)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(197, 202, 48)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(138, 201, 38)" }}
+              ></button>
+              <button
+                className="color"
+                style={{ backgroundColor: "rgb(63, 201, 93)" }}
+              ></button>
+            </div>
+          </div>
+          <div className="element">
+            <div className="title">Gradient</div>
+            <div className="grid">
+              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div
+                  className="preview active"
+                  style={{
+                    background:
+                      "linear-gradient(140deg, rgb(255, 100, 50) 12.8%, rgb(255, 0, 101) 43.52%, rgb(123, 46, 255) 84.34%)",
+                  }}
+                ></div>
+              </div>
+              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div
+                  className="preview"
+                  style={{
+                    background:
+                      "linear-gradient(140deg, rgb(244, 229, 240), rgb(229, 54, 171), rgb(92, 3, 188), rgb(14, 7, 37))",
+                  }}
+                ></div>
+              </div>
+              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div
+                  className="preview"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgb(238, 221, 243), rgb(238, 146, 177), rgb(99, 48, 180))",
+                  }}
+                ></div>
+              </div>
+              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div
+                  className="preview"
+                  style={{
+                    background:
+                      "linear-gradient(113.96deg, rgb(69, 190, 232) 13.54%, rgb(214, 161, 172) 50%, rgb(232, 140, 93) 85.42%)",
+                  }}
+                ></div>
+              </div>
+              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div
+                  className="preview"
+                  style={{
+                    background:
+                      "linear-gradient(113.96deg, rgb(69, 233, 159) 11.98%, rgb(213, 168, 155) 50%, rgb(232, 70, 152) 85.42%)",
+                  }}
+                ></div>
+              </div>
+              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div
+                  className="preview"
+                  style={{
+                    background:
+                      "linear-gradient(113.96deg, rgb(69, 223, 232) 11.98%, rgb(211, 170, 175) 50%, rgb(232, 103, 100) 85.42%)",
+                  }}
+                ></div>
+              </div>
             </div>
           </div>
         </div>

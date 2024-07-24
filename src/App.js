@@ -1024,7 +1024,7 @@ function App() {
         frameBtn.classList.remove("active");
       });
       document.querySelector(".panel").classList.remove("none");
-      document.querySelector(".panel.frame").classList.add("none");
+      document.querySelector(".panel.frameWindow").classList.add("none");
     }
     else{
       const buttons = document.querySelectorAll(".mockupBtn");
@@ -1036,7 +1036,7 @@ function App() {
         frameBtn.classList.add("active");
       });
       document.querySelector(".panel").classList.add("none");
-      document.querySelector(".panel.frame").classList.remove("none")
+      document.querySelector(".panel.frameWindow").classList.remove("none")
     }
   };
 
@@ -1507,31 +1507,31 @@ function App() {
                         <div className="value">20</div>
                       </div>
                     </div>
-                    <div className="buttons">
-                      <div
-                        className="button"
-                        onClick={() => modifyBorderButton(0)}
-                      >
-                        <div className="visual"></div>
-                        <p>Sharp</p>
-                      </div>
-                      <div
-                        className="button"
-                        onClick={() => modifyBorderButton(0.5)}
-                      >
-                        <div className="visual"></div>
-                        <p>Curved</p>
-                      </div>
+                      <div className="buttons">
+                        <div
+                          className="button"
+                          onClick={() => modifyBorderButton(0)}
+                        >
+                          <div className="visual"></div>
+                          <p>Sharp</p>
+                        </div>
+                        <div
+                          className="button"
+                          onClick={() => modifyBorderButton(0.5)}
+                        >
+                          <div className="visual"></div>
+                          <p>Curved</p>
+                        </div>
 
-                      <div
-                        className="button"
-                        onClick={() => modifyBorderButton(1)}
-                      >
-                        <div className="visual"></div>
-                        <p>Round</p>
+                        <div
+                          className="button"
+                          onClick={() => modifyBorderButton(1)}
+                        >
+                          <div className="visual"></div>
+                          <p>Round</p>
+                        </div>
+                        <div className="active-btn"></div>
                       </div>
-                      <div className="active-btn"></div>
-                    </div>
                   </div>
                 </div>
 
