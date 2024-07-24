@@ -1,16 +1,49 @@
 import React from "react";
+import "./Frame.css";
 
 const Frame = (props) => {
-    const { handleLeftBar } = props;
+  const overlayShadowSlider = (e, start, distance) => {
+    const button = e.currentTarget;
+    const fullSlider = button.querySelector(".fullSlider");
+    const line = button.querySelector(".line");
+    const value = button.querySelector(".value");
+
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percent = x / rect.width;
+
+    fullSlider.style.setProperty("--size", 100 - percent * 100 + "%");
+    line.style.setProperty("--leftVal", percent * 100 + "%");
+    value.textContent = Math.round(start + percent * distance);
+    console.log(start + percent * distance);
+  };
+
+  const startOverlayShadowSlider = (e, start, distance) => {
+    const handler = overlayShadowSliderHandler(start, distance);
+    const button = e.currentTarget;
+    button.addEventListener("mousemove", handler);
+    button._overlayShadowSliderHandler = handler;
+  };
+
+  const stopOverlayShadowSlider = (e) => {
+    const button = e.currentTarget;
+    const handler = button._overlayShadowSliderHandler;
+    if (handler) {
+      button.removeEventListener("mousemove", handler);
+      delete button._overlayShadowSliderHandler;
+    }
+  };
+
+  const overlayShadowSliderHandler = (start, distance) => (e) => {
+    overlayShadowSlider(e, start, distance);
+  };
+
+  const { handleLeftBar } = props;
   return (
     <div className="panel frame none">
       <div className="panel-tabs">
         <div className="tabs">
-          <button
-            type="button"
-            class="mockupBtn"
-            onClick={handleLeftBar}
-          >
+          <button type="button" class="mockupBtn" onClick={handleLeftBar}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
@@ -28,6 +61,267 @@ const Frame = (props) => {
             </svg>
             <span>Frame</span>
           </button>
+        </div>
+      </div>
+      <div className="selectorElem">
+        <div className="btnWrapper">
+          <button className="selector">
+            <div className="current">
+              <div className="currentFrameIcon"></div>
+            </div>
+            <div className="details">
+              <p>Default 4:3</p>
+              <span>1920 X 1440</span>
+            </div>
+            <div className="arrow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M2 8.539c0-.797.688-1.448 1.543-1.448.421 0 .821.165 1.12.455l7.348 7.031 7.325-7.031a1.65 1.65 0 0 1 1.121-.455c.855 0 1.543.651 1.543 1.448 0 .403-.144.734-.433 1.003l-8.324 7.93c-.366.352-.766.528-1.243.528-.466 0-.866-.165-1.243-.527L2.444 9.542C2.155 9.262 2 8.932 2 8.539"
+                ></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div className="scroll">
+        <div className="container">
+          <div className="element">
+            <div className="title">Overlay Shadow</div>
+            <div className="col1-grid">
+              <div
+                className="slider"
+                style={{ transition: "none" }}
+                onMouseDown={(e) => startOverlayShadowSlider(e, 10, 70)}
+                onMouseUp={stopOverlayShadowSlider}
+                onMouseLeave={stopOverlayShadowSlider}
+              >
+                <div className="fullSlider"></div>
+                <div className="line"></div>
+                <div className="labels">
+                  <div className="name">Opacity</div>
+                  <div className="value">40</div>
+                </div>
+              </div>
+
+              <div className="grid">
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                  <div className="preview active">
+                    <div className="icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          fill-rule="evenodd"
+                          d="M3.575 7.088A9.7 9.7 0 0 0 2.25 12c0 5.384 4.365 9.75 9.75 9.75 1.79 0 3.468-.483 4.911-1.326l-1.104-1.104A8.25 8.25 0 0 1 3.75 12a8.2 8.2 0 0 1 .929-3.808zm15.686 8.831A8.25 8.25 0 0 0 12 3.75a8.2 8.2 0 0 0-3.92.988L6.981 3.639A9.7 9.7 0 0 1 12 2.25c5.384 0 9.75 4.365 9.75 9.75a9.7 9.7 0 0 1-1.39 5.018z"
+                        ></path>
+                        <rect
+                          width="1.89"
+                          height="26.833"
+                          x="1.788"
+                          y="3.211"
+                          fill="currentColor"
+                          rx="0.945"
+                          ry="0.945"
+                          transform="rotate(-45 1.789 3.211)"
+                        ></rect>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                  <div className="preview">
+                    <div className="image">
+                      <img src="https://shots.so/shadows/011.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                  <div className="preview">
+                    <div className="image">
+                      <img src="https://shots.so/shadows/020.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                  <div className="preview">
+                    <div className="image">
+                      <img src="https://shots.so/shadows/028.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                  <div className="preview">
+                    <div className="image">
+                      <img src="https://shots.so/shadows/029.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                  <div className="preview">
+                    <div className="icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          fill-rule="evenodd"
+                          d="M1.29 12c0 1.188 1.017 2.16 2.262 2.16s2.244-.972 2.244-2.16-1-2.158-2.244-2.158-2.263.97-2.263 2.158zM12 14.16c-1.245 0-2.263-.972-2.263-2.16S10.755 9.842 12 9.842s2.244.97 2.244 2.158-1 2.16-2.244 2.16m8.448 0c-1.263 0-2.263-.972-2.263-2.16s1-2.158 2.263-2.158c1.245 0 2.244.97 2.244 2.158s-1 2.16-2.244 2.16"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="element">
+            <div className="title">Effects</div>
+            <div
+              className="slider"
+              style={{ transition: "none" }}
+              onMouseDown={(e) => startOverlayShadowSlider(e, 0, 100)}
+              onMouseUp={stopOverlayShadowSlider}
+              onMouseLeave={stopOverlayShadowSlider}
+            >
+              <div className="fullSlider" style={{ "--size": "100" }}></div>
+              <div className="line" style={{ "--leftVal": "0" }}></div>
+              <div className="labels">
+                <div className="name">Noise</div>
+                <div className="value">0</div>
+              </div>
+            </div>
+            <div
+              className="slider"
+              style={{ transition: "none" }}
+              onMouseDown={(e) => startOverlayShadowSlider(e, 0, 100)}
+              onMouseUp={stopOverlayShadowSlider}
+              onMouseLeave={stopOverlayShadowSlider}
+            >
+              <div className="fullSlider" style={{ "--size": "100" }}></div>
+              <div className="line" style={{ "--leftVal": "0" }}></div>
+              <div className="labels">
+                <div className="name">Blur</div>
+                <div className="value">0</div>
+              </div>
+            </div>
+          </div>
+          <div className="element">
+            <div className="title">Background</div>
+            <div className="col1-grid">
+              <div className="grid">
+                <div className="panelBtn textInside active">
+                  <div className="preview">
+                    <div className="icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                      >
+                        <rect
+                          width="24"
+                          height="24"
+                          fill="url(#transparent_svg__a)"
+                          fillOpacity="0.4"
+                          rx="6"
+                        ></rect>
+                        <rect
+                          width="23"
+                          height="23"
+                          x="0.5"
+                          y="0.5"
+                          stroke="#fff"
+                          strokeOpacity="0.16"
+                          rx="5.5"
+                        ></rect>
+                        <defs>
+                          <pattern
+                            id="transparent_svg__a"
+                            width="1"
+                            height="1"
+                            patternContentUnits="objectBoundingBox"
+                          >
+                            <use
+                              xlinkHref="#transparent_svg__b"
+                              transform="scale(.01563)"
+                            ></use>
+                          </pattern>
+                          <image
+                            xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAA40lEQVR4Xu3bQQ6EQAhEUbj/oXsO8Sdh4XOvJAi/qkF3Zt6E6710++xuiD6T40uACtACqYlzD2IACFKBkoHcgmSQDJJBMngKIT6ADygF6DSYfcCLTzg/z0eGrASogDbT0gKxB2MB5pkiBoBgrEEMwIBjLx9fAAiCIAhygmkkRgYjhWMHditsL2AvYC+QIHjdwzk+BmAABmBAWc1kCF0bKRAEQRAEQRAMGaACbaCUz/P5BRiKxhQaiV07uRjfYgQDMKDpGAhGCMUCzD4CBEEw1iAGYIBPZMJh+g8/P8cKpAJfV4EfMee/sLtaEFIAAAAASUVORK5CYII="
+                            id="transparent_svg__b"
+                            width="64"
+                            height="64"
+                          ></image>
+                        </defs>
+                      </svg>
+                    </div>
+                    Transparent
+                  </div>
+                </div>
+                <div className="panelBtn textInside ">
+                  <div className="preview">
+                    <div
+                      className="icon"
+                      style={{ width: "24px", height: "24px" }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "rgb(255,255,255)",
+                          width: "24px",
+                          height: "24px",
+                          borderRadius: "20px",
+                        }}
+                      ></div>
+                    </div>
+                    #ffffff
+                  </div>
+                </div>
+                <div className="panelBtn textInside ">
+                  <div className="preview">
+                    <div className="icon" style={{ width: "24px", height: "24px" , color:"black"}}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M16.33 2c3.38 0 5.66 2.37 5.66 5.91v8.16c0 3.53-2.28 5.91-5.67 5.91H7.65c-3.39 0-5.67-2.38-5.67-5.92V7.89c0-3.54 2.27-5.92 5.66-5.92h8.66Zm1.1 10.55c-1.08-.67-1.9.27-2.13.57-.22.29-.41.6-.6.92-.48.78-1.03 1.69-1.97 2.22-1.38.76-2.42.05-3.17-.45-.29-.19-.56-.37-.83-.49-.68-.29-1.28.04-2.18 1.17-.48.59-.94 1.18-1.41 1.77-.29.35-.22.89.16 1.13.6.37 1.35.57 2.18.57h8.42c.47 0 .95-.07 1.4-.22 1.02-.34 1.83-1.11 2.26-2.12.35-.86.532-1.89.19-2.75-.12-.29-.28-.55-.52-.79-.62-.61-1.19-1.18-1.88-1.61ZM8.49 6c-1.38 0-2.5 1.12-2.5 2.49s1.12 2.5 2.49 2.5 2.49-1.13 2.49-2.51-1.13-2.5-2.5-2.5Z"
+                        ></path>
+                      </svg>
+                    </div>
+                    Image
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="element">
+            <div className="title">Solid color</div>
+            <div className="colorsGrid">
+              <button className="color" style={{backgroundColor:"white"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(222, 226, 230)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(173, 181, 189)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(73, 80, 87)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(33, 37, 41)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(21, 22, 23)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(255, 89, 94)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(222, 226, 230)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(173, 181, 189)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(73, 80, 87)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(33, 37, 41)"}}></button>
+              <button className="color" style={{backgroundColor:"rgb(21, 22, 23)"}}></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

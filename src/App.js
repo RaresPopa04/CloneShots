@@ -595,8 +595,8 @@ function App() {
     const x = e.clientX - rect.left;
     const width = rect.width;
     const percent = x / width;
-    fullSlider.style.setProperty("--size", 100 - percent * 100 + "%");
-    line.style.setProperty("--leftVal", percent * 100 + "%");
+      fullSlider.style.setProperty("--size", 100 - percent * 100 + "%");
+      line.style.setProperty("--leftVal", percent * 100 + "%");
     value.innerHTML = Math.round(percent * 100);
     const content = document.querySelectorAll(".centeredDropbox");
     content.forEach((content) => {
