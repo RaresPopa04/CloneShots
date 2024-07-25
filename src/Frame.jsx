@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Frame.css";
 
 const Frame = (props) => {
   const openLayoutsPanel = props.openLayoutsPanel;
+
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
+  const [activated, setActivated] = useState(false);
 
   const overlayShadowSlider = (e, start, distance) => {
     const button = e.currentTarget;
@@ -42,14 +46,51 @@ const Frame = (props) => {
 
   const setAspectRatio = (e) => {
     const button = e.currentTarget;
-    const frameItems = button.parentElement.querySelectorAll(".frameItem");
+    const frameItems = button.parentElement.parentElement.querySelectorAll(".frameItem");
     frameItems.forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
     const buttonAspectRatio = button.querySelector(".framePreview").style.aspectRatio;
 
     document.documentElement.style.setProperty("--cardAspectRatio", buttonAspectRatio);
+
+    const width = buttonAspectRatio.split("/")[0];
+    const height = buttonAspectRatio.split("/")[1];
+    console.log(document.querySelector(".frameWindow .details p"));
+    document.querySelector(".frameWindow .details p").textContent = `Default ${width}:${height}`
+    if(button.querySelector(".frameDetails p"))
+      document.querySelector(".frameWindow .details p").textContent = `${button.querySelector(".frameDetails span:nth-child(3)").textContent} ${button.querySelector(".frameDetails p").textContent}`
+    document.querySelector(".frameWindow .details span").textContent = button.querySelector(".frameDetails span").textContent;
   };
 
+  const changeField = (e) => {
+    const { name, value } = e.target;
+    if (name === "width") {
+      setWidth(value);
+    }
+    if (name === "height") {
+      setHeight(value);
+    }
+
+    if(width!=0 && height!=0){
+      setActivated(true);
+    }else{
+      setActivated(false);
+    }
+
+  };
+
+  const hadleRatioChange = (e) => {
+    e.preventDefault();
+    const width = e.target.width.value;
+    const height = e.target.height.value;
+    document.documentElement.style.setProperty("--cardAspectRatio", `${width}/${height}`);
+
+    setWidth(0);
+    setHeight(0);
+
+    setActivated(false);
+
+  };
   const { handleLeftBar } = props;
   return (
     <div className="panel frameWindow none">
@@ -101,16 +142,16 @@ const Frame = (props) => {
         </div>
         <div className="layoutPanel none">
           <div className="custom">
-            <form autoComplete="off">
+            <form autoComplete="off" onSubmit={hadleRatioChange}>
               <div className="panelDim">
                 <h6>W</h6>
-                <input name="width" type="number" class="input-text" placeholder="1920" min="128" max="7680"></input>
+                <input onChange={changeField} value={width==0?"":width} name="width" type="number" class="input-text" placeholder="1920" min="128" max="7680"></input>
               </div>
               <div className="panelDim">
                 <h6>H</h6>
-                <input name="height" type="number" class="input-text" placeholder="1440" min="128" max="7680"></input>
+                <input  onChange={changeField} value={height==0?"":height} name="height" type="number" class="input-text" placeholder="1440" min="128" max="7680"></input>
               </div>
-              <button disabled="" type="submit"><span>Set</span></button>
+              <button disabled="" type="submit" className={`${activated? 'clickable':''}`}><span>Set</span></button>
             </form>
           </div>
           <div className="list">
@@ -123,7 +164,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1920 x 1080
+                  <span>1920 x 1080</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -133,7 +174,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1920 x 1280
+                  <span>1920 x 1280</span>
                 </div>
             </button>
             <button className="frameItem active" onClick={setAspectRatio}>
@@ -143,7 +184,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1920 x 1440
+                  <span>1920 x 1440</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -153,7 +194,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1920 x 1536
+                  <span>1920 x 1536</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -163,7 +204,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1920 x 1920
+                  <span>1920 x 1920</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -173,7 +214,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1080 x 1350
+                  <span>1080 x 1350</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -183,7 +224,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1080 x 1440
+                  <span>1080 x 1440</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -193,7 +234,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1080 x 1620 
+                  <span>1080 x 1620</span> 
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -203,7 +244,7 @@ const Frame = (props) => {
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1080 x 1920
+                  <span>1080 x 1920</span>
                 </div>
             </button>
             
@@ -222,7 +263,8 @@ const Frame = (props) => {
                 </div>
                 <div className="frameDetails">
                   <p>Post</p>
-                  1080 x 1080
+                  <span>1080 x 1080</span>
+                  <span style={{display:"none"}}>Instagram</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -233,7 +275,8 @@ const Frame = (props) => {
                 </div>
                 <div className="frameDetails">
                   <p>Portrait</p>
-                  1080 x 1350
+                  <span>1080 x 1350</span>
+                  <span style={{display:"none"}}>Instagram</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -244,7 +287,8 @@ const Frame = (props) => {
                 </div>
                 <div className="frameDetails">
                   <p>Story</p>
-                  1080 x 1920
+                  <span>1080 x 1920</span>
+                  <span style={{display:"none"}}>Instagram</span>
                 </div>
             </button>
             
@@ -262,7 +306,8 @@ const Frame = (props) => {
                 </div>
                 <div className="frameDetails">
                   <p>Tweet</p>
-                  1200 x 675
+                  <span>1200 x 675</span>
+                  <span style={{display:"none"}}>Twitter</span>
                 </div>
             </button>
             <button className="frameItem" onClick={setAspectRatio}>
@@ -273,7 +318,8 @@ const Frame = (props) => {
                 </div>
                 <div className="frameDetails">
                   <p>Cover</p>
-                  1500 x 500
+                  <span>1500 x 500</span>
+                  <span style={{display:"none"}}>Twitter</span>
                 </div>
             </button>
 
@@ -293,7 +339,8 @@ const Frame = (props) => {
                 </div>
                 <div className="frameDetails">
                   <p>Shot</p>
-                  2800 x 2100
+                  <span>2800 x 2100</span>
+                  <span style={{display:"none"}}>Dribble</span>
                 </div>
             </button>
 

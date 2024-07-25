@@ -1,12 +1,11 @@
 .currentFrameIcon{
-    --aspect-ratio:4/3;
+    aspect-ratio:var(--cardAspectRatio);
     height: 100%;
     width: auto;
     border-radius: 3px;
     background: rgba(0,0,0, .12);
     border: 1px solid rgba(0,0,0, 1);
     transition: all .2s ease;
-    aspect-ratio: var(--aspect-ratio);
 }
 
 .panel.frameWindow .selectorElem .current{
@@ -204,4 +203,10 @@ input[type="number"] {
     color: black;
     cursor: pointer;
     transition: all .2s ease;
+}
+
+button[type="submit"].clickable{
+    pointer-events: all;
+    background: black;
+    cursor: pointer;
 }
