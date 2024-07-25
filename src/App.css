@@ -12,6 +12,8 @@
     --aspect-ratio3:1/1;
     --border-radius:0.5em;
     --pading: 0% 0% 0% 0%;
+    
+    --cardAspectRatio:4/3;
 }
 
 #root>.container{
@@ -56,7 +58,7 @@
 }
 
 .frame{
-    aspect-ratio: 4/3;
+    aspect-ratio: var(--cardAspectRatio);
     border-radius: 6px;
     position: absolute;
     inset: 0;
@@ -67,7 +69,7 @@
     overflow: hidden;
 }
 .innerFrame{
-    aspect-ratio: 4/3;
+    aspect-ratio: var(--cardAspectRatio);
     inset: 0;
     max-height: 100%;
     margin: auto;
@@ -256,7 +258,7 @@
 
 }
 .right-bar .card{
-    aspect-ratio: 4 / 3; 
+    aspect-ratio: var(--cardAspectRatio); 
     border-radius: 10px;
     width: 100%; 
     max-width: 100%; 

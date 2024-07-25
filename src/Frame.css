@@ -9,7 +9,7 @@
     aspect-ratio: var(--aspect-ratio);
 }
 
-.panel.frame .selectorElem .current{
+.panel.frameWindow .selectorElem .current{
     height: 100%;
 }
 
@@ -98,7 +98,7 @@ input[type="number"] {
     flex-flow: row wrap;
     align-items: flex-end;
     padding: 12px;
-    border-bottom: 1px solid rgba(var(--primary), .08);
+    border-bottom: 1px solid rgba(0,0,0, .08);
 }
 
 .frames-wrapper .frameItem{
@@ -119,6 +119,8 @@ input[type="number"] {
     outline: none;
     border: none;
     background: none;
+
+    pointer-events: all;
 }
 
 .frameItem .frameIcon{
@@ -133,6 +135,11 @@ input[type="number"] {
 .frameItem .frameDetails{
     font: normal 11px / 14px Inter, sans-serif;
     letter-spacing: -.2px;
+}
+
+.frameDetails p{
+    font: 500 14px / 20px Inter, sans-serif;
+    letter-spacing: -.4px;
 }
 
 .framePreview span{
@@ -167,4 +174,34 @@ input[type="number"] {
 
     border: none;
     outline: none;
+}
+
+.headSection{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    padding-bottom: 8px;
+}
+
+.headSection img{
+    width: 20px;
+    height: 20px;
+}
+
+.headSection h5{
+    font: 500 17px / 24px Inter, sans-serif;
+    letter-spacing: -.6px;
+}
+
+.frameItem.active{
+    background: rgba(0,0,0, .04);
+    outline: solid 1.5px rgba(0,0,0, 1) !important;
+}
+
+.frameItem:hover{
+    background: rgba(0,0,0, .04);
+    color: black;
+    cursor: pointer;
+    transition: all .2s ease;
 }

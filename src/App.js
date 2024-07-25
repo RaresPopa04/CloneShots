@@ -903,12 +903,14 @@ function App() {
     grid.classList.toggle("none");
   };
 
-  const openLayoutsPanel = (e) => {
-    const layoutPanel = document.querySelector(".layoutPanel");
-    const arrow = document.querySelector(".left-bar .selector .arrow");
+  const openLayoutsPanel = (index) => {
+    const layoutPanel = document.querySelectorAll(".layoutPanel");
+   
+    const arrow = document.querySelectorAll(".left-bar .selector .arrow");
+    console.log(index);
 
-    arrow.classList.toggle("rotate");
-    layoutPanel.classList.toggle("none");
+    arrow[index].classList.toggle("rotate");
+    layoutPanel[index].classList.toggle("none");
   };
 
   const changeLayout = (aspectRatio, textRatio) => {
@@ -1106,7 +1108,7 @@ function App() {
           
           <div className="selectorElem">
             <div className="btnWrapper">
-              <button className="selector" onClick={openLayoutsPanel}>
+              <button className="selector" onClick={()=>openLayoutsPanel(0)}>
                 <div className="current">
                   <img
                     crossorigin="anonymous"
@@ -1980,7 +1982,7 @@ function App() {
           </div>
 
         </div>
-        <Frame handleLeftBar ={handleLeftBar}/>
+        <Frame handleLeftBar ={handleLeftBar} openLayoutsPanel = {openLayoutsPanel}/>
       </div>
       <input
         type="file"

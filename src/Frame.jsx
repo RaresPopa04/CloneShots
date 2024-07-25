@@ -2,6 +2,8 @@ import React from "react";
 import "./Frame.css";
 
 const Frame = (props) => {
+  const openLayoutsPanel = props.openLayoutsPanel;
+
   const overlayShadowSlider = (e, start, distance) => {
     const button = e.currentTarget;
     const fullSlider = button.querySelector(".fullSlider");
@@ -38,6 +40,16 @@ const Frame = (props) => {
     overlayShadowSlider(e, start, distance);
   };
 
+  const setAspectRatio = (e) => {
+    const button = e.currentTarget;
+    const frameItems = button.parentElement.querySelectorAll(".frameItem");
+    frameItems.forEach((item) => item.classList.remove("active"));
+    button.classList.add("active");
+    const buttonAspectRatio = button.querySelector(".framePreview").style.aspectRatio;
+
+    document.documentElement.style.setProperty("--cardAspectRatio", buttonAspectRatio);
+  };
+
   const { handleLeftBar } = props;
   return (
     <div className="panel frameWindow none">
@@ -65,7 +77,7 @@ const Frame = (props) => {
       </div>
       <div className="selectorElem">
         <div className="btnWrapper">
-          <button className="selector">
+          <button className="selector" onClick={()=>openLayoutsPanel(1)}>
             <div className="current">
               <div className="currentFrameIcon"></div>
             </div>
@@ -87,7 +99,7 @@ const Frame = (props) => {
             </div>
           </button>
         </div>
-        <div className="layoutPanel">
+        <div className="layoutPanel none">
           <div className="custom">
             <form autoComplete="off">
               <div className="panelDim">
@@ -101,8 +113,10 @@ const Frame = (props) => {
               <button disabled="" type="submit"><span>Set</span></button>
             </form>
           </div>
+          <div className="list">
+            
           <div className="frames-wrapper">
-            <button className="frameItem">
+            <button className="frameItem" onClick={setAspectRatio}>
                 <div className="frameIcon" >
                   <div className="framePreview" style={{aspectRatio:"16/9"}}>
                     <span>16:9</span>
@@ -112,27 +126,183 @@ const Frame = (props) => {
                   1920 x 1080
                 </div>
             </button>
-            <button className="frameItem">
+            <button className="frameItem" onClick={setAspectRatio}>
                 <div className="frameIcon" >
                   <div className="framePreview" style={{aspectRatio:"3/2"}}>
                     <span>3:2</span>
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1920 x 1080
+                  1920 x 1280
                 </div>
             </button>
-            <button className="frameItem">
+            <button className="frameItem active" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"4/3"}}>
+                    <span>4:3</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1920 x 1440
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"5/4"}}>
+                    <span>5:4</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1920 x 1536
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"1/1"}}>
+                    <span>1:1</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1920 x 1920
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"4/5"}}>
+                    <span>4:5</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1080 x 1350
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"3/4"}}>
+                    <span>3:4</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1080 x 1440
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"2/3"}}>
+                    <span>2:3</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1080 x 1620 
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"9/16"}}>
+                    <span>9:16</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  1080 x 1920
+                </div>
+            </button>
+            
+          </div>
+          
+          <div className="headSection">
+              <img src="https://shots.so/icon/socials/instagram.png" alt="" />
+              <h5>Instagram</h5>
+            </div>
+          <div className="frames-wrapper">
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"1/1"}}>
+                    <span>1:1</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  <p>Post</p>
+                  1080 x 1080
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"4/5"}}>
+                    <span>4:5</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  <p>Portrait</p>
+                  1080 x 1350
+                </div>
+            </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"9/16"}}>
+                    <span>9:16</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  <p>Story</p>
+                  1080 x 1920
+                </div>
+            </button>
+            
+          </div>
+          <div className="headSection">
+              <img src="https://shots.so/icon/socials/twitter.png" alt="" />
+              <h5>Twitter</h5>
+            </div>
+          <div className="frames-wrapper">
+            <button className="frameItem" onClick={setAspectRatio}>
                 <div className="frameIcon" >
                   <div className="framePreview" style={{aspectRatio:"16/9"}}>
                     <span>16:9</span>
                   </div>
                 </div>
                 <div className="frameDetails">
-                  1920 x 1080
+                  <p>Tweet</p>
+                  1200 x 675
                 </div>
             </button>
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"3/1"}}>
+                    <span>3:1</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  <p>Cover</p>
+                  1500 x 500
+                </div>
+            </button>
+
+            
           </div>
+
+          <div className="headSection">
+              <img src="https://shots.so/icon/socials/dribbble.png" alt="" />
+              <h5>Dribbble</h5>
+            </div>
+          <div className="frames-wrapper">
+            <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon" >
+                  <div className="framePreview" style={{aspectRatio:"4/3"}}>
+                    <span>4:3</span>
+                  </div>
+                </div>
+                <div className="frameDetails">
+                  <p>Shot</p>
+                  2800 x 2100
+                </div>
+            </button>
+
+            
+          </div>
+
+
+          </div>
+          
         </div>
       </div>
       <div className="scroll">
