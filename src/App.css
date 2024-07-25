@@ -831,6 +831,11 @@
 .slider.inactive{
     pointer-events: none;
     background-color: rgba(0,0,0, .04);
+    
+}
+
+.slider.inactive .fullSlider{
+    background-color: rgba(0,0,0, .04);
 }
 
 .fullSlider{
@@ -1559,4 +1564,28 @@ button.mockupBtn.active, button.frameBtn.active{
     width: 20px;
     height: 20px;
     color: rgba(0,0,0, .36);
+}
+
+.overlay{
+    --blur: 0.8em;
+    --opacity: 0.55;
+    filter: blur(var(--blur));
+    opacity: var(--opacity);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+    pointer-events: none;
+}
+
+.overlay img{
+    top: -2.4em;
+    left: -2.4em;
+    width: calc(100% + 4.8em);
+    height: calc(100% + 4.8em);
+    opacity: 1;
+    position: absolute;
+    object-fit: cover;
 }

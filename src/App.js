@@ -236,6 +236,8 @@ function App() {
     0, 0, 4, 0, 0, 0, 0, 1, 0,
   ];
 
+  const [currentOverlay, setCurrentOverlay] = useState(0);
+
   useEffect(() => {
     const activeBtnRight = document.querySelector(".active-btn.right");
     activeBtnRight.style.setProperty("--position", "82%");
@@ -1041,6 +1043,23 @@ function App() {
       document.querySelector(".panel.frameWindow").classList.remove("none")
     }
   };
+
+  
+
+  const addOverlay = (e, i,img) => {
+    const button = e.currentTarget;
+    const parent = button.parentElement;
+    const activeButton = parent.querySelector(".active");
+    activeButton.classList.remove("active");
+    button.classList.add("active");
+    
+
+    if(i == 0){
+      setCurrentOverlay(0);
+    }else{
+      setCurrentOverlay(img)
+    }
+  }
 
   return (
     <div className="container">
@@ -1982,7 +2001,7 @@ function App() {
           </div>
 
         </div>
-        <Frame handleLeftBar ={handleLeftBar} openLayoutsPanel = {openLayoutsPanel}/>
+        <Frame handleLeftBar ={handleLeftBar} openLayoutsPanel = {openLayoutsPanel} addOverlay = {addOverlay}/>
       </div>
       <input
         type="file"
@@ -2008,6 +2027,9 @@ function App() {
           <div className="frame">
             <div className="innerFrame" ref={ref}>
               <div className="background"></div>
+              <div className="overlay">
+                <img src={`${currentOverlay}`} alt="" />
+              </div>
               <div className="dropboxParent">
                 <div className="dropbox">
                   <div className={`centeredDropbox style-0 ${layoutsName}`}>
@@ -2198,6 +2220,7 @@ function App() {
               preview={preview}
               preview2={previewTwo}
               applyStyle={applyStyle}
+              currentOverlay = {currentOverlay}
             />
           )}
           {layoutsName === "layout-2" && (
@@ -2206,6 +2229,7 @@ function App() {
               preview2={previewTwo}
               preview3={previewThree}
               applyStyle={applyStyle}
+              currentOverlay = {currentOverlay}
             />
           )}
           {layoutsName === "layout-4" && (
@@ -2215,6 +2239,7 @@ function App() {
               preview3={previewThree}
               applyStyle={applyStyle}
               imgsrc={currentDevice}
+              currentOverlay = {currentOverlay}
             />
           )}
         </div>

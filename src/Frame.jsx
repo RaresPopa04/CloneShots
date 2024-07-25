@@ -7,6 +7,9 @@ const Frame = (props) => {
   const [width, setWidth] = useState();
   const [height, setHeight] = useState();
   const [activated, setActivated] = useState(false);
+  const [overlayShadow, setOverlayShadow] = useState(false);
+
+  const addOverlay = props.addOverlay;
 
   const overlayShadowSlider = (e, start, distance) => {
     const button = e.currentTarget;
@@ -91,6 +94,24 @@ const Frame = (props) => {
     setActivated(false);
 
   };
+      
+  const toggleOpacity = (e,hide) => {
+    console.log("toggleOpacity");
+    const button = e.currentTarget;
+    const parent = button.parentElement;
+    const active = parent.querySelector(".active");
+    active.classList.remove("active");
+    button.classList.add("active");
+    console.log(button);
+    if(hide)
+      setOverlayShadow(false);
+    else
+      setOverlayShadow(true);
+    console.log(overlayShadow);
+
+  }
+
+
   const { handleLeftBar } = props;
   return (
     <div className="panel frameWindow none">
@@ -358,7 +379,7 @@ const Frame = (props) => {
             <div className="title">Overlay Shadow</div>
             <div className="col1-grid">
               <div
-                className="slider"
+                className={`slider ${overlayShadow?"":"inactive"}`}
                 style={{ transition: "none" }}
                 onMouseDown={(e) => startOverlayShadowSlider(e, 10, 70)}
                 onMouseUp={stopOverlayShadowSlider}
@@ -373,8 +394,8 @@ const Frame = (props) => {
               </div>
 
               <div className="grid">
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
-                  <div className="preview active">
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,0);toggleOpacity(e,true);}}>
+                  <div className="preview active" >
                     <div className="icon">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -399,28 +420,28 @@ const Frame = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/011.png");toggleOpacity(e,false)}}>
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/011.jpg" alt="" />
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/020.png");toggleOpacity(e,false)}}>
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/020.jpg" alt="" />
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/028.png");toggleOpacity(e,false)}}>
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/028.jpg" alt="" />
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/029.png");toggleOpacity(e,false)}}>
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/029.jpg" alt="" />

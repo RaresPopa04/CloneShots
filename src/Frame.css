@@ -11,6 +11,9 @@
 .panel.frameWindow .selectorElem .current{
     height: 100%;
 }
+.panelBtn{
+    pointer-events: all;
+}
 
 .panelBtn.textInside .preview{
     padding: 10% 0 6%;
@@ -210,3 +213,4 @@ button[type="submit"].clickable{
     background: black;
     cursor: pointer;
 }
+

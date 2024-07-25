@@ -4,6 +4,7 @@ const IphonePosition = (props) => {
   const { preview, preview2: previewTwo, preview3: previewThree } = props;
   const applyStyle = props.applyStyle;
   const imageSource = props.imgsrc;
+  const currentOverlay = props.currentOverlay;
   return (
     <div className="card-wrapper">
       {Array.from({ length: 2 }).map((_, i) => {
@@ -12,6 +13,9 @@ const IphonePosition = (props) => {
             <div className="frame">
               <div className="innerFrame">
                 <div className="background"></div>
+                <div className="overlay">
+                  <img src={`${currentOverlay}`} alt="" />
+                </div>
                 <div className="dropboxParent">
                   <div className="dropbox">
                     <div className={`centeredDropbox layout-2 style-${i}`}>
@@ -70,6 +74,9 @@ const IphonePosition = (props) => {
             <div className="frame">
               <div className="innerFrame">
                 <div className="background"></div>
+                <div className="overlay">
+                  <img src={`${currentOverlay}`} alt="" />
+                </div>
                 <div className="dropboxParent">
                   <div className="dropbox">
                     <div
@@ -166,6 +173,9 @@ const IphonePosition = (props) => {
             <div className="frame">
               <div className="innerFrame">
                 <div className="background"></div>
+                <div className="overlay">
+                  <img src={`${currentOverlay}`} alt="" />
+                </div>
                 <div className="dropboxParent">
                   <div className="dropbox">
                     <div
@@ -300,6 +310,9 @@ const IphonePosition = (props) => {
             <div className="frame">
               <div className="innerFrame">
                 <div className="background"></div>
+                <div className="overlay">
+                  <img src={`${currentOverlay}`} alt="" />
+                </div>
                 <div className="dropboxParent">
                   <div className="dropbox">
                     <div className={`centeredDropbox layout-2 style-${i + 2}`}>
