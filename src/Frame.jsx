@@ -11,7 +11,7 @@ const Frame = (props) => {
 
   const addOverlay = props.addOverlay;
 
-  const overlayShadowSlider = (e, start, distance) => {
+  const overlayShadowSlider = (e, start, distance, modifyFunction) => {
     const button = e.currentTarget;
     const fullSlider = button.querySelector(".fullSlider");
     const line = button.querySelector(".line");
@@ -24,11 +24,12 @@ const Frame = (props) => {
     fullSlider.style.setProperty("--size", 100 - percent * 100 + "%");
     line.style.setProperty("--leftVal", percent * 100 + "%");
     value.textContent = Math.round(start + percent * distance);
-    console.log(start + percent * distance);
+
+    modifyFunction(percent);
   };
 
-  const startOverlayShadowSlider = (e, start, distance) => {
-    const handler = overlayShadowSliderHandler(start, distance);
+  const startOverlayShadowSlider = (e, start, distance,updateFunction) => {
+    const handler = overlayShadowSliderHandler(start, distance,updateFunction);
     const button = e.currentTarget;
     button.addEventListener("mousemove", handler);
     button._overlayShadowSliderHandler = handler;
@@ -43,8 +44,8 @@ const Frame = (props) => {
     }
   };
 
-  const overlayShadowSliderHandler = (start, distance) => (e) => {
-    overlayShadowSlider(e, start, distance);
+  const overlayShadowSliderHandler = (start, distance,updateFunction) => (e) => {
+    overlayShadowSlider(e, start, distance,updateFunction);
   };
 
   const setAspectRatio = (e) => {
@@ -109,6 +110,13 @@ const Frame = (props) => {
       setOverlayShadow(true);
     console.log(overlayShadow);
 
+  }
+
+  const updateOpacity = (value) => {
+    const overlayElement = document.querySelector(".overlay");
+    const opacityValue = 0.25 + value * 0.70;
+    console.log(opacityValue);
+    overlayElement.style.setProperty("--opacity", opacityValue);
   }
 
 
@@ -381,7 +389,7 @@ const Frame = (props) => {
               <div
                 className={`slider ${overlayShadow?"":"inactive"}`}
                 style={{ transition: "none" }}
-                onMouseDown={(e) => startOverlayShadowSlider(e, 10, 70)}
+                onMouseDown={(e) => startOverlayShadowSlider(e, 10, 70,updateOpacity)}
                 onMouseUp={stopOverlayShadowSlider}
                 onMouseLeave={stopOverlayShadowSlider}
               >

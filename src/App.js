@@ -360,7 +360,6 @@ function App() {
 
   const handleClickInputFile = (num) => {
     let inputFile;
-    console.log(num);
     if (num == 1) inputFile = document.getElementById("fileInput");
     else if (num == 2) inputFile = document.getElementById("fileInputTwo");
     else if (num == 3) inputFile = document.getElementById("fileInputThree");
@@ -1943,7 +1942,7 @@ function App() {
 
                 <div className="export">
                   <div className="exportBtn">
-                    <button className="download">
+                    <button className="download" onClick={handleDownload}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -2092,7 +2091,7 @@ function App() {
                     </div>
 
                     <div className="zone none">
-                      <img src={currentDevice} alt="" />
+                      <img src={currentDevice} className="none" alt="" />
                       <div className="zone2">
                         <div
                           className="uploadBox"

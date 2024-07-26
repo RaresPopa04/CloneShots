@@ -304,7 +304,7 @@
 }
 
 
-.centeredDropbox.styletwo-0:not(.layout-2) .uploadBox:first-child{
+.centeredDropbox.styletwo-0:not(.layout-2) .zone:first-child{
     transform: translate3d(0, 0, 0) ;
 }
 .centeredDropbox.styletwo-0:not(.layout-2) .zone:nth-child(2){
@@ -313,51 +313,51 @@
 }
 
 
-.centeredDropbox.styletwo-1:not(.layout-2) .uploadBox:first-child{
+.centeredDropbox.styletwo-1:not(.layout-2) .zone:first-child .uploadBox, .centeredDropbox.styletwo-1:not(.layout-2) .uploadBox:first-child{
     transform: translate3d(0,-6%, 0) rotate(-3deg) ;
 
 }
-.centeredDropbox.styletwo-1:not(.layout-2) .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-1:not(.layout-2) .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-1:not(.layout-2) .uploadBox:nth-child(2){
     transform: translate3d(0,6%, 0) rotate(1.5deg) ;
 
 }
 
 
-.centeredDropbox.styletwo-2:not(.layout-2) .uploadBox:first-child{
+.centeredDropbox.styletwo-2:not(.layout-2) .zone:first-child .uploadBox, .centeredDropbox.styletwo-2:not(.layout-2) .uploadBox:first-child{
     transform: translate3d(20%,-10%, 0) rotate(-4deg) ;
 
 }
-.centeredDropbox.styletwo-2:not(.layout-2) .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-2:not(.layout-2) .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-2:not(.layout-2) .uploadBox:nth-child(2){
     transform: translate3d(-20%,10%, 0) rotate(4deg) ;
 
 }
 
 
-.centeredDropbox.styletwo-3:not(.layout-2) .uploadBox:first-child{
+.centeredDropbox.styletwo-3:not(.layout-2) .zone:first-child .uploadBox, .centeredDropbox.styletwo-3:not(.layout-2) .uploadBox:first-child{
     transform: translate3d(20%,10%, 0) rotate(4deg) ;
 
 }
-.centeredDropbox.styletwo-3:not(.layout-2) .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-3:not(.layout-2) .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-3:not(.layout-2) .uploadBox:nth-child(2){
     transform: translate3d(-20%,-10%, 0) rotate(-4deg) ;
 
 }
 
 
-.centeredDropbox.styletwo-4:not(.layout-2) .uploadBox:first-child{
+.centeredDropbox.styletwo-4:not(.layout-2) .zone:first-child .uploadBox, .centeredDropbox.styletwo-4:not(.layout-2) .uploadBox:first-child{
     transform: translate3d(0,-16%, 0) ;
 
 }
-.centeredDropbox.styletwo-4:not(.layout-2) .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-4:not(.layout-2) .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-4:not(.layout-2) .uploadBox:nth-child(2){
     transform: translate3d(0,16%, 0) ;
 
 }
 
 
-.centeredDropbox.styletwo-5:not(.layout-2) .uploadBox:first-child{
+.centeredDropbox.styletwo-5:not(.layout-2) .zone:first-child .uploadBox, .centeredDropbox.styletwo-5:not(.layout-2) .uploadBox:first-child{
     transform: translate3d(0,-10%, 0) ;
 
 }
-.centeredDropbox.styletwo-5:not(.layout-2) .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-5:not(.layout-2) .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-5:not(.layout-2) .uploadBox:nth-child(2){
     transform: translate3d(0,10%, 0) ;
 
 }
@@ -368,19 +368,19 @@
 
 
 
-.centeredDropbox.styletwo-6 .uploadBox:first-child{
+.centeredDropbox.styletwo-6:not(.layout-2) .zone:first-child .uploadBox, .centeredDropbox.styletwo-6:not(.layout-2) .uploadBox:first-child{
     transform: translate3d(-30%, -5%, 0) ;
 
 }
-.centeredDropbox.styletwo-6 .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-6 .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-6:not(.layout-2) .uploadBox:nth-child(2){
     transform: translate3d(90%, 5%, 0) ;
 
 }
-.centeredDropbox.styletwo-7 .uploadBox:first-child{
+.centeredDropbox.styletwo-7 .zone:first-child .uploadBox, .centeredDropbox.styletwo-7:not(.layout-2) .uploadBox:first-child{
     transform: rotateY(20deg) rotateX(20deg) rotate(-10deg) translate3d(20%, 50%, 0) ;
 
 }
-.centeredDropbox.styletwo-7 .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-7 .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-7:not(.layout-2) .uploadBox:nth-child(2){
     transform: rotateY(20deg) rotateX(20deg) rotate(-10deg)translate3d(-20%, -50%, 0) ;
 
 }
@@ -388,11 +388,11 @@
     gap:0;
 
 }
-.centeredDropbox.styletwo-8 .uploadBox:first-child{
+.centeredDropbox.styletwo-8 .zone:first-child .uploadBox, .centeredDropbox.styletwo-8:not(.layout-2) .uploadBox:first-child{
     transform: rotateX(5deg) rotateY(30deg) translate3d(20%, -20%, 0) ;
 
 }
-.centeredDropbox.styletwo-8 .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-8 .zone:nth-child(2) .uploadBox, .centeredDropbox.styletwo-8:not(.layout-2) .uploadBox:nth-child(2){
     transform: rotateX(5deg) rotateY(30deg) translate3d(-20%, 20%, 0) ;  
 
 }
@@ -400,11 +400,11 @@
     gap:0;
 
 }
-.centeredDropbox.styletwo-9 .uploadBox:first-child{
+.centeredDropbox.styletwo-9 .zone:first-child .uploadBox, .centeredDropbox.styletwo-9:not(.layout-2) .uploadBox:first-child{
     transform: rotateX(5deg) rotateY(-30deg) translate3d(10%,20%, 0) ;
 
 }
-.centeredDropbox.styletwo-9 .uploadBox:nth-child(2){
+.centeredDropbox.styletwo-9 .zone:nth-child(2) .uploadBox,.centeredDropbox.styletwo-9:not(.layout-2) .uploadBox:nth-child(2){
     transform: rotateX(5deg) rotateY(50deg) translate3d(-10%, -20%, 0) ;
 
 }
@@ -1568,7 +1568,7 @@ button.mockupBtn.active, button.frameBtn.active{
 
 .overlay{
     --blur: 0.8em;
-    --opacity: 0.55;
+    --opacity: 0.65;
     filter: blur(var(--blur));
     opacity: var(--opacity);
     position: absolute;
