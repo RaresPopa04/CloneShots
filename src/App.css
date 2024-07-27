@@ -14,6 +14,7 @@
     --pading: 0% 0% 0% 0%;
     
     --cardAspectRatio:4/3;
+    --overlayOpacity: 0.65;
 }
 
 #root>.container{
@@ -108,6 +109,22 @@
 
 }
 
+.centeredDropbox .zone:nth-child(1) .uploadBox, .centeredDropbox .uploadBox:nth-child(1)
+{
+    aspect-ratio: var(--aspect-ratio);
+}
+
+.centeredDropbox .zone:nth-child(2) .uploadBox, .centeredDropbox .uploadBox:nth-child(2)
+{
+    aspect-ratio: var(--aspect-ratio2);
+}
+
+.centeredDropbox .zone:nth-child(3) .uploadBox, .centeredDropbox .uploadBox:nth-child(3)
+{
+    aspect-ratio: var(--aspect-ratio3);
+}
+
+
 .dropbox{
     width: 100%;
     height: 100%;
@@ -121,7 +138,6 @@
     position: relative;
 
     height: 100%;
-    aspect-ratio: var(--aspect-ratio);
     cursor: pointer;
 
     
@@ -313,7 +329,7 @@
 }
 
 
-.centeredDropbox.styletwo-1:not(.layout-2) .zone:first-child .uploadBox, .centeredDropbox.styletwo-1:not(.layout-2) .uploadBox:first-child{
+.centeredDropbox.styletwo-1:not(.layout-2) .zone:first-child {
     transform: translate3d(0,-6%, 0) rotate(-3deg) ;
 
 }
@@ -1545,11 +1561,22 @@ button.copy svg{
 
 .zone{
     position: relative;
-    width: 100%;
+    height: 100%;
+    aspect-ratio: var(--aspect-ratio);
 }
+.centeredDropbox .zone:nth-child(2){
+    aspect-ratio: var(--aspect-ratio2);
+}
+
+.centeredDropbox .zone:nth-child(3){
+    aspect-ratio: var(--aspect-ratio3);
+}
+
 
 .zone2{
     position: relative;
+    width: 100%;
+    height: 100%;
     
     padding: var(--padding);
 
@@ -1568,9 +1595,8 @@ button.mockupBtn.active, button.frameBtn.active{
 
 .overlay{
     --blur: 0.8em;
-    --opacity: 0.65;
     filter: blur(var(--blur));
-    opacity: var(--opacity);
+    opacity: var(--overlayOpacity);
     position: absolute;
     left: 0;
     top: 0;

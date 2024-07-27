@@ -113,10 +113,11 @@ const Frame = (props) => {
   }
 
   const updateOpacity = (value) => {
-    const overlayElement = document.querySelector(".overlay");
+    const overlayElement = document.querySelectorAll(".overlay");
+    
     const opacityValue = 0.25 + value * 0.70;
     console.log(opacityValue);
-    overlayElement.style.setProperty("--opacity", opacityValue);
+    document.documentElement.style.setProperty("--overlayOpacity", opacityValue);
   }
 
 
