@@ -15,6 +15,23 @@
     
     --cardAspectRatio:4/3;
     --overlayOpacity: 0.65;
+    --shadowpacity:40%;
+
+    --shadowPosX1: 0em;
+    --shadowPosY1: 0em;
+    --shadouwBlur1: 0em;
+
+    --shadowPosX2: 0em;
+    --shadowPosY2: 0em;
+    --shadowBlur2: 0em;
+
+    --shadowPosX3: 0em;
+    --shadowPosY3: 0em;
+    --shadowBlur3: 0em;
+
+    --shadowPosX4: 0em;
+    --shadowPosY4: 0em;
+    --shadowBlur4: 0em;
 }
 
 #root>.container{
@@ -140,14 +157,9 @@
     height: 100%;
     cursor: pointer;
 
-    
-    --shadowOpacity: 40%;
-    --offsetX: 8px;
-    --offsetY: 8px;
    
     
     
-    box-shadow: var(--offsetX) var(--offsetY) 1em 3px rgb(0 0 0 / var(--shadowOpacity));
     border-radius: var(--border-radius);
 
     
@@ -1562,8 +1574,17 @@ button.copy svg{
 .zone{
     position: relative;
     height: 100%;
+
+    border-radius: var(--border-radius);
+    
+    /* box-shadow: var(--offsetX) var(--offsetY) 1em 3px rgb(0 0 0 / var(--shadowOpacity)); */
     aspect-ratio: var(--aspect-ratio);
 }
+
+.centeredDropbox>.uploadBox{
+    box-shadow: var(--offsetX) var(--offsetY) 1em 3px rgb(0 0 0 / var(--shadowOpacity));
+}
+
 .centeredDropbox .zone:nth-child(2){
     aspect-ratio: var(--aspect-ratio2);
 }
@@ -1614,4 +1635,43 @@ button.mockupBtn.active, button.frameBtn.active{
     opacity: 1;
     position: absolute;
     object-fit: cover;
+}
+
+.shadow{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    border-radius: var(--border-radius);
+    
+}
+
+.shadowLayer{
+    background: rgba(0,0,0,1);
+    border-radius: var(--border-radius);
+    position: absolute;
+    inset: 1%;
+    opacity: var(--shadowOpacity);  
+
+}
+
+.shadow .shadowLayer:nth-child(1){
+    transform: translateX(var(--shadowPosX1)) translateY(var(--shadowPosY1));
+    filter: blur(var(--shadowBlur1));
+}
+
+.shadow .shadowLayer:nth-child(2){
+    transform: translateX(var(--shadowPosX2)) translateY(var(--shadowPosY2));
+    filter: blur(var(--shadowBlur2));
+
+}
+
+.shadow .shadowLayer:nth-child(3){
+    transform: translateX(var(--shadowPosX3)) translateY(var(--shadowPosY3));
+    filter: blur(var(--shadowBlur3));
+}
+
+.shadow .shadowLayer:nth-child(4){
+    transform: translateX(var(--shadowPosX4)) translateY(var(--shadowPosY4));
+    filter: blur(var(--shadowBlur4));
 }
