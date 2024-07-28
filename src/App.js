@@ -527,7 +527,15 @@ function App() {
 
   const modifyOpacity = (e, value) => {
     if (value == 1) {
-      
+      const slider = document.querySelectorAll(".slider")[1];
+      const content = document.querySelectorAll(".uploadBox");
+      slider.classList.add("inactive");
+      const activeBtn = e.currentTarget;
+      const parentActiveBtn = activeBtn.parentElement.querySelector(".active-btn");
+      parentActiveBtn.style.setProperty("--position", "17%");
+
+      document.documentElement.style.setProperty("--shadowAppearance", "100000000000");
+
     } else if (value == 2) {
       const slider = document.querySelectorAll(".slider")[1];
 
@@ -537,29 +545,21 @@ function App() {
 
       const content = document.querySelectorAll(".zone");
 
-      document.documentElement.style.setProperty(
-        "--shadowOpacity",
-        valueLabel.innerHTML + "%"
-      );
-      document.documentElement.style.setProperty("--offsetX", "0px");
-      document.documentElement.style.setProperty("--offsetY", "0px");
+      document.documentElement.style.setProperty("--shadowAppearance", "2");
 
       const activeBtn = e.currentTarget;
       const parentActiveBtn =
         activeBtn.parentElement.querySelector(".active-btn");
       parentActiveBtn.style.setProperty("--position", "50%");
     } else if (value == 3) {
+      
       const slider = document.querySelectorAll(".slider")[1];
 
       slider.classList.remove("inactive");
       const labels = slider.querySelector(".labels");
       const valueLabel = labels.querySelector(".value");
-      document.documentElement.style.setProperty(
-        "--shadowOpacity",
-        valueLabel.innerHTML + "%"
-      );
-      document.documentElement.style.setProperty("--offsetX", "8px");
-      document.documentElement.style.setProperty("--offsetY", "8px");
+      
+      document.documentElement.style.setProperty("--shadowAppearance", "1");
       const activeBtn = e.currentTarget;
       const parentActiveBtn =
         activeBtn.parentElement.querySelector(".active-btn");
@@ -2160,6 +2160,12 @@ function App() {
 
                     <div className="zone none">
                       <img src={currentDevice} className="none" alt="" />
+                      <div className="shadow">
+                        <div className="shadowLayer" ></div>
+                        <div className="shadowLayer"></div>
+                        <div className="shadowLayer"></div>
+                        <div className="shadowLayer"></div>
+                      </div>
                       <div className="zone2">
                         <div
                           className="uploadBox"
@@ -2217,6 +2223,12 @@ function App() {
                     </div>
                     <div className="zone none">
                       <img src={currentDevice} alt="" />
+                      <div className="shadow">
+                        <div className="shadowLayer" ></div>
+                        <div className="shadowLayer"></div>
+                        <div className="shadowLayer"></div>
+                        <div className="shadowLayer"></div>
+                      </div>
                       <div className="zone2">
                         <div
                           className="uploadBox"

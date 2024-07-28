@@ -21,6 +21,12 @@ const IphonePosition = (props) => {
                     <div className={`centeredDropbox layout-2 style-${i}`}>
                       <div className="zone">
                         <img src={imageSource} alt="" />
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                        </div>
 
                         <div className="zone2">
                           <div className="uploadBox">
@@ -84,6 +90,12 @@ const IphonePosition = (props) => {
                     >
                       <div className="zone">
                         <img src={imageSource} alt="" />
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                        </div>
                         <div className="zone2">
                           <div className="uploadBox">
                             <div className="stack2 none">
@@ -121,6 +133,12 @@ const IphonePosition = (props) => {
                       </div>
                       <div className="zone">
                         <img src={imageSource} alt="" />
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                        </div>
                         <div className="zone2">
                           <div className="uploadBox">
                             <div className="stack2 none">
@@ -183,6 +201,12 @@ const IphonePosition = (props) => {
                     >
                       <div className="zone">
                         <img src={imageSource} alt="" />
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                        </div>
                         <div className="zone2">
                           <div className="uploadBox">
                             <div className="stack2 none">
@@ -220,6 +244,12 @@ const IphonePosition = (props) => {
                       </div>
                       <div className="zone">
                         <img src={imageSource} alt="" />
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                        </div>
                         <div className="zone2">
                           <div className="uploadBox">
                             <div className="stack2 none">
@@ -258,6 +288,12 @@ const IphonePosition = (props) => {
 
                       <div className="zone">
                         <img src={imageSource} alt="" />
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                        </div>
                         <div className="zone2">
                           <div className="uploadBox">
                             <div className="stack2 none">
@@ -318,6 +354,12 @@ const IphonePosition = (props) => {
                     <div className={`centeredDropbox layout-2 style-${i + 2}`}>
                       <div className="zone">
                         <img src={imageSource} alt="" />
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                        </div>
                         <div className="zone2">
                           <div className="uploadBox">
                             <div className="stack2 none">

@@ -18,35 +18,47 @@ const ScreenshotPosition = (props) => {
                 <div className="dropboxParent">
                   <div className="dropbox">
                     <div className={`centeredDropbox style-${i}`}>
-                      <div className="uploadBox">
-                        <div className="stack2 none">
-                          {preview && (
-                            <div className="imgContainer">
-                              <img
-                                src={preview}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
-                            </div>
-                          )}
+                      <div className="zone">
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
                         </div>
-                        <div className="stack1 none">
-                          {preview && (
-                            <div className="imgContainer">
-                              <img
-                                src={preview}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
+                        <div className="zone2">
+                          <div className="uploadBox">
+                            <div className="stack2 none">
+                              {preview && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={preview}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        {preview == null && <div class="content default"></div>}
-                        {preview && (
-                          <div className="imgContainer">
-                            <img src={preview} alt="preview" />
+                            <div className="stack1 none">
+                              {preview && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={preview}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                            {preview == null && (
+                              <div class="content default"></div>
+                            )}
+                            {preview && (
+                              <div className="imgContainer">
+                                <img src={preview} alt="preview" />
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -73,67 +85,89 @@ const ScreenshotPosition = (props) => {
                     <div
                       className={`centeredDropbox two-canvases styletwo-${i}`}
                     >
-                      <div className="uploadBox">
-                        <div className="stack2 none">
-                          {preview && (
-                            <div className="imgContainer">
-                              <img
-                                src={preview}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
-                            </div>
-                          )}
+                      <div className="zone">
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
                         </div>
-                        <div className="stack1 none">
-                          {preview && (
-                            <div className="imgContainer">
-                              <img
-                                src={preview}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
+                        <div className="zone2">
+                          <div className="uploadBox">
+                            <div className="stack2 none">
+                              {preview && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={preview}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        {preview == null && <div class="content default"></div>}
-                        {preview && (
-                          <div className="imgContainer">
-                            <img src={preview} alt="preview" />
+                            <div className="stack1 none">
+                              {preview && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={preview}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                            {preview == null && (
+                              <div class="content default"></div>
+                            )}
+                            {preview && (
+                              <div className="imgContainer">
+                                <img src={preview} alt="preview" />
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </div>
-                      <div className="uploadBox">
-                        <div className="stack2 none">
-                          {previewTwo && (
-                            <div className="imgContainer">
-                              <img
-                                src={previewTwo}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
-                            </div>
-                          )}
+                      <div className="zone">
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
                         </div>
-                        <div className="stack1 none">
-                          {previewTwo && (
-                            <div className="imgContainer">
-                              <img
-                                src={previewTwo}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
+                        <div className="zone2">
+                          <div className="uploadBox">
+                            <div className="stack2 none">
+                              {previewTwo && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={previewTwo}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        {previewTwo == null && (
-                          <div class="content default"></div>
-                        )}
-                        {previewTwo && (
-                          <div className="imgContainer">
-                            <img src={previewTwo} alt="preview" />
+                            <div className="stack1 none">
+                              {previewTwo && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={previewTwo}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                            {previewTwo == null && (
+                              <div class="content default"></div>
+                            )}
+                            {previewTwo && (
+                              <div className="imgContainer">
+                                <img src={previewTwo} alt="preview" />
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -158,35 +192,47 @@ const ScreenshotPosition = (props) => {
                 <div className="dropboxParent">
                   <div className="dropbox">
                     <div className={`centeredDropbox style-${i + 14}`}>
-                      <div className="uploadBox">
-                        <div className="stack2 none">
-                          {preview && (
-                            <div className="imgContainer">
-                              <img
-                                src={preview}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
-                            </div>
-                          )}
+                      <div className="zone">
+                        <div className="shadow">
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
+                          <div className="shadowLayer"></div>
                         </div>
-                        <div className="stack1 none">
-                          {preview && (
-                            <div className="imgContainer">
-                              <img
-                                src={preview}
-                                alt="preview"
-                                style={{ filter: "blur(2em)" }}
-                              />
+                        <div className="zone2">
+                          <div className="uploadBox">
+                            <div className="stack2 none">
+                              {preview && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={preview}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        {preview == null && <div class="content default"></div>}
-                        {preview && (
-                          <div className="imgContainer">
-                            <img src={preview} alt="preview" />
+                            <div className="stack1 none">
+                              {preview && (
+                                <div className="imgContainer">
+                                  <img
+                                    src={preview}
+                                    alt="preview"
+                                    style={{ filter: "blur(2em)" }}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                            {preview == null && (
+                              <div class="content default"></div>
+                            )}
+                            {preview && (
+                              <div className="imgContainer">
+                                <img src={preview} alt="preview" />
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -97,7 +97,6 @@ const Frame = (props) => {
   };
       
   const toggleOpacity = (e,hide) => {
-    console.log("toggleOpacity");
     const button = e.currentTarget;
     const parent = button.parentElement;
     const active = parent.querySelector(".active");
