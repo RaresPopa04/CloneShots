@@ -305,28 +305,17 @@ function App() {
 
   const canvasRef = useRef(null);
 
-  const [isProcessing, setIsProcessing] = useState(false);
-
   const handleDownload = () => {
     if (canvasRef.current) {
-      setIsProcessing(true);
-
-      // Introduce a delay to ensure everything is rendered properly
-      setTimeout(() => {
-        html2canvas(canvasRef.current, { scale: 2, useCORS: true })
-          .then((canvas) => {
-            const link = document.createElement("a");
-            link.download = "screenshot.png";
-            link.href = canvas.toDataURL();
-            link.click();
-
-            setIsProcessing(false);
-          })
-          .catch((err) => {
-            console.error("Error capturing the image:", err);
-            setIsProcessing(false);
-          });
-      }, 500); // Adjust the delay duration as needed
+      html2canvas(canvasRef.current).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.download = "mockup.png";
+        link.href = imgData;
+        link.click();
+      });
+      
+    
     }
   };
   const handleFileChange = (e, num) => {
@@ -521,8 +510,10 @@ function App() {
     line.style.setProperty("--leftVal", percent * 100 + "%");
     value.innerHTML = 10 + Math.round(percent * 60);
 
-    document.documentElement.style.setProperty("--shadowOpacity", 10 + Math.round(percent * 60) + "%");
-
+    document.documentElement.style.setProperty(
+      "--shadowOpacity",
+      10 + Math.round(percent * 60) + "%"
+    );
   };
 
   const modifyOpacity = (e, value) => {
@@ -531,11 +522,14 @@ function App() {
       const content = document.querySelectorAll(".uploadBox");
       slider.classList.add("inactive");
       const activeBtn = e.currentTarget;
-      const parentActiveBtn = activeBtn.parentElement.querySelector(".active-btn");
+      const parentActiveBtn =
+        activeBtn.parentElement.querySelector(".active-btn");
       parentActiveBtn.style.setProperty("--position", "17%");
 
-      document.documentElement.style.setProperty("--shadowAppearance", "100000000000");
-
+      document.documentElement.style.setProperty(
+        "--shadowAppearance",
+        "100000000000"
+      );
     } else if (value == 2) {
       const slider = document.querySelectorAll(".slider")[1];
 
@@ -552,13 +546,12 @@ function App() {
         activeBtn.parentElement.querySelector(".active-btn");
       parentActiveBtn.style.setProperty("--position", "50%");
     } else if (value == 3) {
-      
       const slider = document.querySelectorAll(".slider")[1];
 
       slider.classList.remove("inactive");
       const labels = slider.querySelector(".labels");
       const valueLabel = labels.querySelector(".value");
-      
+
       document.documentElement.style.setProperty("--shadowAppearance", "1");
       const activeBtn = e.currentTarget;
       const parentActiveBtn =
@@ -812,37 +805,41 @@ function App() {
     selectBtn.style.setProperty("--transformX", `${posXBtn}px`);
     selectBtn.style.setProperty("--transformY", `${posYBtn}px`);
 
-    
-    const percentX = posXBtn/ 179.2;
+    const percentX = posXBtn / 179.2;
     const percentY = posYBtn / 179.2;
-    
+
     const start1 = -0.25;
     const start2 = -0.5;
     const start3 = -0.8;
     const start4 = -1;
-    const blur1start =  -0.175;
+    const blur1start = -0.175;
     const blur2start = -0.35;
     const blur3start = -0.525;
     const blur4start = -0.7;
 
-
     const posX1 = start1 + percentX * 2 * Math.abs(start1);
     const posY1 = start1 + percentY * 2 * Math.abs(start1);
-    const blur1 = Math.abs(blur1start + percentX * 2 * Math.abs(blur1start))+Math.abs(blur1start + percentY * 2 * Math.abs(blur1start));
-    
+    const blur1 =
+      Math.abs(blur1start + percentX * 2 * Math.abs(blur1start)) +
+      Math.abs(blur1start + percentY * 2 * Math.abs(blur1start));
 
     const posX2 = start2 + percentX * 2 * Math.abs(start2);
     const posY2 = start2 + percentY * 2 * Math.abs(start2);
-    const blur2 = Math.abs(blur2start + percentX * 2 * Math.abs(blur2start))+Math.abs(blur2start + percentY * 2 * Math.abs(blur2start));
-    
+    const blur2 =
+      Math.abs(blur2start + percentX * 2 * Math.abs(blur2start)) +
+      Math.abs(blur2start + percentY * 2 * Math.abs(blur2start));
 
     const posX3 = start3 + percentX * 2 * Math.abs(start3);
     const posY3 = start3 + percentY * 2 * Math.abs(start3);
-    const blur3 = Math.abs(blur3start + percentX * 2 * Math.abs(blur3start))+Math.abs(blur3start + percentY * 2 * Math.abs(blur3start));
+    const blur3 =
+      Math.abs(blur3start + percentX * 2 * Math.abs(blur3start)) +
+      Math.abs(blur3start + percentY * 2 * Math.abs(blur3start));
 
     const posX4 = start4 + percentX * 2 * Math.abs(start4);
     const posY4 = start4 + percentY * 2 * Math.abs(start4);
-    const blur4 = Math.abs(blur4start + percentX * 2 * Math.abs(blur4start))+Math.abs(blur4start + percentY * 2 * Math.abs(blur4start));
+    const blur4 =
+      Math.abs(blur4start + percentX * 2 * Math.abs(blur4start)) +
+      Math.abs(blur4start + percentY * 2 * Math.abs(blur4start));
 
     document.documentElement.style.setProperty("--shadowPosX1", `${-posX1}em`);
     document.documentElement.style.setProperty("--shadowPosY1", `${-posY1}em`);
@@ -859,8 +856,6 @@ function App() {
     document.documentElement.style.setProperty("--shadowPosX4", `${-posX4}em`);
     document.documentElement.style.setProperty("--shadowPosY4", `${-posY4}em`);
     document.documentElement.style.setProperty("--shadowBlur4", `${blur4}em`);
-
-    
   };
 
   const handleShadowDrag = (e) => {
@@ -898,36 +893,41 @@ function App() {
 
     const uploadBoxes = document.querySelectorAll(".uploadBox");
 
-    const percentX = posXBtn/ 179.2;
+    const percentX = posXBtn / 179.2;
     const percentY = posYBtn / 179.2;
-    
+
     const start1 = -0.25;
     const start2 = -0.5;
     const start3 = -0.8;
     const start4 = -1;
-    const blur1start =  -0.175;
+    const blur1start = -0.175;
     const blur2start = -0.35;
     const blur3start = -0.525;
     const blur4start = -0.7;
 
-
     const posX1 = start1 + percentX * 2 * Math.abs(start1);
     const posY1 = start1 + percentY * 2 * Math.abs(start1);
-    const blur1 = Math.abs(blur1start + percentX * 2 * Math.abs(blur1start))+Math.abs(blur1start + percentY * 2 * Math.abs(blur1start));
-    
+    const blur1 =
+      Math.abs(blur1start + percentX * 2 * Math.abs(blur1start)) +
+      Math.abs(blur1start + percentY * 2 * Math.abs(blur1start));
 
     const posX2 = start2 + percentX * 2 * Math.abs(start2);
     const posY2 = start2 + percentY * 2 * Math.abs(start2);
-    const blur2 = Math.abs(blur2start + percentX * 2 * Math.abs(blur2start))+Math.abs(blur2start + percentY * 2 * Math.abs(blur2start));
-    
+    const blur2 =
+      Math.abs(blur2start + percentX * 2 * Math.abs(blur2start)) +
+      Math.abs(blur2start + percentY * 2 * Math.abs(blur2start));
 
     const posX3 = start3 + percentX * 2 * Math.abs(start3);
     const posY3 = start3 + percentY * 2 * Math.abs(start3);
-    const blur3 = Math.abs(blur3start + percentX * 2 * Math.abs(blur3start))+Math.abs(blur3start + percentY * 2 * Math.abs(blur3start));
+    const blur3 =
+      Math.abs(blur3start + percentX * 2 * Math.abs(blur3start)) +
+      Math.abs(blur3start + percentY * 2 * Math.abs(blur3start));
 
     const posX4 = start4 + percentX * 2 * Math.abs(start4);
     const posY4 = start4 + percentY * 2 * Math.abs(start4);
-    const blur4 = Math.abs(blur4start + percentX * 2 * Math.abs(blur4start))+Math.abs(blur4start + percentY * 2 * Math.abs(blur4start));
+    const blur4 =
+      Math.abs(blur4start + percentX * 2 * Math.abs(blur4start)) +
+      Math.abs(blur4start + percentY * 2 * Math.abs(blur4start));
 
     document.documentElement.style.setProperty("--shadowPosX1", `${-posX1}em`);
     document.documentElement.style.setProperty("--shadowPosY1", `${-posY1}em`);
@@ -944,9 +944,6 @@ function App() {
     document.documentElement.style.setProperty("--shadowPosX4", `${-posX4}em`);
     document.documentElement.style.setProperty("--shadowPosY4", `${-posY4}em`);
     document.documentElement.style.setProperty("--shadowBlur4", `${blur4}em`);
-
-
-
   };
 
   const startShadowDrag = (e) => {
@@ -2097,7 +2094,7 @@ function App() {
                     <div className="zone">
                       <img src={currentDevice} className="none" alt="" />
                       <div className="shadow">
-                        <div className="shadowLayer" ></div>
+                        <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
@@ -2161,7 +2158,7 @@ function App() {
                     <div className="zone none">
                       <img src={currentDevice} className="none" alt="" />
                       <div className="shadow">
-                        <div className="shadowLayer" ></div>
+                        <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
@@ -2224,7 +2221,7 @@ function App() {
                     <div className="zone none">
                       <img src={currentDevice} alt="" />
                       <div className="shadow">
-                        <div className="shadowLayer" ></div>
+                        <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>
                         <div className="shadowLayer"></div>

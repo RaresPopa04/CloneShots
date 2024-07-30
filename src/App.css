@@ -19,17 +19,17 @@
   --overlayOpacity: 0.65;
   --shadowpacity: 40%;
 
-  --shadowPosX1: 0em;
-  --shadowPosY1: 0em;
-  --shadouwBlur1: 0em;
+  --shadowPosX1: 0.2em;
+  --shadowPosY1: 0.2em;
+  --shadouwBlur1: 0.2em;
 
-  --shadowPosX2: 0em;
-  --shadowPosY2: 0em;
-  --shadowBlur2: 0em;
+  --shadowPosX2: 0.3em;
+  --shadowPosY2: 0.3em;
+  --shadowBlur2: 0.3em;
 
-  --shadowPosX3: 0em;
-  --shadowPosY3: 0em;
-  --shadowBlur3: 0em;
+  --shadowPosX3: 0.4em;
+  --shadowPosY3: 0.4em;
+  --shadowBlur3: 0.4em;
 
   --shadowPosX4: 0em;
   --shadowPosY4: 0em;
@@ -1011,6 +1011,11 @@
     translateZ(0px);
 }
 
+.propertyGridElement:nth-of-type(1) .selectBtn{
+  --transformX: 71.6px;
+  --transformY: 71.6px;
+}
+
 .infoElem {
   width: 100%;
 }
@@ -1607,20 +1612,20 @@ button.frameBtn.active {
 .shadow .shadowLayer:nth-child(1) {
   transform: translateX(calc((--shadowPosX1) / var(--shadowAppearance)))
     translateY(calc(var(--shadowPosY1)/var(--shadowAppearance)));
-  filter: blur(var(--shadowBlur1));
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .shadow .shadowLayer:nth-child(2) {
   transform: translateX(calc(var(--shadowPosX2)/var(--shadowAppearance))) translateY(calc(var(--shadowPosY2)/var(--shadowAppearance)));
-  filter: blur(var(--shadowBlur2));
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .shadow .shadowLayer:nth-child(3) {
     transform: translateX(calc(var(--shadowPosX3)/var(--shadowAppearance))) translateY(calc(var(--shadowPosY3)/var(--shadowAppearance)));
-  filter: blur(var(--shadowBlur3));
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .shadow .shadowLayer:nth-child(4) {
     transform: translateX(calc(var(--shadowPosX4)/var(--shadowAppearance))) translateY(calc(var(--shadowPosY4)/var(--shadowAppearance)));
-  filter: blur(var(--shadowBlur4));
+    background-color: rgba(0, 0, 0, 0.3);
 }
