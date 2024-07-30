@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Frame.css";
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/css";
 
 const Frame = (props) => {
   const openLayoutsPanel = props.openLayoutsPanel;
@@ -10,6 +12,12 @@ const Frame = (props) => {
   const [overlayShadow, setOverlayShadow] = useState(false);
 
   const addOverlay = props.addOverlay;
+
+  const [color, setColor] = useColor("rgb(86 30 203)");
+
+  useEffect(() => {
+    document.querySelector(".rcp-root.rcp").classList.add("none");
+  }, []);
 
   const overlayShadowSlider = (e, start, distance, modifyFunction) => {
     const button = e.currentTarget;
@@ -28,8 +36,8 @@ const Frame = (props) => {
     modifyFunction(percent);
   };
 
-  const startOverlayShadowSlider = (e, start, distance,updateFunction) => {
-    const handler = overlayShadowSliderHandler(start, distance,updateFunction);
+  const startOverlayShadowSlider = (e, start, distance, updateFunction) => {
+    const handler = overlayShadowSliderHandler(start, distance, updateFunction);
     const button = e.currentTarget;
     button.addEventListener("mousemove", handler);
     button._overlayShadowSliderHandler = handler;
@@ -44,26 +52,37 @@ const Frame = (props) => {
     }
   };
 
-  const overlayShadowSliderHandler = (start, distance,updateFunction) => (e) => {
-    overlayShadowSlider(e, start, distance,updateFunction);
-  };
+  const overlayShadowSliderHandler =
+    (start, distance, updateFunction) => (e) => {
+      overlayShadowSlider(e, start, distance, updateFunction);
+    };
 
   const setAspectRatio = (e) => {
     const button = e.currentTarget;
-    const frameItems = button.parentElement.parentElement.querySelectorAll(".frameItem");
+    const frameItems =
+      button.parentElement.parentElement.querySelectorAll(".frameItem");
     frameItems.forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
-    const buttonAspectRatio = button.querySelector(".framePreview").style.aspectRatio;
+    const buttonAspectRatio =
+      button.querySelector(".framePreview").style.aspectRatio;
 
-    document.documentElement.style.setProperty("--cardAspectRatio", buttonAspectRatio);
+    document.documentElement.style.setProperty(
+      "--cardAspectRatio",
+      buttonAspectRatio
+    );
 
     const width = buttonAspectRatio.split("/")[0];
     const height = buttonAspectRatio.split("/")[1];
     console.log(document.querySelector(".frameWindow .details p"));
-    document.querySelector(".frameWindow .details p").textContent = `Default ${width}:${height}`
-    if(button.querySelector(".frameDetails p"))
-      document.querySelector(".frameWindow .details p").textContent = `${button.querySelector(".frameDetails span:nth-child(3)").textContent} ${button.querySelector(".frameDetails p").textContent}`
-    document.querySelector(".frameWindow .details span").textContent = button.querySelector(".frameDetails span").textContent;
+    document.querySelector(
+      ".frameWindow .details p"
+    ).textContent = `Default ${width}:${height}`;
+    if (button.querySelector(".frameDetails p"))
+      document.querySelector(".frameWindow .details p").textContent = `${
+        button.querySelector(".frameDetails span:nth-child(3)").textContent
+      } ${button.querySelector(".frameDetails p").textContent}`;
+    document.querySelector(".frameWindow .details span").textContent =
+      button.querySelector(".frameDetails span").textContent;
   };
 
   const changeField = (e) => {
@@ -75,50 +94,129 @@ const Frame = (props) => {
       setHeight(value);
     }
 
-    if(width!=0 && height!=0){
+    if (width != 0 && height != 0) {
       setActivated(true);
-    }else{
+    } else {
       setActivated(false);
     }
-
   };
 
   const hadleRatioChange = (e) => {
     e.preventDefault();
     const width = e.target.width.value;
     const height = e.target.height.value;
-    document.documentElement.style.setProperty("--cardAspectRatio", `${width}/${height}`);
+    document.documentElement.style.setProperty(
+      "--cardAspectRatio",
+      `${width}/${height}`
+    );
 
     setWidth(0);
     setHeight(0);
 
     setActivated(false);
-
   };
-      
-  const toggleOpacity = (e,hide) => {
+
+  const toggleOpacity = (e, hide) => {
     const button = e.currentTarget;
     const parent = button.parentElement;
     const active = parent.querySelector(".active");
     active.classList.remove("active");
     button.classList.add("active");
     console.log(button);
-    if(hide)
-      setOverlayShadow(false);
-    else
-      setOverlayShadow(true);
+    if (hide) setOverlayShadow(false);
+    else setOverlayShadow(true);
     console.log(overlayShadow);
-
-  }
+  };
 
   const updateOpacity = (value) => {
     const overlayElement = document.querySelectorAll(".overlay");
-    
-    const opacityValue = 0.25 + value * 0.70;
-    console.log(opacityValue);
-    document.documentElement.style.setProperty("--overlayOpacity", opacityValue);
-  }
 
+    const opacityValue = 0.25 + value * 0.7;
+    console.log(opacityValue);
+    document.documentElement.style.setProperty(
+      "--overlayOpacity",
+      opacityValue
+    );
+  };
+
+  const changeColor = (e) => {
+    const button = e.currentTarget;
+    const color = button.style.backgroundColor;
+    document.documentElement.style.setProperty("--cardBackgroundColor", color);
+
+    const colorActive = button.parentElement.querySelector(".color.active");
+    console.log(button.parentElement);
+    if (colorActive) {
+      colorActive.classList.remove("active");
+    }
+    button.classList.add("active");
+  };
+
+  const changeGradient = (e) => {
+    const button = e.currentTarget;
+    const gradient = button.querySelector(".preview").style.background;
+    document.documentElement.style.setProperty(
+      "--cardBackgroundColor",
+      gradient
+    );
+
+    const gradientActive =
+      button.parentElement.querySelector(".panelBtn.active");
+    if (gradientActive) {
+      gradientActive.classList.remove("active");
+    }
+    button.classList.add("active");
+  };
+
+  const changeColorPalette = (color) => {
+    document.documentElement.style.setProperty(
+      "--cardBackgroundColor",
+      color.hex
+    );
+    document.documentElement.style.setProperty(
+      "--gradientColorButton",
+      color.hex
+    );
+
+    const icon = document.querySelector(".grid .panelBtn.textInside:nth-child(2) .preview");
+    console.log(icon);
+    const previousColor = icon.querySelector("div");
+
+    icon.textContent = color.hex
+    icon.prepend(previousColor);
+
+    setColor(color);
+  };
+
+  const changeBackground = (e) => {
+    const button = e.currentTarget;
+    
+
+    const parent = button.parentElement;
+    const active = parent.querySelector(".active");
+    if(active)
+      active.classList.remove("active");
+    if(active !== button)
+     button.classList.add("active");
+
+    if (button.textContent.includes("Transparent")) {
+
+      const colorPallete = document.querySelector(".rcp-root.rcp");
+      colorPallete.classList.add("none");
+      
+      const background = document.querySelector(".background");
+      background.classList.toggle("none");
+
+
+      
+    } else if (button.textContent.includes("Image")) {
+      const colorPallete = document.querySelector(".rcp-root.rcp");
+      colorPallete.classList.add("none");
+    } else {
+      const colorPallete = document.querySelector(".rcp-root.rcp");
+      colorPallete.classList.toggle("none");
+    }
+  };
 
   const { handleLeftBar } = props;
   return (
@@ -147,7 +245,7 @@ const Frame = (props) => {
       </div>
       <div className="selectorElem">
         <div className="btnWrapper">
-          <button className="selector" onClick={()=>openLayoutsPanel(1)}>
+          <button className="selector" onClick={() => openLayoutsPanel(1)}>
             <div className="current">
               <div className="currentFrameIcon"></div>
             </div>
@@ -174,211 +272,225 @@ const Frame = (props) => {
             <form autoComplete="off" onSubmit={hadleRatioChange}>
               <div className="panelDim">
                 <h6>W</h6>
-                <input onChange={changeField} value={width==0?"":width} name="width" type="number" class="input-text" placeholder="1920" min="128" max="7680"></input>
+                <input
+                  onChange={changeField}
+                  value={width == 0 ? "" : width}
+                  name="width"
+                  type="number"
+                  class="input-text"
+                  placeholder="1920"
+                  min="128"
+                  max="7680"
+                ></input>
               </div>
               <div className="panelDim">
                 <h6>H</h6>
-                <input  onChange={changeField} value={height==0?"":height} name="height" type="number" class="input-text" placeholder="1440" min="128" max="7680"></input>
+                <input
+                  onChange={changeField}
+                  value={height == 0 ? "" : height}
+                  name="height"
+                  type="number"
+                  class="input-text"
+                  placeholder="1440"
+                  min="128"
+                  max="7680"
+                ></input>
               </div>
-              <button disabled="" type="submit" className={`${activated? 'clickable':''}`}><span>Set</span></button>
+              <button
+                disabled=""
+                type="submit"
+                className={`${activated ? "clickable" : ""}`}
+              >
+                <span>Set</span>
+              </button>
             </form>
           </div>
           <div className="list">
-            
-          <div className="frames-wrapper">
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"16/9"}}>
+            <div className="frames-wrapper">
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "16/9" }}>
                     <span>16:9</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1920 x 1080</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"3/2"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "3/2" }}>
                     <span>3:2</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1920 x 1280</span>
                 </div>
-            </button>
-            <button className="frameItem active" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"4/3"}}>
+              </button>
+              <button className="frameItem active" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "4/3" }}>
                     <span>4:3</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1920 x 1440</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"5/4"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "5/4" }}>
                     <span>5:4</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1920 x 1536</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"1/1"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "1/1" }}>
                     <span>1:1</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1920 x 1920</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"4/5"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "4/5" }}>
                     <span>4:5</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1080 x 1350</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"3/4"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "3/4" }}>
                     <span>3:4</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1080 x 1440</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"2/3"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "2/3" }}>
                     <span>2:3</span>
                   </div>
                 </div>
                 <div className="frameDetails">
-                  <span>1080 x 1620</span> 
+                  <span>1080 x 1620</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"9/16"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "9/16" }}>
                     <span>9:16</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <span>1080 x 1920</span>
                 </div>
-            </button>
-            
-          </div>
-          
-          <div className="headSection">
+              </button>
+            </div>
+
+            <div className="headSection">
               <img src="https://shots.so/icon/socials/instagram.png" alt="" />
               <h5>Instagram</h5>
             </div>
-          <div className="frames-wrapper">
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"1/1"}}>
+            <div className="frames-wrapper">
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "1/1" }}>
                     <span>1:1</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <p>Post</p>
                   <span>1080 x 1080</span>
-                  <span style={{display:"none"}}>Instagram</span>
+                  <span style={{ display: "none" }}>Instagram</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"4/5"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "4/5" }}>
                     <span>4:5</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <p>Portrait</p>
                   <span>1080 x 1350</span>
-                  <span style={{display:"none"}}>Instagram</span>
+                  <span style={{ display: "none" }}>Instagram</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"9/16"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "9/16" }}>
                     <span>9:16</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <p>Story</p>
                   <span>1080 x 1920</span>
-                  <span style={{display:"none"}}>Instagram</span>
+                  <span style={{ display: "none" }}>Instagram</span>
                 </div>
-            </button>
-            
-          </div>
-          <div className="headSection">
+              </button>
+            </div>
+            <div className="headSection">
               <img src="https://shots.so/icon/socials/twitter.png" alt="" />
               <h5>Twitter</h5>
             </div>
-          <div className="frames-wrapper">
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"16/9"}}>
+            <div className="frames-wrapper">
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "16/9" }}>
                     <span>16:9</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <p>Tweet</p>
                   <span>1200 x 675</span>
-                  <span style={{display:"none"}}>Twitter</span>
+                  <span style={{ display: "none" }}>Twitter</span>
                 </div>
-            </button>
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"3/1"}}>
+              </button>
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "3/1" }}>
                     <span>3:1</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <p>Cover</p>
                   <span>1500 x 500</span>
-                  <span style={{display:"none"}}>Twitter</span>
+                  <span style={{ display: "none" }}>Twitter</span>
                 </div>
-            </button>
+              </button>
+            </div>
 
-            
-          </div>
-
-          <div className="headSection">
+            <div className="headSection">
               <img src="https://shots.so/icon/socials/dribbble.png" alt="" />
               <h5>Dribbble</h5>
             </div>
-          <div className="frames-wrapper">
-            <button className="frameItem" onClick={setAspectRatio}>
-                <div className="frameIcon" >
-                  <div className="framePreview" style={{aspectRatio:"4/3"}}>
+            <div className="frames-wrapper">
+              <button className="frameItem" onClick={setAspectRatio}>
+                <div className="frameIcon">
+                  <div className="framePreview" style={{ aspectRatio: "4/3" }}>
                     <span>4:3</span>
                   </div>
                 </div>
                 <div className="frameDetails">
                   <p>Shot</p>
                   <span>2800 x 2100</span>
-                  <span style={{display:"none"}}>Dribble</span>
+                  <span style={{ display: "none" }}>Dribble</span>
                 </div>
-            </button>
-
-            
+              </button>
+            </div>
           </div>
-
-
-          </div>
-          
         </div>
       </div>
       <div className="scroll">
@@ -387,9 +499,11 @@ const Frame = (props) => {
             <div className="title">Overlay Shadow</div>
             <div className="col1-grid">
               <div
-                className={`slider ${overlayShadow?"":"inactive"}`}
+                className={`slider ${overlayShadow ? "" : "inactive"}`}
                 style={{ transition: "none" }}
-                onMouseDown={(e) => startOverlayShadowSlider(e, 10, 70,updateOpacity)}
+                onMouseDown={(e) =>
+                  startOverlayShadowSlider(e, 10, 70, updateOpacity)
+                }
                 onMouseUp={stopOverlayShadowSlider}
                 onMouseLeave={stopOverlayShadowSlider}
               >
@@ -402,8 +516,15 @@ const Frame = (props) => {
               </div>
 
               <div className="grid">
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,0);toggleOpacity(e,true);}}>
-                  <div className="preview active" >
+                <div
+                  className="panelBtn"
+                  style={{ aspectRatio: "16/9" }}
+                  onClick={(e) => {
+                    addOverlay(e, 0);
+                    toggleOpacity(e, true);
+                  }}
+                >
+                  <div className="preview active">
                     <div className="icon">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -428,28 +549,72 @@ const Frame = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/011.png");toggleOpacity(e,false)}}>
+                <div
+                  className="panelBtn"
+                  style={{ aspectRatio: "16/9" }}
+                  onClick={(e) => {
+                    addOverlay(
+                      e,
+                      1,
+                      "https://assets.shots.so/shadow-overlays/011.png"
+                    );
+                    toggleOpacity(e, false);
+                  }}
+                >
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/011.jpg" alt="" />
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/020.png");toggleOpacity(e,false)}}>
+                <div
+                  className="panelBtn"
+                  style={{ aspectRatio: "16/9" }}
+                  onClick={(e) => {
+                    addOverlay(
+                      e,
+                      1,
+                      "https://assets.shots.so/shadow-overlays/020.png"
+                    );
+                    toggleOpacity(e, false);
+                  }}
+                >
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/020.jpg" alt="" />
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/028.png");toggleOpacity(e,false)}}>
+                <div
+                  className="panelBtn"
+                  style={{ aspectRatio: "16/9" }}
+                  onClick={(e) => {
+                    addOverlay(
+                      e,
+                      1,
+                      "https://assets.shots.so/shadow-overlays/028.png"
+                    );
+                    toggleOpacity(e, false);
+                  }}
+                >
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/028.jpg" alt="" />
                     </div>
                   </div>
                 </div>
-                <div className="panelBtn" style={{ aspectRatio: "16/9" }} onClick={(e)=>{addOverlay(e,1,"https://assets.shots.so/shadow-overlays/029.png");toggleOpacity(e,false)}}>
+                <div
+                  className="panelBtn"
+                  style={{ aspectRatio: "16/9" }}
+                  onClick={(e) => {
+                    addOverlay(
+                      e,
+                      1,
+                      "https://assets.shots.so/shadow-overlays/029.png"
+                    );
+                    toggleOpacity(e, false);
+                  }}
+                >
                   <div className="preview">
                     <div className="image">
                       <img src="https://shots.so/shadows/029.jpg" alt="" />
@@ -512,7 +677,7 @@ const Frame = (props) => {
             <div className="title">Background</div>
             <div className="col1-grid">
               <div className="grid">
-                <div className="panelBtn textInside active">
+                <div className="panelBtn textInside" onClick={changeBackground}>
                   <div className="preview">
                     <div className="icon">
                       <svg
@@ -561,7 +726,10 @@ const Frame = (props) => {
                     Transparent
                   </div>
                 </div>
-                <div className="panelBtn textInside ">
+                <div
+                  className="panelBtn textInside "
+                  onClick={changeBackground}
+                >
                   <div className="preview">
                     <div
                       className="icon"
@@ -579,7 +747,10 @@ const Frame = (props) => {
                     #ffffff
                   </div>
                 </div>
-                <div className="panelBtn textInside ">
+                <div
+                  className="panelBtn textInside "
+                  onClick={changeBackground}
+                >
                   <div className="preview">
                     <div
                       className="icon"
@@ -601,72 +772,98 @@ const Frame = (props) => {
               </div>
             </div>
           </div>
+          <ColorPicker
+            className="colorPallete"
+            hideInput={["rgb", "hsv"]}
+            color={color}
+            onChange={changeColorPalette}
+          />
           <div className="element">
             <div className="title">Solid color</div>
             <div className="colorsGrid">
               <button
                 className="color"
                 style={{ backgroundColor: "white" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(222, 226, 230)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(173, 181, 189)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(73, 80, 87)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(33, 37, 41)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(21, 22, 23)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(255, 89, 94)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(255, 146, 76)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(255, 202, 58)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(197, 202, 48)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(138, 201, 38)" }}
+                onClick={changeColor}
               ></button>
               <button
                 className="color"
                 style={{ backgroundColor: "rgb(63, 201, 93)" }}
+                onClick={changeColor}
               ></button>
             </div>
           </div>
           <div className="element">
             <div className="title">Gradient</div>
             <div className="grid">
-              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+              <div
+                className="panelBtn active"
+                style={{ aspectRatio: "16/9" }}
+                onClick={changeGradient}
+              >
                 <div
-                  className="preview active"
+                  className="preview"
                   style={{
                     background:
                       "linear-gradient(140deg, rgb(255, 100, 50) 12.8%, rgb(255, 0, 101) 43.52%, rgb(123, 46, 255) 84.34%)",
                   }}
                 ></div>
               </div>
-              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+              <div
+                className="panelBtn"
+                style={{ aspectRatio: "16/9" }}
+                onClick={changeGradient}
+              >
                 <div
                   className="preview"
                   style={{
@@ -675,7 +872,11 @@ const Frame = (props) => {
                   }}
                 ></div>
               </div>
-              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+              <div
+                className="panelBtn"
+                style={{ aspectRatio: "16/9" }}
+                onClick={changeGradient}
+              >
                 <div
                   className="preview"
                   style={{
@@ -684,7 +885,11 @@ const Frame = (props) => {
                   }}
                 ></div>
               </div>
-              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+              <div
+                className="panelBtn"
+                style={{ aspectRatio: "16/9" }}
+                onClick={changeGradient}
+              >
                 <div
                   className="preview"
                   style={{
@@ -693,7 +898,11 @@ const Frame = (props) => {
                   }}
                 ></div>
               </div>
-              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+              <div
+                className="panelBtn"
+                style={{ aspectRatio: "16/9" }}
+                onClick={changeGradient}
+              >
                 <div
                   className="preview"
                   style={{
@@ -702,7 +911,11 @@ const Frame = (props) => {
                   }}
                 ></div>
               </div>
-              <div className="panelBtn" style={{ aspectRatio: "16/9" }}>
+              <div
+                className="panelBtn"
+                style={{ aspectRatio: "16/9" }}
+                onClick={changeGradient}
+              >
                 <div
                   className="preview"
                   style={{
